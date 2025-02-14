@@ -13,11 +13,11 @@ fi
 
 # and the root of tw5 
 if [  -z "$TW5_ROOT" ]; then
-    TW5_ROOT=../../../../../../..
+    TW5_ROOT=../../../..
 fi
 
 if [  ! -d "$TW5_ROOT" ]; then
-    TW5_ROOT=../../../../../../..
+    TW5_ROOT=../../../..
 fi
 
 # add path to root of plugin
