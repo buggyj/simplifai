@@ -1,0 +1,18 @@
+{
+	"tiddlers": [
+		{
+			"file": "license.tid",
+			"fields": {
+				"title": "$:/plugins/developer/buildtw/license"
+			}
+		},
+		{
+			"file": "readme.tid",
+			"fields": {
+				"title": "$:/plugins/developer/buildtw/readme"
+			}
+		}
+	],
+	 "directories": ["files"
+	 ]
+}

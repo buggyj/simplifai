@@ -1,0 +1,8 @@
+{
+"plugin-type":"plugin",
+ "type":"application/json",
+ "tags":"preact-applet",
+ "title":"$:/plugins/developer/buildtw",
+ "version":"0.0.1",
+ "list":"readme license"
+}

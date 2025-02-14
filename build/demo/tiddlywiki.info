@@ -1,0 +1,13 @@
+{
+	"plugins": [
+		"developer/buildtw"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+		"doNotSave": [
+	],
+	"includeWikis": [
+	]
+}
