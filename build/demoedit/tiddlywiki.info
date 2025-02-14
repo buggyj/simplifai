@@ -2,7 +2,7 @@
 	"plugins": [
 		"tiddlywiki/tiddlyweb",
 		"tiddlywiki/filesystem",
-		"developer/buildtw"
+		"bj/simplifai"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

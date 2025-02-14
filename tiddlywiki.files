@@ -3,13 +3,13 @@
 		{
 			"file": "license.tid",
 			"fields": {
-				"title": "$:/plugins/developer/buildtw/license"
+				"title": "$:/plugins/bj/simplifai/license"
 			}
 		},
 		{
 			"file": "readme.tid",
 			"fields": {
-				"title": "$:/plugins/developer/buildtw/readme"
+				"title": "$:/plugins/bj/simplifai/readme"
 			}
 		}
 	],

@@ -1,6 +1,6 @@
 {
 	"plugins": [
-		"developer/buildtw"
+		"bj/simplifai"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
