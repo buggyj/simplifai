@@ -1,0 +1,82 @@
+created: 20241009222533272
+title: $:/plugins/bj/aiclone/main.css
+tags: $:/tags/Stylesheet
+modified: 20241022063857114
+type: text/plain
+
+/*$:/plugins/bj/aiclone/aiclone.css*/
+
+.main {
+  display: flex;
+  flex-direction:column;
+}
+
+	.main .greet {
+}
+	.main .greet span {
+}
+
+
+	.main .nav img {
+		width: 40px;
+		border-radius: 50%;
+	}
+
+
+
+ .main .maincontainer  {
+box-sizing: border-box;
+flex: 1 1 0; overflow-y: scroll;
+}
+
+	
+	.result {
+	  overflow-y: scroll;
+	
+	}
+	
+	.result::-webkit-scrollbar {
+	  display: none;
+	}
+
+.main-bottom {
+box-sizing: border-box;
+flex: 0 0 auto;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background-color: #f0f4f9;
+  padding: 10px 20px;
+  border-radius: 50px;
+}
+
+	.search-box img {
+	  width: 24px;
+	  cursor: pointer;
+	}
+	
+	.search-box input {
+	  flex: 1;
+	  background: transparent;
+	  border: none;
+	  outline: none;
+	  padding: 8px;
+	  font-size: 18px;
+	}
+	
+	.search-box div {
+	  display: flex;
+	  align-items: center;
+	  gap: 15px;
+	}
+	
+	.main .bottom-info {
+	  font-size: 13px;
+	  margin: 15px auto;
+	  text-align: center;
+	  font-weight: 300;
+	}

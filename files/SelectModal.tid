@@ -1,0 +1,14 @@
+created: 20140912145537860
+title: $:/plugins/bj/aiclone/SelectModal
+footer: <$button message="tm-close-tiddler">Close</$button>
+modified: 20250213165927772
+subtitle: <<title>>
+tags: [[Message Examples]]
+type: 
+
+
+<$select tiddler='$:/temp/bj/aiclone/CurrentGeminiChat' tooltip='Choose a chat'>
+<$list filter='[tag[geminiChats]]'>
+<option><$view field='title'/></option>
+</$list>
+</$select>

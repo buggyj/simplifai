@@ -1,0 +1,57 @@
+created: 20241009175338632
+title: $:/plugins/bj/aiclone/index.css
+tags: $:/tags/Stylesheet
+modified: 20250203080616698
+type: text/plain
+
+#aiclone{
+  height:80vh;
+  display:flex;
+  flex-direction:column;
+  outline: solid green;
+}
+
+.aiclone{
+  height:80vh;
+  display:flex;
+  flex-direction:column;
+  outline: solid green;
+}
+
+.aic_nav {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 22px;
+  padding: 20px;
+  flex:0 0 auto;
+  display:flex;
+  background-color: var(--bj-aiclone-nav);
+}
+
+.aic_nav p {
+  margin: 0;
+}
+
+.aic_nav__btn {
+  display: block;
+  margin-left: 10px;
+  cursor: pointer;
+
+}
+
+.aic_content_container {
+  flex:1 1 0;
+  display:flex;
+}
+
+/*$:/plugins/bj/aiclone/main.css*/
+.main {
+  flex: 1 1 100%;
+}
+
+/*$:/plugins/bj/aiclone/sidebar.css*/
+.aic_sidebar {
+flex: 0 1 auto;
+}
