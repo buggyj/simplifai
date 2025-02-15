@@ -1,11 +1,11 @@
 /*\
-title: $:/plugins/bj/aiclone/gpt.mjs
+title: $:/plugins/bj/simplifai/gpt.mjs
 type: application/javascript
 module-type: library
 \*/
  
  const { signal } = await import ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs");
-const { API_KEY } = await import("$:/plugins/bj/aiclone/setting.mjs");
+const { API_KEY } = await import("$:/plugins/bj/simplifai/setting.mjs");
 
 export async function runChat(prompt, history) {
     function createChat(apiKey, history) {

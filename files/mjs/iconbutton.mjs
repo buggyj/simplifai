@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/bj/aiclone/iconbutton.mjs
+title: $:/plugins/bj/simplifai/iconbutton.mjs
 type: application/javascript
 module-type: library
 \*/
@@ -8,7 +8,7 @@ const {getTextReference} =  await import("$:/plugins/bj/tiddlywiki-preact/store.
 
 
 function geticon(iconname) {
-	let txtref="$:/plugins/bj/aiclone/"+iconname+".png"
+	let txtref="$:/plugins/bj/simplifai/"+iconname+".png"
 	return "data:image/png;base64,"+getTextReference(txtref)
 }
 

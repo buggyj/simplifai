@@ -1,13 +1,13 @@
 created: 20241020114730485
-title: $:/plugins/bj/aiclone/color.css
+title: $:/plugins/bj/simplifai/color.css
 tags: $:/tags/Stylesheet
 modified: 20241020121005521
 type: text/plain
 
 
 :root    {
---bj-aiclone-sidebar: gold;
---bj-aiclone-nav: #e2e6eb;
---bj-aiclone-heading: powderblue;
---bj-aiclone-cell: khaki;
+--bj-simplifai-sidebar: gold;
+--bj-simplifai-nav: #e2e6eb;
+--bj-simplifai-heading: powderblue;
+--bj-simplifai-cell: khaki;
 }

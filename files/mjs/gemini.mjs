@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/bj/aiclone/gemini.mjs
+title: $:/plugins/bj/simplifai/gemini.mjs
 type: application/javascript
 module-type: library
 \*/
@@ -8,7 +8,7 @@ const {GoogleGenerativeAI} = await import('https://esm.run/@google/generative-ai
 const {signal} = await import ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs")
 const {init} = await import ("$:/plugins/bj/tiddlywiki-preact/towidget.mjs")
 
-const { MODEL_NAME, API_KEY, safetySettings ,generationConfig} = await import("$:/plugins/bj/aiclone/setting.mjs");
+const { MODEL_NAME, API_KEY, safetySettings ,generationConfig} = await import("$:/plugins/bj/simplifai/setting.mjs");
 
 export async function runChat(prompt,history,__pwidget) {
     const {invokeActionString} = init(__pwidget)
@@ -29,7 +29,7 @@ export async function runChat(prompt,history,__pwidget) {
              // by checking if title exist and if so appending a number
             invokeActionString(`<$action-sendmessage $message="tm-rename-tiddler" from="$:/temp/bj/newChat" to="""${title}""" renameInTags="no" renameInLists="no"/>`)
              // rename $:/temp/bj/newChat to the title
-             invokeActionString(`<$action-setfield $tiddler="$:/temp/bj/aiclone/CurrentGeminiChat" text="""${title}"""/>`)
+             invokeActionString(`<$action-setfield $tiddler="$:/temp/bj/simplifai/CurrentGeminiChat" text="""${title}"""/>`)
      }
 	function createChat(apiKey, history) {
 	

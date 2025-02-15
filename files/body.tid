@@ -1,9 +1,9 @@
 created: 20250204144632001
-title: $:/plugins/bj/aiclone/ViewTemplate/body
+title: $:/plugins/bj/simplifai/ViewTemplate/body
 modified: 20250212140645837
 tags: 
 type: 
 
-\import $:/plugins/bj/aiclone/widget
+\import $:/plugins/bj/simplifai/widget
 
 <$mkchat.details tid={{{[<currentTiddler>else[$:/temp/bj/newChat]]}}}>

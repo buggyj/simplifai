@@ -1,14 +1,14 @@
 created: 20241009174621036
-title: $:/plugins/bj/aiclone/widget
+title: $:/plugins/bj/simplifai/widget
 type: text/vnd.tiddlywikis
 tags: 
 modified: 20250204143629250
 stylesheet: $:/themes/bj/cssreset
 
 \widget $mkchat.app(tid )
-<$pwidget  class="aiclone" $app="$:/plugins/bj/aiclone/aiclone.mjs"  $tids=`[[:history|$(tid)$]]` errorMessage="Error in app" />
+<$pwidget  class="simplifai" $app="$:/plugins/bj/simplifai/simplifai.mjs"  $tids=`[[:history|$(tid)$]]` errorMessage="Error in app" />
 \end
 
 \widget $mkchat.details(tid) 
-<$pwidget  $app="$:/plugins/bj/aiclone/details.mjs"  history={{{[<tid>get[text]]}}} errorMessage="Error in app" />
+<$pwidget  $app="$:/plugins/bj/simplifai/details.mjs"  history={{{[<tid>get[text]]}}} errorMessage="Error in app" />
 \end

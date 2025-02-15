@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/bj/aiclone/setting.mjs
+title: $:/plugins/bj/simplifai/setting.mjs
 type: application/javascript
 module-type: library
 \*/

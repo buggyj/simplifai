@@ -1,18 +1,18 @@
 /*\
-title: $:/plugins/bj/aiclone/sidebar.mjs
+title: $:/plugins/bj/simplifai/sidebar.mjs
 type: application/javascript
 module-type: library
 \*/
-const {ibutton}=await import("$:/plugins/bj/aiclone/iconbutton.mjs")
+const {ibutton}=await import("$:/plugins/bj/simplifai/iconbutton.mjs")
 const {html, render, useState} = await import ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs");
-const {API_KEY} = await import("$:/plugins/bj/aiclone/setting.mjs")
+const {API_KEY} = await import("$:/plugins/bj/simplifai/setting.mjs")
 
 const {init} = await import ("$:/plugins/bj/tiddlywiki-preact/towidget.mjs")
 
 function mssg(modal, name, msg) {return `<$action-sendmessage $message="tm-modal" $param="${modal}" title="${name}" message="${msg}"/>`}
-let modal="$:/plugins/bj/aiclone/SelectModal", name="chats",  msg="choose chat"	
+let modal="$:/plugins/bj/simplifai/SelectModal", name="chats",  msg="choose chat"	
 
-function newChat(){return `<$action-setfield $tiddler="$:/temp/bj/aiclone/CurrentGeminiChat" text="$:/temp/bj/newChat"/>`}
+function newChat(){return `<$action-setfield $tiddler="$:/temp/bj/simplifai/CurrentGeminiChat" text="$:/temp/bj/newChat"/>`}
 
 export function sidebar({history,__pwidget}) {
 	const [extended, setExtended] = useState(false)

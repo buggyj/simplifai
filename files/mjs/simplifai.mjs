@@ -1,14 +1,14 @@
 /*\
-title: $:/plugins/bj/aiclone/aiclone.mjs
+title: $:/plugins/bj/simplifai/simplifai.mjs
 type: application/javascript
 module-type: library
 \*/
 
 const {html, render} = await import ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs");
 
-const { sidebar } = await import ('$:/plugins/bj/aiclone/sidebar.mjs');
- const { Main } = await import ('$:/plugins/bj/aiclone/main.mjs');
-const {ibutton}=await import("$:/plugins/bj/aiclone/iconbutton.mjs")
+const { sidebar } = await import ('$:/plugins/bj/simplifai/sidebar.mjs');
+ const { Main } = await import ('$:/plugins/bj/simplifai/main.mjs');
+const {ibutton}=await import("$:/plugins/bj/simplifai/iconbutton.mjs")
 const {getTextReference} = await import('$:/plugins/bj/tiddlywiki-preact/store.js')
 const {init} = await import ("$:/plugins/bj/tiddlywiki-preact/towidget.mjs")
 

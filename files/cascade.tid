@@ -1,8 +1,8 @@
 created: 20250204144442494
-title: $:/plugins/bj/aiclone/view/cascade
+title: $:/plugins/bj/simplifai/view/cascade
 list-before: $:/config/ViewTemplateBodyFilters/system
 tags: $:/tags/ViewTemplateBodyFilter
 modified: 20250204144552266
 type: 
 
-[applicationtype[aichat]then[$:/plugins/bj/aiclone/ViewTemplate/body]]
+[applicationtype[aichat]then[$:/plugins/bj/simplifai/ViewTemplate/body]]

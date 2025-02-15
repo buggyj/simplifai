@@ -1,12 +1,12 @@
 /*\
-title: $:/plugins/bj/aiclone/details.mjs
+title: $:/plugins/bj/simplifai/details.mjs
 type: application/javascript
 module-type: library
 \*/
 
 const {html} = await import ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs");
 
-const {ibutton}=await import("$:/plugins/bj/aiclone/iconbutton.mjs")
+const {ibutton}=await import("$:/plugins/bj/simplifai/iconbutton.mjs")
 const marked = await import ("$:/plugins/bj/plugins/marked/markdown.js");
 
 

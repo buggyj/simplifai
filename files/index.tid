@@ -1,9 +1,9 @@
 created: 20241009174621036
-title: $:/plugins/bj/aiclone/index
+title: $:/plugins/bj/simplifai/index
 type: text/vnd.tiddlywikis
 tags: $:/tags/customLayout
 modified: 20241021164643343
 stylesheet: $:/themes/bj/cssreset
 
-<div id="aiclone"/>
-<$pwidget $selector= "#aiclone" $app="$:/plugins/bj/aiclone/aiclone.mjs"  errorMessage="Error in app"/>
+<div id="simplifai"/>
+<$pwidget $selector= "#simplifai" $app="$:/plugins/bj/simplifai/simplifai.mjs"  errorMessage="Error in app"/>

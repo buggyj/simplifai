@@ -1,10 +1,10 @@
 created: 20241009222533272
-title: $:/plugins/bj/aiclone/main.css
+title: $:/plugins/bj/simplifai/main.css
 tags: $:/tags/Stylesheet
 modified: 20241022063857114
 type: text/plain
 
-/*$:/plugins/bj/aiclone/aiclone.css*/
+/*$:/plugins/bj/simplifai/simplifai.css*/
 
 .main {
   display: flex;

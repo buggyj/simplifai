@@ -1,15 +1,15 @@
 created: 20241009212421654
-title: $:/plugins/bj/aiclone/sidebar.css
+title: $:/plugins/bj/simplifai/sidebar.css
 tags: $:/tags/Stylesheet
 modified: 20241022171843632
 type: text/plain
 
-/*$:/plugins/bj/aiclone/aiclone.css*/
+/*$:/plugins/bj/simplifai/simplifai.css*/
 .aic_sidebar {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: var(--bj-aiclone-sidebar);
+  background-color: var(--bj-simplifai-sidebar);
   padding: 25px 15px;
 }
 

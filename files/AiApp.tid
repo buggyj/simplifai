@@ -1,10 +1,10 @@
 created: 20250203084301454
 tags: $:/tags/customLayout
-title: $:/plugins/bj/aiclone/AiApp
+title: $:/plugins/bj/simplifai/AiApp
 modified: 20250214055727913
 stylesheet: $:/themes/tiddlywiki/vanilla
 type: 
 
-\import $:/plugins/bj/aiclone/widget
+\import $:/plugins/bj/simplifai/widget
 
-<$mkchat.app tid={{{[[$:/temp/bj/aiclone/CurrentGeminiChat]get[text]else[$:/temp/bj/newChat]]}}}>
+<$mkchat.app tid={{{[[$:/temp/bj/simplifai/CurrentGeminiChat]get[text]else[$:/temp/bj/newChat]]}}}>

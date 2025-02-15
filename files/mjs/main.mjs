@@ -1,16 +1,16 @@
 /*\
-title: $:/plugins/bj/aiclone/main.mjs
+title: $:/plugins/bj/simplifai/main.mjs
 type: application/javascript
 module-type: library
 \*/
 
 const {html, render,useContext,useState, useRef, useEffect, signal} = await import ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs");
 
-const {ibutton}=await import("$:/plugins/bj/aiclone/iconbutton.mjs")
+const {ibutton}=await import("$:/plugins/bj/simplifai/iconbutton.mjs")
 const marked = await import ("$:/plugins/bj/plugins/marked/markdown.js");
-const { runChat } = await import ('$:/plugins/bj/aiclone/gemini.mjs');
-//const { runChat } = await import ('$:/plugins/bj/aiclone/gpt.mjs')
-const {API_KEY} = await import("$:/plugins/bj/aiclone/setting.mjs"); 
+const { runChat } = await import ('$:/plugins/bj/simplifai/gemini.mjs');
+//const { runChat } = await import ('$:/plugins/bj/simplifai/gpt.mjs')
+const {API_KEY} = await import("$:/plugins/bj/simplifai/setting.mjs"); 
 
 const {init} = await import ("$:/plugins/bj/tiddlywiki-preact/towidget.mjs")
 

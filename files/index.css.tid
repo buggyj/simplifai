@@ -1,17 +1,17 @@
 created: 20241009175338632
-title: $:/plugins/bj/aiclone/index.css
+title: $:/plugins/bj/simplifai/index.css
 tags: $:/tags/Stylesheet
 modified: 20250203080616698
 type: text/plain
 
-#aiclone{
+#simplifai{
   height:80vh;
   display:flex;
   flex-direction:column;
   outline: solid green;
 }
 
-.aiclone{
+.simplifai{
   height:80vh;
   display:flex;
   flex-direction:column;
@@ -27,7 +27,7 @@ type: text/plain
   padding: 20px;
   flex:0 0 auto;
   display:flex;
-  background-color: var(--bj-aiclone-nav);
+  background-color: var(--bj-simplifai-nav);
 }
 
 .aic_nav p {
@@ -46,12 +46,12 @@ type: text/plain
   display:flex;
 }
 
-/*$:/plugins/bj/aiclone/main.css*/
+/*$:/plugins/bj/simplifai/main.css*/
 .main {
   flex: 1 1 100%;
 }
 
-/*$:/plugins/bj/aiclone/sidebar.css*/
+/*$:/plugins/bj/simplifai/sidebar.css*/
 .aic_sidebar {
 flex: 0 1 auto;
 }
