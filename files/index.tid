@@ -6,4 +6,4 @@ modified: 20241021164643343
 stylesheet: $:/themes/bj/cssreset
 
 <div id="simplifai"/>
-<$pwidget $selector= "#simplifai" $app="$:/plugins/bj/simplifai/simplifai.mjs"  errorMessage="Error in app"/>
+<$pwidget  $app="$:/plugins/bj/simplifai/simplifai.mjs"  errorMessage="Error in app"/>

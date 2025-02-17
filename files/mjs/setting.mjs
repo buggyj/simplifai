@@ -7,7 +7,7 @@ const {signal} = await import ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs
 const {HarmCategory, HarmBlockThreshold} = await import('https://esm.run/@google/generative-ai') 
 const key = "";
 
-export const MODEL_NAME = "gemini-1.5-pro";
+export const MODEL_NAME = "gemini-2.0-flash";
 export const API_KEY = signal(key);
 export const useHistLen = 10;
 export const safetySettings = [

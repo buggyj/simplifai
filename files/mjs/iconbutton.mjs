@@ -12,6 +12,6 @@ function geticon(iconname) {
 	return "data:image/png;base64,"+getTextReference(txtref)
 }
 
-export const ibutton =function({name,visable=1,...props}) {console.log(name)
+export const ibutton =function({name,visable=1,...props}) {
 	return html`<img src=${geticon(name)} style="opacity:${visable}" ...${props}/>`
 }

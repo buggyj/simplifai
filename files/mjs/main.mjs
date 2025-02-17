@@ -18,7 +18,7 @@ function mssg(modal, name, msg) {return `<$action-sendmessage $message="tm-modal
 let modal="ModalMessage", title="Error no key",  msg="No key found, setup need a key"	
 export const Input=signal("")
 
-export function Main({history,__pwidget}) {
+export function Main({history,sysRole,__pwidget}) {
 	const onSent = async (prompt) => {
      if (!API_KEY.value){onNoKey();return}
 		//setResult("")
@@ -26,7 +26,8 @@ export function Main({history,__pwidget}) {
 		setCurrentPrompt(Input.value)
 		Input.value=""
 		//let response=
-        await runChat(prompt, history, __pwidget)
+		console.log(sysRole.value +" 9999999999")
+        await runChat(prompt, history,sysRole,__pwidget)
 		//setResult(response)	
 	}
   const onNoKey = () => {invokeActionString(mssg(modal, name, msg))}
@@ -86,7 +87,7 @@ export function Main({history,__pwidget}) {
 			  placeholder="Don't be shy..."
 			/>
 			<div>
-			  <${ibutton} name="send_icon" alt="" onclick=${() => {
+			  <${ibutton} name="input_icon" alt="" onclick=${() => {
 				  onSent(Input.value)
 				}}/>
 			  

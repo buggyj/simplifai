@@ -1,0 +1,10 @@
+title: $:/plugins/bj/simplifai/roleModal
+footer: <$button message="tm-close-tiddler">Close</$button>
+subtitle: <<title>>
+tags: [[Message Examples]]
+
+<$select tiddler='$:/temp/bj/simplifai/CurrentGeminiRole' tooltip='Choose a chat'>
+<$list filter='[tag[geminiRoles]]'>
+<option><$view field='title'/></option>
+</$list>
+</$select>

@@ -7,4 +7,7 @@ type:
 
 \import $:/plugins/bj/simplifai/widget
 
-<$mkchat.app tid={{{[[$:/temp/bj/simplifai/CurrentGeminiChat]get[text]else[$:/temp/bj/newChat]]}}}>
+<$mkchat.app 
+	tid={{{[[$:/temp/bj/simplifai/CurrentGeminiChat]get[text]else[$:/temp/bj/newChat]]}}}
+	systid = {{{[[$:/temp/bj/simplifai/CurrentGeminiRole]get[text]else[$:/temp/bj/newRole]]}}}
+>
