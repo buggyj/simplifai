@@ -1,0 +1,6 @@
+title: $:/plugins/bj/simplifai/nokeyModal
+footer: <$button message="tm-close-tiddler">Close</$button>
+subtitle: Api Key not found
+tags: ModalMessage
+
+click the {{$:/plugins/bj/simplifai/key_icon.png}} in the sidebar and enter your gemini api key

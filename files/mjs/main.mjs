@@ -15,20 +15,17 @@ const {API_KEY} = await import("$:/plugins/bj/simplifai/setting.mjs");
 const {init} = await import ("$:/plugins/bj/tiddlywiki-preact/towidget.mjs")
 
 function mssg(modal, name, msg) {return `<$action-sendmessage $message="tm-modal" $param="${modal}" title="${title}" message="${msg}"/>`}
-let modal="ModalMessage", title="Error no key",  msg="No key found, setup need a key"	
+let modal="$:/plugins/bj/simplifai/nokeyModal", title="",  msg=""	
 export const Input=signal("")
 
-export function Main({history,sysRole,__pwidget}) {
+function markdown(source) {
+  return (marked(source)).replace(/<pre>/g, "<my-pre><pre>").replace(/<\/pre>/g, "</pre></my-pre>");
+}
+export function Main({history,sysRole,params,__pwidget}) {
 	const onSent = async (prompt) => {
      if (!API_KEY.value){onNoKey();return}
-		//setResult("")
-		//setStarted(true)
-		setCurrentPrompt(Input.value)
 		Input.value=""
-		//let response=
-		console.log(sysRole.value +" 9999999999")
-        await runChat(prompt, history,sysRole,__pwidget)
-		//setResult(response)	
+        await runChat(prompt, history,sysRole,params,__pwidget)
 	}
   const onNoKey = () => {invokeActionString(mssg(modal, name, msg))}
   const lastMessageRef = useRef(null);
@@ -40,7 +37,6 @@ export function Main({history,sysRole,__pwidget}) {
     }
   }, [history.value]); // Runs every time history updates
     
-	const [currentPrompt, setCurrentPrompt] = useState("");
     const [started, setStarted] = useState(false);
     const [result, setResult] = useState("");
 	return html`
@@ -67,7 +63,7 @@ export function Main({history,sysRole,__pwidget}) {
                 <div class="result-data">
 	              <${ibutton} name="gemini_icon" alt="" />
                       ${message.parts.map(
-                      (part, i) => html`<p key=${i} dangerouslySetInnerHTML=${{ __html: marked(part.text )}}></p>`)}
+                      (part, i) => html`<p key=${i} dangerouslySetInnerHTML=${{ __html: markdown(part.text )}}></p>`)}
 	            </div>`
               }
 	        </div> `     
@@ -76,8 +72,31 @@ export function Main({history,sysRole,__pwidget}) {
         </div>   
 		<div class="main-bottom">
 		  <div class="search-box">
-			<input
+			<textarea
+			  onkeydown=${(e) => {
+			 
+				if (e.key === "Enter" && !e.shiftKey) {
+				  e.preventDefault(); // Prevent default behavior (new line)
+				 onSent(e.target.value)
+				 if (API_KEY.value){ 
+					e.target.value=''
+					e.target.parentElement.style.height = 'auto';
+					e.target.style.height = 'auto';
+				 }
+				}
+			  }}
+			  onInput=${(e) => { 
+			     e.target.style.height = 'auto';
+			  	 e.target.parentElement.style.height = 'auto';
+			  	 e.target.style.height = (e.target.scrollHeight) + 'px';
+				 e.target.parentElement.style.height = (e.target.scrollHeight) + 'px';
+				  
+			  }}
 			  onchange=${(e) => {
+				e.target.parentElement.style.height = 'auto';
+				 e.target.parentElement.style.height = (e.target.scrollHeight) + 'px';
+				 e.target.style.height = 'auto';
+				 e.target.style.height = (e.target.scrollHeight) + 'px';
 				//setInput(e.target.value)
 				Input.value=e.target.value
 				  

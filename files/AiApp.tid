@@ -10,4 +10,5 @@ type:
 <$mkchat.app 
 	tid={{{[[$:/temp/bj/simplifai/CurrentGeminiChat]get[text]else[$:/temp/bj/newChat]]}}}
 	systid = {{{[[$:/temp/bj/simplifai/CurrentGeminiRole]get[text]else[$:/temp/bj/newRole]]}}}
+	paramstid = {{{[[$:/temp/bj/simplifai/CurrentGeminiParams]get[text]else[$:/temp/bj/newParams]]}}}
 >

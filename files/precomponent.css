@@ -1,0 +1,21 @@
+/*\
+title:  $:/plugins/bj/simplifai/precomponent.css
+type: text/plain
+tags: $:/tags/Stylesheet
+\*/
+
+<my-pre {
+  display: block;
+  max-width: 100%; 
+  overflow: auto; 
+}
+
+my-pre pre {
+  white-space: pre-wrap; /* Wrap long lines */
+  word-break: break-word; 
+  overflow: auto; 
+  padding: 10px;
+  background: #f4f4f4;
+  border-radius: 5px;
+  max-width: 100%; 
+}

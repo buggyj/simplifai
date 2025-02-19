@@ -1,0 +1,5 @@
+list-before: $:/config/ViewTemplateBodyFilters/system
+tags: $:/tags/ViewTemplateBodyFilter
+title: $:/plugins/bj/simplifai/showview/cascade
+
+[applicationtype[geminiChats]then[$:/plugins/bj/simplifai/ShowViewTemplate/body]]

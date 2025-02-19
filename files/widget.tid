@@ -5,8 +5,8 @@ tags:
 modified: 20250204143629250
 stylesheet: $:/themes/bj/cssreset
 
-\widget $mkchat.app(tid,systid)
-<$pwidget  class="simplifai" $app="$:/plugins/bj/simplifai/simplifai.mjs"  $tids=`[[:history|$(tid)$]] [[sysRole|$(systid)$]]` errorMessage="Error in app" />
+\widget $mkchat.app(tid,systid,paramstid)
+<$pwidget  class="simplifai" $app="$:/plugins/bj/simplifai/simplifai.mjs"  $tids=`[[:history|$(tid)$]] [[sysRole|$(systid)$]] [[:params|$(paramstid)$]]` errorMessage="Error in app" />
 \end
 
 \widget $mkchat.details(tid) 

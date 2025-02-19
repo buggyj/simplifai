@@ -13,7 +13,7 @@ const {getTextReference} = await import('$:/plugins/bj/tiddlywiki-preact/store.j
 
 const { MODEL_NAME, API_KEY, safetySettings ,generationConfig} = await import("$:/plugins/bj/simplifai/setting.mjs");
 
-export async function runChat(prompt,history,sysRole,__pwidget) {
+export async function runChat(prompt,history,sysRole,params,__pwidget) {
     const {invokeActionString} = init(__pwidget)
     const makeTitle= function(prompt) {
         if (!prompt.length) return "New Chat";
@@ -53,10 +53,9 @@ export async function runChat(prompt,history,sysRole,__pwidget) {
              // rename $:/temp/bj/newChat to the title
              invokeActionString(`<$action-setfield $tiddler="$:/temp/bj/simplifai/CurrentGeminiChat" text="""${title}"""/>`)
      }
-	function createChat(apiKey, history, sysRole) {
+	function createChat(apiKey, history, sysRole, params) { console.log (params)
 	
 	  const genAI = new GoogleGenerativeAI(apiKey);
-	console.log(sysRole.value +" 8888888888")
 	  const model = genAI.getGenerativeModel({ 
 		 model: MODEL_NAME,
 		 systemInstruction: {
@@ -69,7 +68,7 @@ export async function runChat(prompt,history,sysRole,__pwidget) {
 	  const chat = model.startChat({
 	    history,
 	    safetySettings,
-	    generationConfig
+	    params
 	  });
 
 	  return async (message) => {
@@ -84,9 +83,9 @@ export async function runChat(prompt,history,sysRole,__pwidget) {
 	  }
 	}
 
-var hist = [...history.value]
+  var hist = [...history.value]
 
-  const chatWithAI = createChat(API_KEY,hist,sysRole);//gemini appends history to 'hist'
+  const chatWithAI = createChat(API_KEY,hist,sysRole,params);//gemini appends history to 'hist'
   const response  = await chatWithAI(prompt)
   //const response = [...history.value,{"role": "user", "parts": [{"text": prompt}]},{"role": "model", "parts": [{"text": result.response.text()}]}];
   //console.log(history.value)

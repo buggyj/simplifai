@@ -3,12 +3,13 @@ title: $:/plugins/bj/simplifai/SelectModal
 footer: <$button message="tm-close-tiddler">Close</$button>
 modified: 20250213165927772
 subtitle: <<title>>
-tags: [[Message Examples]]
+tags: ModalMessage
 type: 
 
 
-<$select tiddler='$:/temp/bj/simplifai/CurrentGeminiChat' tooltip='Choose a chat'>
-<$list filter='[tag[geminiChats]]'>
+<$select tiddler='$:/temp/bj/simplifai/CurrentGeminiChat' tooltip='Choose a chat' 
+		 actions='<$action-sendmessage $message="tm-close-tiddler"/>'>
+<$list filter='[tag[geminiChats]!sort[modified]]'>
 <option><$view field='title'/></option>
 </$list>
 </$select>

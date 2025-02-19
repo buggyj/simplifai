@@ -1,0 +1,4 @@
+hide-body: yes
+title: $:/plugins/bj/simplifai/ShowViewTemplate/body
+
+{{||$:/plugins/bj/simplifai/detailsTemplate}}

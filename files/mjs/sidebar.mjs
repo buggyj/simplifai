@@ -12,13 +12,16 @@ const {init} = await import ("$:/plugins/bj/tiddlywiki-preact/towidget.mjs")
 function mssg(modal, name, msg) {return `<$action-sendmessage $message="tm-modal" $param="${modal}" title="${name}" message="${msg}"/>`}
 let chatsmodal="$:/plugins/bj/simplifai/SelectModal", chatsname="chats",  chatsmsg="choose chat"	
 let rolemodal="$:/plugins/bj/simplifai/roleModal", rolename="role",  rolemsg="choose role"	
+let paramsmodal="$:/plugins/bj/simplifai/paramsModal", paramsname="params",  paramsmsg="choose params"	
 
 function newChat(){return `<$action-setfield $tiddler="$:/temp/bj/simplifai/CurrentGeminiChat" text="$:/temp/bj/newChat"/>`}
 
 export function sidebar({history,__pwidget}) {
 	const [extended, setExtended] = useState(false)
 	const [hidKeyEntry, setHidKeyEntry] = useState(true);
+	const [hidTemp, setHidTemp] = useState(true);
 	const {dispatchEvent, invokeActionString} = init(__pwidget)
+	
 	return html`
 	${!hidKeyEntry && html`
 	<div class="bj_key-entry-overlay "></div>
@@ -30,11 +33,16 @@ export function sidebar({history,__pwidget}) {
 		</div>
 		<div class="bottom-item btn">
 		    <${ibutton}  name="colorwheel_icon" alt="sysrole icon"  
+			   onclick=${() => (invokeActionString(mssg(paramsmodal, paramsname, paramsmsg)))}/>
+			${extended ? html`<span>select role</span> `: null}
+		</div>
+		<div class="bottom-item btn">
+		    <${ibutton}  name="cog_icon" alt="sysrole icon"  
 			   onclick=${() => (invokeActionString(mssg(rolemodal, rolename, rolemsg)))}/>
 			${extended ? html`<span>select role</span> `: null}
 		</div>
 		<div class="bottom-item btn">
-		    <${ibutton}  name="cog_icon" alt="chats icon"  
+		    <${ibutton}  name="tids_icon" alt="chats icon"  
 			   onclick=${() => (invokeActionString(mssg(chatsmodal, chatsname, chatsmsg)))}/>
 			${extended ? html`<span>select chat</span> `: null}
 		</div>
@@ -43,6 +51,7 @@ export function sidebar({history,__pwidget}) {
 			   onclick=${() => {invokeActionString(newChat())}}/>
 			${extended ? html`<span>new chat</span> `: null}
 		</div>
+
 		<div class="bottom-item btn">
 		  <${ibutton} name="key_icon" alt="enter key" visable="0.5"
 		  onclick=${() => setHidKeyEntry((prev) => !prev)}/>

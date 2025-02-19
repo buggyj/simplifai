@@ -2,6 +2,7 @@ created: 20250203183917937
 tags: geminiChats
 modified: 20250212140905758
 title: $:/temp/bj/newChat
-type: 
+type: application/json
+applicationtype: geminiChats
 
 []

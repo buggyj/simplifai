@@ -1,0 +1,5 @@
+hide-body: yes
+title: $:/plugins/bj/simplifai/detailsTemplate
+type: 
+
+<$macrocall $name="showchat" chattid=<<currentTiddler>>/>

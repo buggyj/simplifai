@@ -1,0 +1,19 @@
+caption: {{$:/core/images/plugin-generic-language}}} goAI
+created: 20241011080445321
+description: goAI
+modified: 20250218203311861
+tags: $:/tags/EditToolbar $:/tags/ViewToolbar
+title: $:/plugins/bj/simplifai/Buttons/goAI
+type: 
+
+\whitespace trim
+<% if [all[current]applicationtype[geminiChats]] %>
+<$button class="tc-btn-invisible" tooltip="goAI">
+<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+{{$:/core/images/plugin-generic-language}}
+</$list>
+<$action-setfield  $tiddler='$:/temp/bj/simplifai/CurrentGeminiChat' text=<<currentTiddler>>/>
+<$action-setfield $tiddler="$:/theme" text="$:/themes/bj/cssreset"/><$action-setfield $tiddler="$:/layout" text="$:/plugins/bj/simplifai/AiApp"/>
+
+</$button>
+<% endif %>

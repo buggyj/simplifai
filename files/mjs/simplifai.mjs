@@ -26,15 +26,15 @@ function ai({__state,__pwidget}) {
 	<div class="aic_nav"> 
 		<${ibutton} class='aic_nav__btn' name="exit_icon" 
 					alt="menu icon"  onclick=${() =>switchMode()}/>
-		<p>Gemini ${__pwidget.toTiddlers['history']}</p>
+		<p>Gemini@ ${__pwidget.toTiddlers['history']}</p>
 		<${ibutton} name="user_icon" alt="" />
 	</div>
 	<div class="aic_content_container">
-		    <${sidebar} __pwidget=${__pwidget} history=${__state["history"]}/><${Main} history=${__state["history"]} sysRole=${__state["sysRole"]} __pwidget=${__pwidget}/>
+		    <${sidebar} __pwidget=${__pwidget} history=${__state["history"]}/><${Main} history=${__state["history"]} sysRole=${__state["sysRole"]} params=${__state["params"]} __pwidget=${__pwidget}/>
 	</div>
   `;
 }
 
 //check binding for
-export var psignals = [":history", "sysRole"]
+export var psignals = [":history", "sysRole",":params"]
 export  {ai as start};

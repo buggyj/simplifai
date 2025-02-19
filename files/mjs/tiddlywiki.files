@@ -1,1 +1,85 @@
-{"tiddlers": [{"file":"simplifai.mjs","fields":{"type":"application/javascript","module-type":"library","title": "$:/plugins/bj/simplifai/simplifai.mjs"}},{"file":"data.mjs","fields":{"type":"application/javascript","module-type":"library","title": "$:/plugins/bj/simplifai/data.mjs"}},{"file":"details.mjs","fields":{"type":"application/javascript","module-type":"library","title": "$:/plugins/bj/simplifai/details.mjs"}},{"file":"gemini.mjs","fields":{"type":"application/javascript","module-type":"library","title": "$:/plugins/bj/simplifai/gemini.mjs"}},{"file":"gpt.mjs","fields":{"type":"application/javascript","module-type":"library","title": "$:/plugins/bj/simplifai/gpt.mjs"}},{"file":"iconbutton.mjs","fields":{"type":"application/javascript","module-type":"library","title": "$:/plugins/bj/simplifai/iconbutton.mjs"}},{"file":"main.mjs","fields":{"type":"application/javascript","module-type":"library","title": "$:/plugins/bj/simplifai/main.mjs"}},{"file":"setting.mjs","fields":{"type":"application/javascript","module-type":"library","title": "$:/plugins/bj/simplifai/setting.mjs"}},{"file":"sidebar.mjs","fields":{"type":"application/javascript","module-type":"library","title": "$:/plugins/bj/simplifai/sidebar.mjs"}}]}
+{
+  "tiddlers": [
+    {
+      "file": "simplifai.mjs",
+      "fields": {
+        "type": "application/javascript",
+        "module-type": "library",
+        "title": "$:/plugins/bj/simplifai/simplifai.mjs"
+      }
+    },
+    {
+      "file": "data.mjs",
+      "fields": {
+        "type": "application/javascript",
+        "module-type": "library",
+        "title": "$:/plugins/bj/simplifai/data.mjs"
+      }
+    },
+    {
+      "file": "details.mjs",
+      "fields": {
+        "type": "application/javascript",
+        "module-type": "library",
+        "title": "$:/plugins/bj/simplifai/details.mjs"
+      }
+    },
+    {
+      "file": "gemini.mjs",
+      "fields": {
+        "type": "application/javascript",
+        "module-type": "library",
+        "title": "$:/plugins/bj/simplifai/gemini.mjs"
+      }
+    },
+    {
+      "file": "gpt.mjs",
+      "fields": {
+        "type": "application/javascript",
+        "module-type": "library",
+        "title": "$:/plugins/bj/simplifai/gpt.mjs"
+      }
+    },
+    {
+      "file": "iconbutton.mjs",
+      "fields": {
+        "type": "application/javascript",
+        "module-type": "library",
+        "title": "$:/plugins/bj/simplifai/iconbutton.mjs"
+      }
+    },
+    {
+      "file": "main.mjs",
+      "fields": {
+        "type": "application/javascript",
+        "module-type": "library",
+        "title": "$:/plugins/bj/simplifai/main.mjs"
+      }
+    },
+    {
+      "file": "setting.mjs",
+      "fields": {
+        "type": "application/javascript",
+        "module-type": "library",
+        "title": "$:/plugins/bj/simplifai/setting.mjs"
+      }
+    },
+    {
+      "file": "precomponent.js",
+      "fields": {
+		"title": "$:/plugins/bj/simplifai/precomponent.js",
+		"type": "application/javascript",
+		"module-type": "library",
+		"tags": "$:/tags/RawMarkup"
+      }
+    },
+    {
+      "file": "sidebar.mjs",
+      "fields": {
+        "type": "application/javascript",
+        "module-type": "library",
+        "title": "$:/plugins/bj/simplifai/sidebar.mjs"
+      }
+    }
+  ]
+}
