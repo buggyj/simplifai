@@ -58,7 +58,7 @@ export function sidebar({history,__pwidget}) {
 		  ${extended ? html`<span>Set Key</span> `: null}
 		  ${!hidKeyEntry ? html`
 			  <div class='bj_key-entry'>Enter Key:
-			  <input type="password" onchange=${(e) => {
+			  <input autofocus type="password" onchange=${(e) => {
 				API_KEY.value=e.target.value		  
 			  }}/>
 			  <button onclick=${() => setHidKeyEntry((prev) => !prev)}>[x]</button>

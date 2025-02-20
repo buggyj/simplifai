@@ -4,17 +4,19 @@ type: application/javascript
 module-type: library
 \*/
 
-const {html, render} = await import ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs");
+const {html, render, signal} = await import ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs");
 
 const { sidebar } = await import ('$:/plugins/bj/simplifai/sidebar.mjs');
  const { Main } = await import ('$:/plugins/bj/simplifai/main.mjs');
 const {ibutton}=await import("$:/plugins/bj/simplifai/iconbutton.mjs")
 const {getTextReference} = await import('$:/plugins/bj/tiddlywiki-preact/store.js')
 const {init} = await import ("$:/plugins/bj/tiddlywiki-preact/towidget.mjs")
+const {busy} = await import ("$:/plugins/bj/simplifai/gemini.mjs")
 
 let  ToTid= `<$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/vanilla"/><$action-setfield $tiddler="$:/layout" text="$:/core/ui/PageTemplate"/>`
 
 let  FromTid= `<$action-setfield $tiddler="$:/theme" text="$:/themes/bj/cssreset"/><$action-setfield $tiddler="$:/layout" text="$:/plugins/bj/simplifai/AiApp"/>`
+
 
 function ai({__state,__pwidget}) {
 	const {invokeActionString} = init(__pwidget)
@@ -23,7 +25,7 @@ function ai({__state,__pwidget}) {
 		else invokeActionString(ToTid)
 	} 
 	return html`
-	<div class="aic_nav"> 
+	<div class="aic_nav" style="background:${ (() => {if (busy.value) return "pink"; return "#e2e6eb";})() }"> 
 		<${ibutton} class='aic_nav__btn' name="exit_icon" 
 					alt="menu icon"  onclick=${() =>switchMode()}/>
 		<p>Gemini@ ${__pwidget.toTiddlers['history']}</p>

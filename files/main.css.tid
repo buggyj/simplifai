@@ -76,7 +76,7 @@ flex: 0 0 auto;
 	  background: transparent;
 	  border: none;
 	  outline: none;
-	  padding: 0px;
+	  padding: 4px;
 	  font-size: 13px;
 	  resize: none;
 	}

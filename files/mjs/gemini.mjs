@@ -12,6 +12,7 @@ const {getTextReference} = await import('$:/plugins/bj/tiddlywiki-preact/store.j
 
 
 const { MODEL_NAME, API_KEY, safetySettings ,generationConfig} = await import("$:/plugins/bj/simplifai/setting.mjs");
+export const busy = signal (false)
 
 export async function runChat(prompt,history,sysRole,params,__pwidget) {
     const {invokeActionString} = init(__pwidget)
@@ -84,7 +85,7 @@ export async function runChat(prompt,history,sysRole,params,__pwidget) {
 	}
 
   var hist = [...history.value]
-
+  busy.value=true
   const chatWithAI = createChat(API_KEY,hist,sysRole,params);//gemini appends history to 'hist'
   const response  = await chatWithAI(prompt)
   //const response = [...history.value,{"role": "user", "parts": [{"text": prompt}]},{"role": "model", "parts": [{"text": result.response.text()}]}];
@@ -92,6 +93,7 @@ export async function runChat(prompt,history,sysRole,params,__pwidget) {
   let newchat = (history.value.length==0)
   history.value = hist
   if (newchat) doNewChat(prompt);
+  busy.value=false
   //return response
   
 }
