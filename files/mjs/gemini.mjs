@@ -83,15 +83,15 @@ export async function runChat(prompt,history,sysRole,params,__pwidget) {
 	    }
 	  }
 	}
-
-  var hist = [...history.value]
+  var hist = history.value.filter(entry => !entry.hidden);
+  var lastchat = hist.length;
   busy.value=true
   const chatWithAI = createChat(API_KEY,hist,sysRole,params);//gemini appends history to 'hist'
   const response  = await chatWithAI(prompt)
   //const response = [...history.value,{"role": "user", "parts": [{"text": prompt}]},{"role": "model", "parts": [{"text": result.response.text()}]}];
   //console.log(history.value)
   let newchat = (history.value.length==0)
-  history.value = hist
+  history.value = [...history.value,...(hist.slice(lastchat))]
   if (newchat) doNewChat(prompt);
   busy.value=false
   //return response

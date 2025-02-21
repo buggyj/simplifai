@@ -33,12 +33,12 @@ export function sidebar({history,__pwidget}) {
 		</div>
 		<div class="bottom-item btn">
 		    <${ibutton}  name="colorwheel_icon" alt="sysrole icon"  
-			   onclick=${() => (invokeActionString(mssg(paramsmodal, paramsname, paramsmsg)))}/>
+			   onclick=${() => (invokeActionString(mssg(rolemodal, rolename, rolemsg)))}/>
 			${extended ? html`<span>select role</span> `: null}
 		</div>
 		<div class="bottom-item btn">
 		    <${ibutton}  name="cog_icon" alt="sysrole icon"  
-			   onclick=${() => (invokeActionString(mssg(rolemodal, rolename, rolemsg)))}/>
+			   onclick=${() => (invokeActionString(mssg(paramsmodal, paramsname, paramsmsg)))}/>
 			${extended ? html`<span>select role</span> `: null}
 		</div>
 		<div class="bottom-item btn">

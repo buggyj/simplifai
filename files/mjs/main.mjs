@@ -55,12 +55,22 @@ export function Main({history,sysRole,params,__pwidget}) {
               <!-- Display User or Bot Icon -->
               ${message.role === "user"
                 ? html`	
-                <div class="result-title">
+                <div class="result-title" class=${!message.hidden?'':'noshow'} onclick=${() =>{
+						if (history.value[index].hidden){
+							delete history.value[index].hidden;
+							delete history.value[index+1].hidden;
+							history.value = [...history.value]
+						}
+						else {
+							history.value[index].hidden=true;
+							history.value[index+1].hidden=true;
+							history.value = [...history.value]				
+						}}} >
 	              <${ibutton} name="user_icon" alt="" />
 	              <p>${message.parts[0].text}</p>
 	            </div>`
                 : html` 
-                <div class="result-data">
+                <div class="result-data" style="display:${!message.hidden?'block':'none'};">
 	              <${ibutton} name="gemini_icon" alt="" />
                       ${message.parts.map(
                       (part, i) => html`<p key=${i} dangerouslySetInnerHTML=${{ __html: markdown(part.text )}}></p>`)}
