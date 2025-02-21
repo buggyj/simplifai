@@ -11,7 +11,7 @@ const {init} = await import ("$:/plugins/bj/tiddlywiki-preact/towidget.mjs")
 
 function mssg(modal, name, msg) {return `<$action-sendmessage $message="tm-modal" $param="${modal}" title="${name}" message="${msg}"/>`}
 let chatsmodal="$:/plugins/bj/simplifai/SelectModal", chatsname="chats",  chatsmsg="choose chat"	
-let rolemodal="$:/plugins/bj/simplifai/roleModal", rolename="role",  rolemsg="choose role"	
+let tagsmodal="$:/plugins/bj/simplifai/tagsModal", tagsname="tags",  tagsmsg="choose tags"	
 let paramsmodal="$:/plugins/bj/simplifai/paramsModal", paramsname="params",  paramsmsg="choose params"	
 
 function newChat(){return `<$action-setfield $tiddler="$:/temp/bj/simplifai/CurrentGeminiChat" text="$:/temp/bj/newChat"/>`}
@@ -33,7 +33,7 @@ export function sidebar({history,__pwidget}) {
 		</div>
 		<div class="bottom-item btn">
 		    <${ibutton}  name="colorwheel_icon" alt="sysrole icon"  
-			   onclick=${() => (invokeActionString(mssg(rolemodal, rolename, rolemsg)))}/>
+			   onclick=${() => (invokeActionString(mssg(tagsmodal, tagsname, tagsmsg)))}/>
 			${extended ? html`<span>select role</span> `: null}
 		</div>
 		<div class="bottom-item btn">

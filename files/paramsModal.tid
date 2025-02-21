@@ -3,8 +3,15 @@ footer: <$button message="tm-close-tiddler">Close</$button>
 subtitle: <<title>>
 tags: [[Message Examples]]
 
+<div class="paramsModal">
 <$select tiddler='$:/temp/bj/simplifai/CurrentGeminiParams' tooltip='Choose a params Configtid'>
 <$list filter='[tag[geminiParams]]'>
 <option><$view field='title'/></option>
 </$list>
 </$select>
+<$select tiddler='$:/temp/bj/simplifai/CurrentGeminiRole' tooltip='Choose a chat'>
+<$list filter='[tag[geminiRoles]]'>
+<option><$view field='title'/></option>
+</$list>
+</$select>
+</div>

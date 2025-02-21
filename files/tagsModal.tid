@@ -1,0 +1,13 @@
+title: $:/plugins/bj/simplifai/tagsModal
+footer: <$button message="tm-close-tiddler">Close</$button>
+subtitle: <<title>>
+tags: [[Message Examples]]
+
+
+\define seltags(tid)
+<$set name=hashtags  filter='[tag[hashtags]]'> <<itd>>
+<$pwidget  $app="$:/plugins/bj/simplifai/calltables.mjs" $tids="[[tags|$tid$!!tags]]"  hashtags=<<hashtags>>   errorMessage="Error in app" />
+</$set>
+\end
+
+<$macrocall $name=seltags tid={{$:/temp/bj/simplifai/CurrentGeminiChat}}/>

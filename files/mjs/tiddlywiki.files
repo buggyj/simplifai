@@ -80,6 +80,22 @@
         "module-type": "library",
         "title": "$:/plugins/bj/simplifai/sidebar.mjs"
       }
+    },
+    {
+      "file": "tables.mjs",
+      "fields": {
+        "type": "application/javascript",
+        "module-type": "library",
+        "title": "$:/plugins/bj/simplifai/tables.mjs"
+      }
+    },
+    {
+      "file": "calltables.mjs",
+      "fields": {
+        "type": "application/javascript",
+        "module-type": "library",
+        "title": "$:/plugins/bj/simplifai/calltables.mjs"
+      }
     }
   ]
 }

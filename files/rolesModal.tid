@@ -3,8 +3,10 @@ footer: <$button message="tm-close-tiddler">Close</$button>
 subtitle: <<title>>
 tags: [[Message Examples]]
 
-<$select tiddler='$:/temp/bj/simplifai/CurrentGeminiRole' tooltip='Choose a chat'>
-<$list filter='[tag[geminiRoles]]'>
-<option><$view field='title'/></option>
-</$list>
-</$select>
+
+\define seltags(tid)
+<$set name=hashtags  filter='[tag[hashtags]]'>
+<$pwidget  $app="calltables.mjs" $tids="[[tags|$tid$!!tags]]"  hashtags=<<hashtags>>   errorMessage="Error in app" />
+</$set>
+
+<$macrocall $name=seltags tid={{$:/temp/bj/simplifai/CurrentGeminiChat}}/>
