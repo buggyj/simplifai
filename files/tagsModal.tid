@@ -1,8 +1,8 @@
 title: $:/plugins/bj/simplifai/tagsModal
 footer: <$button message="tm-close-tiddler">Close</$button>
 subtitle: <<title>>
-tags: [[Message Examples]]
-
+tags: ModalMessage
+mask-closable: true
 
 \define seltags(tid)
 <$set name=hashtags  filter='[tag[hashtags]]'> <<itd>>

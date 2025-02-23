@@ -34,22 +34,22 @@ export function sidebar({history,__pwidget}) {
 		<div class="bottom-item btn">
 		    <${ibutton}  name="colorwheel_icon" alt="sysrole icon"  
 			   onclick=${() => (invokeActionString(mssg(tagsmodal, tagsname, tagsmsg)))}/>
-			${extended ? html`<span>select role</span> `: null}
+			${extended ? html`<span>tags</span> `: null}
 		</div>
 		<div class="bottom-item btn">
 		    <${ibutton}  name="cog_icon" alt="sysrole icon"  
 			   onclick=${() => (invokeActionString(mssg(paramsmodal, paramsname, paramsmsg)))}/>
-			${extended ? html`<span>select role</span> `: null}
+			${extended ? html`<span>settings</span> `: null}
 		</div>
 		<div class="bottom-item btn">
 		    <${ibutton}  name="tids_icon" alt="chats icon"  
 			   onclick=${() => (invokeActionString(mssg(chatsmodal, chatsname, chatsmsg)))}/>
-			${extended ? html`<span>select chat</span> `: null}
+			${extended ? html`<span>chats</span> `: null}
 		</div>
   		<div class="bottom-item btn">
 		    <${ibutton}  name="plus_icon" alt="newchat icon"  
 			   onclick=${() => {invokeActionString(newChat())}}/>
-			${extended ? html`<span>new chat</span> `: null}
+			${extended ? html`<span>new</span> `: null}
 		</div>
 
 		<div class="bottom-item btn">

@@ -1,0 +1,22 @@
+title: $:/plugins/bj/simplifai/edittagfile
+footer: <$button message="tm-close-tiddler">Close</$button>
+subtitle: edit tags
+tags: ModalMessage
+mask-closable: true
+
+<style>
+.tablefullwidth{
+width:100%;
+}
+
+</style>
+<<message>>
+<div stye="width:100%">
+<$edit-text class="tablefullwidth" tiddler=<<message>>/>
+</div>
+<$button>
+<$action-sendmessage $message="tm-modal" $param="$:/plugins/bj/simplifai/tagsModal"  title="tags" message="choose tags"/>
+<$action-sendmessage $message="tm-close-tiddler"/>
+return
+
+</$button>

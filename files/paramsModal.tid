@@ -2,6 +2,7 @@ title: $:/plugins/bj/simplifai/paramsModal
 footer: <$button message="tm-close-tiddler">Close</$button>
 subtitle: <<title>>
 tags: [[Message Examples]]
+mask-closable: true
 
 <div class="paramsModal">
 <$select tiddler='$:/temp/bj/simplifai/CurrentGeminiParams' tooltip='Choose a params Configtid'>

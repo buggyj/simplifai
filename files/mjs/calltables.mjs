@@ -8,20 +8,41 @@ const {getTiddlerData,filterTiddlers,parseStringArray} = await import ("$:/plugi
 
 const {getTextReference} = await import ("$:/plugins/bj/tiddlywiki-preact/store.js")
 const { tables} =  await import ("$:/plugins/bj/simplifai/tables.mjs")
- 
-function App({__state, hashtags}) {
+
+function filterObjectKeys(obj, keysToExclude) {
+  if (!obj || typeof obj !== 'object') {
+    return {}; // Or throw an error, for invalid input
+  }
+
+  if (!Array.isArray(keysToExclude)) {
+    return { ...obj }; // Or throw an error, for invalid input
+  }
+
+  const filteredObject = {};
+
+  for (const key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key) && !keysToExclude.includes(key)) {
+      filteredObject[key] = obj[key];
+    }
+  }
+
+  return filteredObject;
+}
+
+function App({__state, __pwidget,hashtags}) {
   console.log(hashtags)
   const tids=parseStringArray(hashtags)
    console.log(tids)
   const initialHashtagData = {}
   for (const tid of tids) {
   let name = getTextReference(`${tid}!!caption`,tid)
-  initialHashtagData[name]=getTiddlerData(tid)
+  let ignore =  parseStringArray (getTextReference(`${tid}!!ignore`,""))
+  initialHashtagData[tid]={name:name,values:filterObjectKeys(getTiddlerData(tid),ignore)}
   }
   console.log(initialHashtagData)
   
   return html`
-<${tables} hashtagData=${initialHashtagData} selectedHashtags=${__state["tags"]}  />
+<${tables} hashtagData=${initialHashtagData} selectedHashtags=${__state["tags"]} __pwidget=${__pwidget}/>
   `;
 }
 
