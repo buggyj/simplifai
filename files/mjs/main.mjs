@@ -39,6 +39,40 @@ export function Main({history,sysRole,params,__pwidget}) {
     
     const [started, setStarted] = useState(false);
     const [result, setResult] = useState("");
+    
+function onlyPathToRoot(history, n) {
+  let currentNodeIndex = n;
+  let treeArray = [ ...(history.value)]; 
+  for (const i of treeArray) { i.hidden = true; }
+
+  while (true) {
+    const currentNode = treeArray[currentNodeIndex];
+    if (currentNode.role !== "user") continue;
+    treeArray[currentNodeIndex].hidden = false
+    treeArray[currentNodeIndex+1].hidden = false
+    if (!currentNode || currentNode.parent === null || currentNode.parent === undefined) {
+      break; // Reached the root or an invalid parent
+    }
+
+    const parentIndex = currentNode.parent;
+
+    const parentNode = treeArray[parentIndex];
+
+    if(!parentNode) {
+        break; // Handle if the supposed parent doesn't exist
+    }
+    currentNodeIndex = parentIndex; 
+  }
+  return treeArray;
+}
+
+function toClipBoard(parts) {
+      let text=''
+      for (const item = 0; item < parts.length -1; item++) text += (parts[item]).text + ' '
+      text += (parts[parts.length-1]).text
+	  navigator.clipboard.writeText(text)
+}
+
 	return html`
     <div class="main">
 		<div class="maincontainer" >
@@ -55,23 +89,17 @@ export function Main({history,sysRole,params,__pwidget}) {
               <!-- Display User or Bot Icon -->
               ${message.role === "user"
                 ? html`	
-                <div class="result-title" class=${!message.hidden?'':'noshow'} onclick=${() =>{
-						if (history.value[index].hidden){
-							delete history.value[index].hidden;
-							delete history.value[index+1].hidden;
-							history.value = [...history.value]
-						}
-						else {
-							history.value[index].hidden=true;
-							history.value[index+1].hidden=true;
-							history.value = [...history.value]				
-						}}} >
-	              <${ibutton} name="user_icon" alt="" />
+                <div class="result-title" class=${!message.hidden?'':'noshow'}  >
+	              <${ibutton} name="user_icon" alt="" onclick=${() =>{
+						history.value = onlyPathToRoot(history,index)
+						}} title="toggle"/>
+				  <${ibutton} name="copy_icon" alt="copy request" style="width:12px" title="copy" onClick=${()=>toClipBoard(message.parts)}/>
 	              <p>${message.parts[0].text}</p>
 	            </div>`
                 : html` 
                 <div class="result-data" style="display:${!message.hidden?'block':'none'};">
-	              <${ibutton} name="gemini_icon" alt="" />
+                <${ibutton} name="gemini_icon" alt="" />
+	            <${ibutton} name="copy_icon" alt="copy reply"  style="width:12px" title="copy" onClick=${()=>toClipBoard(message.parts)}/>
                       ${message.parts.map(
                       (part, i) => html`<p key=${i} dangerouslySetInnerHTML=${{ __html: markdown(part.text )}}></p>`)}
 	            </div>`

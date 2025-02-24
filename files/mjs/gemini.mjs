@@ -16,6 +16,7 @@ export const busy = signal (false)
 
 export async function runChat(prompt,history,sysRole,params,__pwidget) {
     const {invokeActionString} = init(__pwidget)
+    
     const makeTitle= function(prompt) {
         if (!prompt.length) return "New Chat";
         let title = "";
@@ -26,6 +27,7 @@ export async function runChat(prompt,history,sysRole,params,__pwidget) {
         }
         return title.length ? title.charAt(0).toUpperCase() + title.slice(1) : "New Chat";
     }
+    
      const tiddlerExists= function(tidname) {
 
 			var tiddler = getTiddler(tidname);
@@ -54,8 +56,8 @@ export async function runChat(prompt,history,sysRole,params,__pwidget) {
              // rename $:/temp/bj/newChat to the title
              invokeActionString(`<$action-setfield $tiddler="$:/temp/bj/simplifai/CurrentGeminiChat" text="""${title}"""/>`)
      }
+     
 	function createChat(apiKey, history, sysRole, params) { console.log (params)
-	
 	  const genAI = new GoogleGenerativeAI(apiKey);
 	  const model = genAI.getGenerativeModel({ 
 		 model: MODEL_NAME,
@@ -83,15 +85,20 @@ export async function runChat(prompt,history,sysRole,params,__pwidget) {
 	    }
 	  }
 	}
-  var hist = history.value.filter(entry => !entry.hidden);
-  var lastchat = hist.length;
+  let Previous = null 
+  let hist = history.value.filter((entry,index) => {  if (!entry.hidden) Previous=index; return(!entry.hidden)});
+  hist = hist.map(entry=>{return {role: entry.role, parts:entry.parts}}); console.log('prev ' + Previous)
+  let lastchat = hist.length; console.log('last ' + lastchat)
   busy.value=true
   const chatWithAI = createChat(API_KEY,hist,sysRole,params);//gemini appends history to 'hist'
   const response  = await chatWithAI(prompt)
   //const response = [...history.value,{"role": "user", "parts": [{"text": prompt}]},{"role": "model", "parts": [{"text": result.response.text()}]}];
   //console.log(history.value)
   let newchat = (history.value.length==0)
-  history.value = [...history.value,...(hist.slice(lastchat))]
+  let newhist = [...(hist.slice(lastchat))]
+  if (Previous) Previous -= 1
+  newhist = newhist.map(elem => { elem.parent=Previous; return (elem)})
+  history.value = [...history.value,...newhist]
   if (newchat) doNewChat(prompt);
   busy.value=false
   //return response
