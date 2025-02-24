@@ -1,8 +1,8 @@
-created: 20250203183917937
 tags: geminiChats
-modified: 20250212140905758
 title: $:/temp/bj/newChat
 type: application/json
 applicationtype: geminiChats
+sysparams: $:/temp/bj/newParams
+sysrole: $:/temp/bj/newRole
 
 []

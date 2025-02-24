@@ -93,13 +93,13 @@ function toClipBoard(parts) {
 	              <${ibutton} name="user_icon" alt="" onclick=${() =>{
 						history.value = onlyPathToRoot(history,index)
 						}} title="toggle"/>
-				  <${ibutton} name="copy_icon" alt="copy request" style="width:12px" title="copy" onClick=${()=>toClipBoard(message.parts)}/>
+				  <${ibutton} name="copy_icon" alt="copy request" style="width:12px;margin:4px;" title="copy" onClick=${()=>toClipBoard(message.parts)}/>
 	              <p>${message.parts[0].text}</p>
 	            </div>`
                 : html` 
                 <div class="result-data" style="display:${!message.hidden?'block':'none'};">
                 <${ibutton} name="gemini_icon" alt="" />
-	            <${ibutton} name="copy_icon" alt="copy reply"  style="width:12px" title="copy" onClick=${()=>toClipBoard(message.parts)}/>
+	            <${ibutton} name="copy_icon" alt="copy reply"  style="width:12px;margin:4px;" title="copy" onClick=${()=>toClipBoard(message.parts)}/>
                       ${message.parts.map(
                       (part, i) => html`<p key=${i} dangerouslySetInnerHTML=${{ __html: markdown(part.text )}}></p>`)}
 	            </div>`

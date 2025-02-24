@@ -11,7 +11,7 @@ const {getTiddler} = await import ("$:/plugins/bj/tiddlywiki-preact/storeutils.j
 const {getTextReference} = await import('$:/plugins/bj/tiddlywiki-preact/store.js')
 
 
-const { MODEL_NAME, API_KEY, safetySettings ,generationConfig} = await import("$:/plugins/bj/simplifai/setting.mjs");
+const { MODEL_NAME, API_KEY, safetySettings} = await import("$:/plugins/bj/simplifai/setting.mjs");
 export const busy = signal (false)
 
 export async function runChat(prompt,history,sysRole,params,__pwidget) {

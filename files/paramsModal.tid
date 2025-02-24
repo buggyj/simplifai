@@ -4,15 +4,17 @@ subtitle: <<title>>
 tags: [[Message Examples]]
 mask-closable: true
 
+<$let tid={{{[[$:/temp/bj/simplifai/CurrentGeminiChat]get[text]else[$:/temp/bj/newChat]]}}}>
 <div class="paramsModal">
-<$select tiddler='$:/temp/bj/simplifai/CurrentGeminiParams' tooltip='Choose a params Configtid'>
+<$select tiddler=<<tid>> field='sysparams' tooltip='Choose a configuration'>
 <$list filter='[tag[geminiParams]]'>
 <option><$view field='title'/></option>
 </$list>
 </$select>
-<$select tiddler='$:/temp/bj/simplifai/CurrentGeminiRole' tooltip='Choose a chat'>
+<$select tiddler=<<tid>> field='sysrole' tooltip='Choose a role'>
 <$list filter='[tag[geminiRoles]]'>
 <option><$view field='title'/></option>
 </$list>
 </$select>
 </div>
+</$let>
