@@ -1,0 +1,21 @@
+title: $:/plugins/bj/simplifai/tagsSearchModal
+footer: <$button message="tm-close-tiddler">Close</$button>
+subtitle: <<title>>
+tags: ModalMessage
+mask-closable: true
+
+\define seltags(tid)
+<$set name=hashtags  filter='[tag[hashtags]]'> <<itd>>
+<$pwidget  $app="$:/plugins/bj/simplifai/calltables.mjs" $tids="[[tags|$tid$]]"  hashtags=<<hashtags>>   errorMessage="Error in app" />
+</$set>
+\end
+
+select: <$select tiddler='$:/temp/bj/simplifai/CurrentGeminiChat' tooltip='Choose a chat' 
+		 actions='<$action-sendmessage $message="tm-close-tiddler"/>'>
+        <$list filter="[enlist{temp/bj/simplifai/tagsSearch}bjalltag[]]">
+                 <option><$view field='title'/></option>
+        </$list>
+</$select> matches: <$list filter="[enlist{temp/bj/simplifai/tagsSearch}bjalltag[]count[]]"/>
+
+
+<$macrocall $name=seltags tid="temp/bj/simplifai/tagsSearch"/>

@@ -4,10 +4,4 @@ stylesheet: $:/themes/tiddlywiki/vanilla
 
 \import $:/plugins/bj/simplifai/widget
 
-<$let tid={{{[[$:/temp/bj/simplifai/CurrentGeminiChat]get[text]else[$:/temp/bj/newChat]]}}}>
-<$mkchat.app 
-	tid=<<tid>>
-	systid = {{{[<tid>get[sysrole]else[$:/temp/bj/newRole]]}}}
-	paramstid = {{{[<tid>get[sysparams]else[$:/temp/bj/newParams]]}}}
->
-</$let>
+<$mkchat.app/>

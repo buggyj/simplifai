@@ -1,12 +1,16 @@
-created: 20241009174621036
 title: $:/plugins/bj/simplifai/widget
 type: text/vnd.tiddlywikis
 tags: 
-modified: 20250204143629250
 stylesheet: $:/themes/bj/cssreset
 
-\widget $mkchat.app(tid,systid,paramstid)
-<$pwidget  class="simplifai" $app="$:/plugins/bj/simplifai/simplifai.mjs"  $tids=`[[:history|$(tid)$]] [[sysRole|$(systid)$]] [[:params|$(paramstid)$]]` errorMessage="Error in app" />
+\widget $mkchat.app()
+<$let tid1={{{[[$:/temp/bj/simplifai/CurrentGeminiChat]get[text]else[$:/temp/bj/newChat]]}}} 
+      tid={{{[<tid1>get[title]else[$:/temp/bj/newChat]]}}}
+      systid = {{{[<tid>get[sysrole]else[$:/temp/bj/newRole]]}}}
+	  paramstid = {{{[<tid>get[sysparams]else[$:/temp/bj/newParams]]}}}     
+      >
+<$pwidget  class="simplifai" $app="$:/plugins/bj/simplifai/simplifai.mjs"  $tids=`[[:history|$(tid)$]] [[sysRole|$(systid)$]] [[:params|$(paramstid)$]]` />
+</$let>
 \end
 
 \widget $mkchat.details(tid) 

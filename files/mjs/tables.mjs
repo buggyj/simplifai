@@ -3,7 +3,7 @@ title: $:/plugins/bj/simplifai/tables.mjs
 type: application/javascript
 module-type: library
 \*/
- const { signal, useComputed, useSignal, render,html} =  await import ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs")
+const { signal, useComputed, useSignal, render,html} =  await import ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs")
 
 const {parseStringArray,stringifyList} = await import ("$:/plugins/bj/tiddlywiki-preact/storeutils.js")
 const {init} = await import ("$:/plugins/bj/tiddlywiki-preact/towidget.mjs")
@@ -11,7 +11,6 @@ const {init} = await import ("$:/plugins/bj/tiddlywiki-preact/towidget.mjs")
 function mssg(tid) {return `<$action-sendmessage $message="tm-modal" $param="$:/plugins/bj/simplifai/edittagfile" title="edit" message="${tid}"/>`}
 function mssgClose(){return `<$action-sendmessage $message="tm-close-tiddler"/>`}
 export function tables({ hashtagData, selectedHashtags, __pwidget }) {
-	console.log("tables")
 	const {dispatchEvent, invokeActionString} = init(__pwidget)
   // Convert string to array
   const selectedHashtagsArray = useComputed(() => {
@@ -34,7 +33,12 @@ return html`
     <div>
       ${Object.entries(hashtagData).map(([categoryName, categoryData], index) => html`
         <div key=${categoryName}><br/>
-          <h3 style="color:blue;" onclick=${() => {invokeActionString(mssg(categoryName));invokeActionString(mssgClose())}} title=${categoryName}>${categoryData.name}</h3><br/>
+          <h3 	style="color:blue;" 
+				onclick=${() => {invokeActionString(mssg(categoryName));invokeActionString(mssgClose())}} 
+				title=${categoryName}
+		   >
+		     ${categoryData.name}
+		   </h3><br/>
           <table style="margin-right:auto;margin-left:0px">
             <tbody>
               ${Object.entries(categoryData.values).map(([subcategoryName, hashtags]) => html`

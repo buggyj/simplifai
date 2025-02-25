@@ -57,7 +57,7 @@ export async function runChat(prompt,history,sysRole,params,__pwidget) {
              invokeActionString(`<$action-setfield $tiddler="$:/temp/bj/simplifai/CurrentGeminiChat" text="""${title}"""/>`)
      }
      
-	function createChat(apiKey, history, sysRole, params) { console.log (params)
+	function createChat(apiKey, history, sysRole, params) {
 	  const genAI = new GoogleGenerativeAI(apiKey);
 	  const model = genAI.getGenerativeModel({ 
 		 model: MODEL_NAME,
@@ -77,23 +77,26 @@ export async function runChat(prompt,history,sysRole,params,__pwidget) {
 	  return async (message) => {
 	    try {
 	      const result = await chat.sendMessage(message);
-	      const response =  result.response;
-	      return response.text();
+	      return false
 	    } catch (error) {
 	      console.error("Error sending message:", error);
-	      return "*****chatbot failed to respond*******";
+	      return error
 	    }
 	  }
 	}
   let Previous = null 
   let hist = history.value.filter((entry,index) => {  if (!entry.hidden) Previous=index; return(!entry.hidden)});
-  hist = hist.map(entry=>{return {role: entry.role, parts:entry.parts}}); console.log('prev ' + Previous)
+  hist = hist.map(entry=>{return {role: entry.role, parts:entry.parts}}); 
   let lastchat = hist.length; console.log('last ' + lastchat)
   busy.value=true
   const chatWithAI = createChat(API_KEY,hist,sysRole,params);//gemini appends history to 'hist'
-  const response  = await chatWithAI(prompt)
+  const error  = await chatWithAI(prompt)
   //const response = [...history.value,{"role": "user", "parts": [{"text": prompt}]},{"role": "model", "parts": [{"text": result.response.text()}]}];
   //console.log(history.value)
+  if (error !== false) {
+	  busy.value=false
+	  return error;
+	}
   let newchat = (history.value.length==0)
   let newhist = [...(hist.slice(lastchat))]
   if (Previous) Previous -= 1
@@ -102,7 +105,7 @@ export async function runChat(prompt,history,sysRole,params,__pwidget) {
   if (newchat) doNewChat(prompt);
   busy.value=false
   //return response
-  
+  return false
 }
 // there needs to be away to initialise with role and history
 

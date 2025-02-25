@@ -14,8 +14,9 @@ const {API_KEY} = await import("$:/plugins/bj/simplifai/setting.mjs");
 
 const {init} = await import ("$:/plugins/bj/tiddlywiki-preact/towidget.mjs")
 
-function mssg(modal, name, msg) {return `<$action-sendmessage $message="tm-modal" $param="${modal}" title="${title}" message="${msg}"/>`}
+function mssg(modal, name, msg) {return `<$action-sendmessage $message="tm-modal" $param="${modal}" title="${name}" message="${msg}"/>`}
 let modal="$:/plugins/bj/simplifai/nokeyModal", title="",  msg=""	
+let errorModal="$:/plugins/bj/simplifai/errorModal", errtitle="",  errmsg=""
 export const Input=signal("")
 
 function markdown(source) {
@@ -23,11 +24,13 @@ function markdown(source) {
 }
 export function Main({history,sysRole,params,__pwidget}) {
 	const onSent = async (prompt) => {
-     if (!API_KEY.value){onNoKey();return}
-		Input.value=""
-        await runChat(prompt, history,sysRole,params,__pwidget)
+     if (!API_KEY.value){onNoKey();return}	
+         const error = await runChat(prompt, history,sysRole,params,__pwidget )
+         if (error === false) Input.value = ''//clear prompt
+         else onError()
 	}
-  const onNoKey = () => {invokeActionString(mssg(modal, name, msg))}
+  const onNoKey = () => {invokeActionString(mssg(modal, title, msg))}
+  const onError = () => {invokeActionString(mssg(errorModal, errtitle, errmsg))}
   const lastMessageRef = useRef(null);
   const {dispatchEvent, invokeActionString} = init(__pwidget)
   // Scroll to the first line of the last message when history updates

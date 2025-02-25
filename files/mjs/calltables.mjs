@@ -30,16 +30,14 @@ function filterObjectKeys(obj, keysToExclude) {
 }
 
 function App({__state, __pwidget,hashtags}) {
-  console.log(hashtags)
   const tids=parseStringArray(hashtags)
-   console.log(tids)
   const initialHashtagData = {}
   for (const tid of tids) {
   let name = getTextReference(`${tid}!!caption`,tid)
   let ignore =  parseStringArray (getTextReference(`${tid}!!ignore`,""))
   initialHashtagData[tid]={name:name,values:filterObjectKeys(getTiddlerData(tid),ignore)}
   }
-  console.log(initialHashtagData)
+  
   
   return html`
 <${tables} hashtagData=${initialHashtagData} selectedHashtags=${__state["tags"]} __pwidget=${__pwidget}/>

@@ -1,0 +1,9 @@
+title: $:/plugins/bj/simplifai/errorModal
+footer: <$button message="tm-close-tiddler">Close</$button>
+subtitle: error
+tags: ModalMessage
+mask-closable: true
+
+Gemini could not reply - check connect and key
+
+

@@ -13,3 +13,9 @@ type:
 <option><$view field='title'/></option>
 </$list>
 </$select>
+
+<$button>
+<$action-sendmessage $message="tm-modal" $param="$:/plugins/bj/simplifai/tagsSearchModal"  title="tags" message="choose bytags"/>
+<$action-sendmessage $message="tm-close-tiddler"/>
+search by tags
+</$button>

@@ -14,6 +14,7 @@ let chatsmodal="$:/plugins/bj/simplifai/SelectModal", chatsname="chats",  chatsm
 let tagsmodal="$:/plugins/bj/simplifai/tagsModal", tagsname="tags",  tagsmsg="choose tags"	
 let paramsmodal="$:/plugins/bj/simplifai/paramsModal", paramsname="params",  paramsmsg="choose params"	
 
+
 function newChat(){return `<$action-setfield $tiddler="$:/temp/bj/simplifai/CurrentGeminiChat" text="$:/temp/bj/newChat"/>`}
 
 export function sidebar({history,__pwidget}) {
@@ -21,7 +22,9 @@ export function sidebar({history,__pwidget}) {
 	const [hidKeyEntry, setHidKeyEntry] = useState(true);
 	const [hidTemp, setHidTemp] = useState(true);
 	const {dispatchEvent, invokeActionString} = init(__pwidget)
-	
+	function invokeDelete(chat){
+		if (window.confirm(`delete this chat`)) invokeActionString(`<$action-deletetiddler $tiddler="${chat}" />`)
+	}
 	return html`
 	${!hidKeyEntry && html`
 	<div class="bj_key-entry-overlay "></div>
@@ -32,14 +35,19 @@ export function sidebar({history,__pwidget}) {
 			   onclick=${() => setExtended((prev) => !prev)}/>
 		</div>
 		<div class="bottom-item btn">
-		    <${ibutton}  name="colorwheel_icon" alt="sysrole icon"  
-			   onclick=${() => (invokeActionString(mssg(tagsmodal, tagsname, tagsmsg)))}/>
-			${extended ? html`<span>tags</span> `: null}
+		    <${ibutton}  name="trashcan_icon" alt="trashcan icon"  
+			   onclick=${() => (invokeDelete(__pwidget.toTiddlers['history']))}/>
+			${extended ? html`<span>delete chat</span> `: null}
 		</div>
 		<div class="bottom-item btn">
 		    <${ibutton}  name="cog_icon" alt="sysrole icon"  
 			   onclick=${() => (invokeActionString(mssg(paramsmodal, paramsname, paramsmsg)))}/>
 			${extended ? html`<span>settings</span> `: null}
+		</div>
+		<div class="bottom-item btn">
+		    <${ibutton}  name="colorwheel_icon" alt="colorwheel icon"  
+			   onclick=${() => (invokeActionString(mssg(tagsmodal, tagsname, tagsmsg)))}/>
+			${extended ? html`<span>tags</span> `: null}
 		</div>
 		<div class="bottom-item btn">
 		    <${ibutton}  name="tids_icon" alt="chats icon"  
