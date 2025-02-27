@@ -23,7 +23,8 @@ export function sidebar({history,__pwidget}) {
 	const [hidTemp, setHidTemp] = useState(true);
 	const {dispatchEvent, invokeActionString} = init(__pwidget)
 	function invokeDelete(chat){
-		if (window.confirm(`delete this chat`)) invokeActionString(`<$action-deletetiddler $tiddler="${chat}" />`)
+		if (window.confirm(`delete this chat`)) 
+		  invokeActionString(`<$action-deletetiddler $tiddler="${chat}" /><$action-deletetiddler $tiddler="$:/temp/bj/simplifai/CurrentGeminiChat" />`)
 	}
 	return html`
 	${!hidKeyEntry && html`

@@ -82,6 +82,14 @@
       }
     },
     {
+      "file": "naming.mjs",
+      "fields": {
+        "type": "application/javascript",
+        "module-type": "library",
+        "title": "$:/plugins/bj/simplifai/naming.mjs"
+      }
+    },
+    {
       "file": "tables.mjs",
       "fields": {
         "type": "application/javascript",

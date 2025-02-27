@@ -25,7 +25,7 @@ function markdown(source) {
 export function Main({history,sysRole,params,__pwidget}) {
 	const onSent = async (prompt) => {
      if (!API_KEY.value){onNoKey();return}	
-         const error = await runChat(prompt, history,sysRole,params,__pwidget )
+         const error = await runChat(prompt, history,sysRole.value,params.value,__pwidget )
          if (error === false) Input.value = ''//clear prompt
          else onError()
 	}
