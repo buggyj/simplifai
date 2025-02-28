@@ -3,10 +3,10 @@ title: $:/plugins/bj/simplifai/calltables.mjs
 type: application/javascript
 module-type: library
 \*/
-const {html,useSignal,useComputed} =  await import ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs")
-const {getTiddlerData,filterTiddlers,parseStringArray} = await import ("$:/plugins/bj/tiddlywiki-preact/storeutils.js")
+const {html,useSignal,useComputed} =  await import ("$:/plugins/bj/unchane/preactsignal.mjs")
+const {getTiddlerData,filterTiddlers,parseStringArray} = await import ("$:/plugins/bj/unchane/storeutils.js")
 
-const {getTextReference} = await import ("$:/plugins/bj/tiddlywiki-preact/store.js")
+const {getTextReference} = await import ("$:/plugins/bj/unchane/store.js")
 const { tables} =  await import ("$:/plugins/bj/simplifai/tables.mjs")
 
 function filterObjectKeys(obj, keysToExclude) {

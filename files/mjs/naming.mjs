@@ -3,9 +3,9 @@ title: $:/plugins/bj/simplifai/naming.mjs
 type: application/javascript
 module-type: library
 \*/
-const {init} = await import ("$:/plugins/bj/tiddlywiki-preact/towidget.mjs")
-const {getTextReference,setTextReference} = await import('$:/plugins/bj/tiddlywiki-preact/store.js')
-const {getTiddler,deleteTiddler} = await import ("$:/plugins/bj/tiddlywiki-preact/storeutils.js")
+const {init} = await import ("$:/plugins/bj/unchane/towidget.mjs")
+const {getTextReference,setTextReference} = await import('$:/plugins/bj/unchane/store.js')
+const {getTiddler,deleteTiddler} = await import ("$:/plugins/bj/unchane/storeutils.js")
 const makeTitle= function(prompt) {
 	if (!prompt.length) return "New Chat";
 	let title = "";

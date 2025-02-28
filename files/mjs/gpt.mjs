@@ -4,7 +4,7 @@ type: application/javascript
 module-type: library
 \*/
  
- const { signal } = await import ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs");
+ const { signal } = await import ("$:/plugins/bj/unchane/preactsignal.mjs");
 const { API_KEY } = await import("$:/plugins/bj/simplifai/setting.mjs");
 
 export async function runChat(prompt, history) {

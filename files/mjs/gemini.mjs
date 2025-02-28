@@ -5,10 +5,10 @@ module-type: library
 \*/
 const {GoogleGenerativeAI} = await import('https://esm.run/@google/generative-ai') 
 
-const {signal} = await import ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs")
-const {init} = await import ("$:/plugins/bj/tiddlywiki-preact/towidget.mjs")
+const {signal} = await import ("$:/plugins/bj/unchane/preactsignal.mjs")
+const {init} = await import ("$:/plugins/bj/unchane/towidget.mjs")
 
-const {getTextReference} = await import('$:/plugins/bj/tiddlywiki-preact/store.js')
+const {getTextReference} = await import('$:/plugins/bj/unchane/store.js')
 const {newChatName} = await import('$:/plugins/bj/simplifai/naming.mjs')
 
 const { MODEL_NAME, API_KEY, safetySettings} = await import("$:/plugins/bj/simplifai/setting.mjs");

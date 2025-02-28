@@ -4,10 +4,10 @@ type: application/javascript
 module-type: library
 \*/
 const {ibutton}=await import("$:/plugins/bj/simplifai/iconbutton.mjs")
-const {html, render, useState} = await import ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs");
+const {html, render, useState} = await import ("$:/plugins/bj/unchane/preactsignal.mjs");
 const {API_KEY} = await import("$:/plugins/bj/simplifai/setting.mjs")
 
-const {init} = await import ("$:/plugins/bj/tiddlywiki-preact/towidget.mjs")
+const {init} = await import ("$:/plugins/bj/unchane/towidget.mjs")
 
 function mssg(modal, name, msg) {return `<$action-sendmessage $message="tm-modal" $param="${modal}" title="${name}" message="${msg}"/>`}
 let chatsmodal="$:/plugins/bj/simplifai/SelectModal", chatsname="chats",  chatsmsg="choose chat"	

@@ -3,10 +3,10 @@ title: $:/plugins/bj/simplifai/tables.mjs
 type: application/javascript
 module-type: library
 \*/
-const { signal, useComputed, useSignal, render,html} =  await import ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs")
+const { signal, useComputed, useSignal, render,html} =  await import ("$:/plugins/bj/unchane/preactsignal.mjs")
 
-const {parseStringArray,stringifyList} = await import ("$:/plugins/bj/tiddlywiki-preact/storeutils.js")
-const {init} = await import ("$:/plugins/bj/tiddlywiki-preact/towidget.mjs")
+const {parseStringArray,stringifyList} = await import ("$:/plugins/bj/unchane/storeutils.js")
+const {init} = await import ("$:/plugins/bj/unchane/towidget.mjs")
 
 function mssg(tid) {return `<$action-sendmessage $message="tm-modal" $param="$:/plugins/bj/simplifai/edittagfile" title="edit" message="${tid}"/>`}
 function mssgClose(){return `<$action-sendmessage $message="tm-close-tiddler"/>`}

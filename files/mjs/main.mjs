@@ -4,7 +4,7 @@ type: application/javascript
 module-type: library
 \*/
 
-const {html, render,useContext,useState, useRef, useEffect, signal} = await import ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs");
+const {html, render,useContext,useState, useRef, useEffect, signal} = await import ("$:/plugins/bj/unchane/preactsignal.mjs");
 
 const {ibutton}=await import("$:/plugins/bj/simplifai/iconbutton.mjs")
 const marked = await import('$:/plugins/bj/plugins/marked/markdown.js');
@@ -12,7 +12,7 @@ const { runChat } = await import ('$:/plugins/bj/simplifai/gemini.mjs');
 //const { runChat } = await import ('$:/plugins/bj/simplifai/gpt.mjs')
 const {API_KEY} = await import("$:/plugins/bj/simplifai/setting.mjs"); 
 const prism = await import("$:/plugins/bj/tiddlyprism/prismjs.js")
-const {init} = await import ("$:/plugins/bj/tiddlywiki-preact/towidget.mjs")
+const {init} = await import ("$:/plugins/bj/unchane/towidget.mjs")
 
 function mssg(modal, name, msg) {return `<$action-sendmessage $message="tm-modal" $param="${modal}" title="${name}" message="${msg}"/>`}
 let modal="$:/plugins/bj/simplifai/nokeyModal", title="",  msg=""	

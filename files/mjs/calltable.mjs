@@ -3,7 +3,7 @@ title: $:/plugins/bj/simplifai/setting.mjs
 type: application/javascript
 module-type: library
 \*/
-const {signal} = await import ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs")
+const {signal} = await import ("$:/plugins/bj/unchane/preactsignal.mjs")
 const {HarmCategory, HarmBlockThreshold} = await import('https://esm.run/@google/generative-ai') 
 const key = "";
 

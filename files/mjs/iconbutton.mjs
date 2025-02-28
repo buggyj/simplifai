@@ -3,8 +3,8 @@ title: $:/plugins/bj/simplifai/iconbutton.mjs
 type: application/javascript
 module-type: library
 \*/
-const {html} = await import ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs");
-const {getTextReference} =  await import("$:/plugins/bj/tiddlywiki-preact/store.js");
+const {html} = await import ("$:/plugins/bj/unchane/preactsignal.mjs");
+const {getTextReference} =  await import("$:/plugins/bj/unchane/store.js");
 
 
 function geticon(iconname) {

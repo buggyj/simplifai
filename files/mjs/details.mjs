@@ -4,7 +4,7 @@ type: application/javascript
 module-type: library
 \*/
 
-const {html} = await import ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs");
+const {html} = await import ("$:/plugins/bj/unchane/preactsignal.mjs");
 
 const {ibutton}=await import("$:/plugins/bj/simplifai/iconbutton.mjs")
 const marked = await import ("$:/plugins/bj/plugins/marked/markdown.js");

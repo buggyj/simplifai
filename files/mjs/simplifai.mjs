@@ -4,12 +4,12 @@ type: application/javascript
 module-type: library
 \*/
 
-const {html, render, signal} = await import ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs");
+const {html, render, signal} = await import ("$:/plugins/bj/unchane/preactsignal.mjs");
 const { sidebar } = await import ('$:/plugins/bj/simplifai/sidebar.mjs');
 const { Main } = await import ('$:/plugins/bj/simplifai/main.mjs');
 const {ibutton}=await import("$:/plugins/bj/simplifai/iconbutton.mjs")
-const {getTextReference} = await import('$:/plugins/bj/tiddlywiki-preact/store.js')
-const {init} = await import ("$:/plugins/bj/tiddlywiki-preact/towidget.mjs")
+const {getTextReference} = await import('$:/plugins/bj/unchane/store.js')
+const {init} = await import ("$:/plugins/bj/unchane/towidget.mjs")
 const {busy,runChat} = await import ("$:/plugins/bj/simplifai/gemini.mjs")
 const {chatRename} = await import('$:/plugins/bj/simplifai/naming.mjs')
 const {API_KEY} = await import("$:/plugins/bj/simplifai/setting.mjs"); 
