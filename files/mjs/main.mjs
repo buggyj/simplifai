@@ -14,13 +14,15 @@ const {API_KEY} = await import("$:/plugins/bj/simplifai/setting.mjs");
 const prism = await import("$:/plugins/bj/tiddlyprism/prismjs.js")
 const {init} = await import ("$:/plugins/bj/unchane/towidget.mjs")
 
+const DOMPurify = await import('$:/plugins/bj/tiddlyprism/twpurify.js')
+
 function mssg(modal, name, msg) {return `<$action-sendmessage $message="tm-modal" $param="${modal}" title="${name}" message="${msg}"/>`}
 let modal="$:/plugins/bj/simplifai/nokeyModal", title="",  msg=""	
 let errorModal="$:/plugins/bj/simplifai/errorModal", errtitle="",  errmsg=""
 export const Input=signal("")
 
 function markdownButton(source) {
-  return marked(source).replace(/<pre(?=\s|>)([^>]*)>/g, "<my-pre><pre$1>").replace(/<\/pre>/g, "</pre></my-pre>");
+  return marked(DOMPurify.sanitize(source)).replace(/<pre(?=\s|>)([^>]*)>/g, "<my-pre><pre$1>").replace(/<\/pre>/g, "</pre></my-pre>");
 }
 
    const MarkdownRenderer = ({ markdown }) => {
