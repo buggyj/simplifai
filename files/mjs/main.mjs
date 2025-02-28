@@ -7,11 +7,11 @@ module-type: library
 const {html, render,useContext,useState, useRef, useEffect, signal} = await import ("$:/plugins/bj/tiddlywiki-preact/preactsignal.mjs");
 
 const {ibutton}=await import("$:/plugins/bj/simplifai/iconbutton.mjs")
-const marked = await import ("$:/plugins/bj/plugins/marked/markdown.js");
+const marked = await import('$:/plugins/bj/plugins/marked/markdown.js');
 const { runChat } = await import ('$:/plugins/bj/simplifai/gemini.mjs');
 //const { runChat } = await import ('$:/plugins/bj/simplifai/gpt.mjs')
 const {API_KEY} = await import("$:/plugins/bj/simplifai/setting.mjs"); 
-
+const prism = await import("$:/plugins/bj/tiddlyprism/prismjs.js")
 const {init} = await import ("$:/plugins/bj/tiddlywiki-preact/towidget.mjs")
 
 function mssg(modal, name, msg) {return `<$action-sendmessage $message="tm-modal" $param="${modal}" title="${name}" message="${msg}"/>`}
@@ -19,9 +19,29 @@ let modal="$:/plugins/bj/simplifai/nokeyModal", title="",  msg=""
 let errorModal="$:/plugins/bj/simplifai/errorModal", errtitle="",  errmsg=""
 export const Input=signal("")
 
-function markdown(source) {
-  return (marked(source)).replace(/<pre>/g, "<my-pre><pre>").replace(/<\/pre>/g, "</pre></my-pre>");
+function markdownButton(source) {
+  return marked(source).replace(/<pre(?=\s|>)([^>]*)>/g, "<my-pre><pre$1>").replace(/<\/pre>/g, "</pre></my-pre>");
 }
+
+   const MarkdownRenderer = ({ markdown }) => {
+       const contentRef = useRef(null);
+
+       useEffect(() => {
+           if (contentRef.current) {
+               const codeBlocks = contentRef.current.querySelectorAll('pre > code');
+               codeBlocks.forEach((codeBlock) => {
+                   Prism.highlightElement(codeBlock);
+               });
+           }
+       }, []); // content is static so no need to check for changes
+
+       const htmlsource = markdownButton(markdown);
+
+       return html`
+           <div ref=${contentRef} dangerouslySetInnerHTML=${{ __html: htmlsource }} />
+       `;
+   };
+
 export function Main({history,sysRole,params,__pwidget}) {
 	const onSent = async (prompt) => {
      if (!API_KEY.value){onNoKey();return}	
@@ -104,7 +124,7 @@ function toClipBoard(parts) {
                 <${ibutton} name="gemini_icon" alt="" />
 	            <${ibutton} name="copy_icon" alt="copy reply"  style="width:12px;margin:4px;" title="copy" onClick=${()=>toClipBoard(message.parts)}/>
                       ${message.parts.map(
-                      (part, i) => html`<p key=${i} dangerouslySetInnerHTML=${{ __html: markdown(part.text )}}></p>`)}
+                      (part, i) => html`<${MarkdownRenderer}  markdown=${part.text}/>`)}
 	            </div>`
               }
 	        </div> `     
