@@ -9,9 +9,6 @@
 		"tiddlywiki/snowwhite"
 	],
 	"includeWikis": [
-		"../demo"
-	],
-	"config": {
-		"default-tiddler-location": "../demo/tiddlers"
-	}
+
+	]
 }

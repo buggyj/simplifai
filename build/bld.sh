@@ -1,6 +1,6 @@
 #!/bin/bash
 
-OUTFILE=buildtw.html
+OUTFILE=simplifai.html
 
 # Set up the build output directory
 if [  -z "$TW5_BUILD_OUTPUT" ]; then
