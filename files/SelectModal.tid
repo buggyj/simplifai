@@ -1,7 +1,5 @@
-created: 20140912145537860
 title: $:/plugins/bj/simplifai/SelectModal
 footer: <$button message="tm-close-tiddler">Close</$button>
-modified: 20250213165927772
 subtitle: <<title>>
 tags: ModalMessage
 type: 

@@ -2,7 +2,6 @@ title: $:/temp/bj/newParams
 type: application/json
 
 {
-  "temperature": 0.9,
-  "topK": 1,
+  "temperature": 0.8,
   "maxOutputTokens": 2048
 }

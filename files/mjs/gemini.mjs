@@ -6,9 +6,7 @@ module-type: library
 const {GoogleGenerativeAI} = await import('https://esm.run/@google/generative-ai') 
 
 const {signal} = await import ("$:/plugins/bj/unchane/preactsignal.mjs")
-const {init} = await import ("$:/plugins/bj/unchane/towidget.mjs")
 
-const {getTextReference} = await import('$:/plugins/bj/unchane/store.js')
 const {newChatName} = await import('$:/plugins/bj/simplifai/naming.mjs')
 
 const { MODEL_NAME, API_KEY, safetySettings} = await import("$:/plugins/bj/simplifai/setting.mjs");
@@ -45,22 +43,23 @@ export async function runChat(prompt,history,sysRole,params,__pwidget,destinatio
 	  }
 	}
   let Previous = null 
+  //filter out hidden responses (and questions)
   let hist = history.value.filter((entry,index) => {  if (!entry.hidden) Previous=index; return(!entry.hidden)});
+  //Previous now contains index (within history) of last active response 
   hist = hist.map(entry=>{return {role: entry.role, parts:entry.parts}}); 
-  let lastchat = hist.length; console.log('last ' + lastchat)
-  busy.value=true
+  let lastchat = hist.length; 
+  busy.value = true
   const chatWithAI = createChat(API_KEY,hist,sysRole,params);//gemini appends history to 'hist'
   const error  = await chatWithAI(prompt,destination)
-  //const response = [...history.value,{"role": "user", "parts": [{"text": prompt}]},{"role": "model", "parts": [{"text": result.response.text()}]}];
-  //console.log(history.value)
+
   if (error !== false) {
 	  busy.value=false
 	  return error;
 	}
-  if (destination) return false;
+  if (destination) return false;//don't add to history 
   let newchat = (history.value.length==0)
-  let newhist = [...(hist.slice(lastchat))]
-  if (Previous) Previous -= 1 //otherwise it is null, a new chat
+  let newhist = [...(hist.slice(lastchat))]//get the latest chat (question and answer)
+  if (Previous) Previous -= 1 //otherwise it is null, a new chat, -1 as we want the last question no response
   newhist = newhist.map(elem => { elem.parent=Previous; return (elem)})
   history.value = [...history.value,...newhist]
   if (newchat) newChatName(prompt,__pwidget);
@@ -68,5 +67,4 @@ export async function runChat(prompt,history,sysRole,params,__pwidget,destinatio
   //return response
   return false
 }
-// there needs to be away to initialise with role and history
 

@@ -1,4 +1,8 @@
 title: $:/plugins/bj/simplifai/readme
 
-tbd
+'system instructions' aka roles are normal tiddlers, without markup, tagged geminiRoles
+
+model configuaration parameters containing 'temperature' etc are dictionary tiddlers tagged 'geminiParams'
+
+User defined 'category tabs' are listed in dictionary tiddlers tagged 'hashtags'
 
