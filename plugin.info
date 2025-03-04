@@ -3,6 +3,6 @@
  "type":"application/json",
  "tags":"preact-applet",
  "title":"$:/plugins/bj/simplifai",
- "version":"0.0.2",
+ "version":"0.0.3",
  "list":"readme license"
 }

@@ -56,7 +56,9 @@ export async function runChat(prompt,history,sysRole,params,__pwidget,destinatio
 	  busy.value=false
 	  return error;
 	}
+
   if (destination) return false;//don't add to history 
+  
   let newchat = (history.value.length==0)
   let newhist = [...(hist.slice(lastchat))]//get the latest chat (question and answer)
   if (Previous) Previous -= 1 //otherwise it is null, a new chat, -1 as we want the last question no response
