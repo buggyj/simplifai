@@ -1,0 +1,9 @@
+title: $:/bj/qustionAIdo
+type: application/x-bclip
+
+#title=
+#askai=((*@userstring*))
+
+#msg=((*#askai*)) ((*@text*))
+#log((*#msg*))
+#nul=((*@aisend(alert,#title,#msg)*))

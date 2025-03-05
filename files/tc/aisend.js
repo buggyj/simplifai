@@ -2,7 +2,7 @@
 title: $:/bj/tc/aisend.js
 type: application/javascript
 module-type: library
-
+tags: $:/tags/tiddlyclip
 \*/
 (function(){
 
@@ -10,7 +10,7 @@ module-type: library
 /*global $tw: false */
 "use strict";
 
-let bjModuleLoader = require("$:/plugins/bj/unchane/mimport.js").bjModuleLoader;
+let loadModule = require("$:/plugins/bj/unchane/mimport.js").bjModuleLoader.loadModule;
 
 exports.name = "aisend";
 
@@ -22,11 +22,11 @@ let params = {
 
 var gemini
 (async () => {
-if (!gemini) gemini =await bjModuleLoader.loadModule ("$:/plugins/bj/simplifai/gemini.mjs");
+if (!gemini) gemini = await loadModule ("$:/plugins/bj/simplifai/gemini.mjs");
 })() 
 var settings
 (async () => {
-if (!settings) settings = await bjModuleLoader.loadModule("$:/plugins/bj/simplifai/setting.mjs"); 
+if (!settings) settings = await loadModule("$:/plugins/bj/simplifai/setting.mjs"); 
 })()
 
 exports.run = async function(mode,title,question) {
