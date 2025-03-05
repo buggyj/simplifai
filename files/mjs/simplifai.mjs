@@ -19,7 +19,7 @@ let  ToTid= `<$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/va
 let  FromTid= `<$action-setfield $tiddler="$:/theme" text="$:/themes/bj/cssreset"/><$action-setfield $tiddler="$:/layout" text="$:/plugins/bj/simplifai/AiApp"/>`
  
 let  nokey=  `<$action-sendmessage $message="tm-modal" $param="$:/plugins/bj/simplifai/nokeyModal" title="" message=""/>`
-const makeTitlePrompt = 'give this chat a title, but do not mention "chat title", 100 character max'
+const makeTitlePrompt = 'Give this chat a title, as summary of approx 60 to 80 characters, but do not mention "chat title", . Give only you top answer.'
 let params = {
   "temperature": 0.9,
   "topK": 1,
