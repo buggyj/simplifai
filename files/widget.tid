@@ -6,8 +6,8 @@ stylesheet: $:/themes/bj/cssreset
 \widget $mkchat.app()
 <$let tid1={{{[[$:/temp/bj/simplifai/CurrentGeminiChat]get[text]else[$:/temp/bj/newChat]]}}} 
       tid={{{[<tid1>get[title]else[$:/temp/bj/newChat]]}}}
-      systid = {{{[<tid>get[sysrole]else[$:/temp/bj/newRole]]}}}
-	  paramstid = {{{[<tid>get[sysparams]else[$:/temp/bj/newParams]]}}}     
+      systid = {{{[<tid>get[sysrole]else[$:/bj/DefaultRole]]}}}
+	  paramstid = {{{[<tid>get[sysparams]else[$:/bj/DefaultParams]]}}}     
       >
 <$pwidget  class="simplifai" $app="$:/plugins/bj/simplifai/simplifai.mjs"  $tids=`[[:history|$(tid)$]] [[sysRole|$(systid)$]] [[:params|$(paramstid)$]]` />
 </$let>

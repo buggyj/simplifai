@@ -1,5 +1,6 @@
-title: $:/temp/bj/newParams
+title: $:/bj/DefaultParams
 type: application/json
+tags: geminiParams
 
 {
   "temperature": 0.8,

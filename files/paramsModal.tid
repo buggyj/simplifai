@@ -1,18 +1,18 @@
 title: $:/plugins/bj/simplifai/paramsModal
 footer: <$button message="tm-close-tiddler">Close</$button>
 subtitle: <<title>>
-tags: [[Message Examples]]
+tags: ModalMessage
 mask-closable: true
 
 <$let tid={{{[[$:/temp/bj/simplifai/CurrentGeminiChat]get[text]else[$:/temp/bj/newChat]]}}}>
 <div class="paramsModal">
 <$select tiddler=<<tid>> field='sysparams' tooltip='Choose a configuration'>
-<$list filter='[tag[geminiParams]]'>
+<$list filter='[all[shadows+tiddlers]tag[geminiParams]]'>
 <option><$view field='title'/></option>
 </$list>
 </$select>
 <$select tiddler=<<tid>> field='sysrole' tooltip='Choose a role'>
-<$list filter='[tag[geminiRoles]]'>
+<$list filter='[all[shadows+tiddlers]tag[geminiRoles]]'>
 <option><$view field='title'/></option>
 </$list>
 </$select>
