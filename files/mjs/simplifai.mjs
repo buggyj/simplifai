@@ -34,6 +34,7 @@ function ai({__state,__pwidget}) {
 	const onNoKey = () => {invokeActionString(nokey)}
 	async function  invokeRename(){
 		const newtitle={title:""}
+		if ( __state["history"].value.length==0) return;//nothing to base title on.
 		if (!API_KEY.value){onNoKey();return}
 		const error = await runChat(makeTitlePrompt, __state["history"],"",params,__pwidget,newtitle)
 		if (error) return; 

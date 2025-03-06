@@ -12,7 +12,7 @@ const makeTitle= function(prompt) {
 	
 	let words = prompt.replaceAll('\n',"").match(/\b\w{1,}\b/g) || []; 
 	for (let word of words) {
-		if ((title + " " + word).trim().length > 40) break;
+		if ((title + " " + word).trim().length > 60) break;
 		title = (title + " " + word).trim();
 	}
 	return title.length ? title.charAt(0).toUpperCase() + title.slice(1) : "New Chat";
