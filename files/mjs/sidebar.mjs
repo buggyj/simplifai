@@ -13,8 +13,9 @@ function mssg(modal, name, msg) {return `<$action-sendmessage $message="tm-modal
 let chatsmodal="$:/plugins/bj/simplifai/SelectModal", chatsname="chats",  chatsmsg="choose chat"	
 let tagsmodal="$:/plugins/bj/simplifai/tagsModal", tagsname="tags",  tagsmsg="choose tags"	
 let paramsmodal="$:/plugins/bj/simplifai/paramsModal", paramsname="params and roles",  paramsmsg="choose params"	
+let forbiddenmodal="$:/plugins/bj/simplifai/forbiddenModal", forbiddenname="Download to Use",  forbiddenmsg=""	
 
-
+const fobiddenURL =""//add url, to block usage 
 function newChat(){return `<$action-setfield $tiddler="$:/temp/bj/simplifai/CurrentGeminiChat" text="$:/temp/bj/newChat"/>`}
 
 export function sidebar({history,__pwidget}) {
@@ -63,7 +64,11 @@ export function sidebar({history,__pwidget}) {
 
 		<div class="bottom-item btn">
 		  <${ibutton} name="key_icon" alt="enter key" visable="0.5"
-		  onclick=${() => setHidKeyEntry((prev) => !prev)}/>
+		  onclick=${() => {if (window.location.hostname===fobiddenURL) {
+			 invokeActionString(mssg(forbiddenmodal, forbiddenname, forbiddenmsg))
+			 return
+			}
+			setHidKeyEntry((prev) => !prev)}}/>
 		  ${extended ? html`<span>Set Key</span> `: null}
 		  ${!hidKeyEntry ? html`
 			  <div class='bj_key-entry'>Enter Key:

@@ -1,0 +1,11 @@
+title: $:/plugins/bj/simplifai/forbiddenModal
+footer: <$button message="tm-close-tiddler">Close</$button>
+subtitle: <<title>>
+tags: ModalMessage
+mask-closable: true
+
+AI must be downloaded to run, click link to download [[download|https://faviconmaker.tiddlyhost.com/download]] 
+
+
+
+
