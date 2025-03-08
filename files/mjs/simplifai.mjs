@@ -25,6 +25,14 @@ let params = {
   "topK": 1,
   "maxOutputTokens": 2048
 }
+
+function modStartString(str) {
+  if (str=="$:/temp/bj/newChat") {
+    return "New Chat"
+  }
+  return str;
+}
+
 function ai({__state,__pwidget}) {
 	const {invokeActionString} = init(__pwidget)
 	function switchMode() {
@@ -45,7 +53,7 @@ function ai({__state,__pwidget}) {
 	<div class="aic_nav" style="background:${ (() => {if (busy.value) return "pink"; return "#e2e6eb";})() }"> 
 		<${ibutton} class='aic_nav__btn' name="exit_icon" 
 					alt="menu icon"  onclick=${() =>switchMode()}/>
-		<p>Gemini<span style="color:red;" onclick=${()=>invokeRename()}>@</span> ${__pwidget.toTiddlers['history']}</p>
+		<p>Gemini<span style="color:red;" onclick=${()=>invokeRename()}>@</span> ${modStartString(__pwidget.toTiddlers['history'])}</p>
 		<${ibutton} name="user_icon" alt="" />
 	</div>
 	<div class="aic_content_container">
