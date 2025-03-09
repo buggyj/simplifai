@@ -5,6 +5,8 @@ module-type: library
 \*/
 const {ibutton}=await import("$:/plugins/bj/simplifai/iconbutton.mjs")
 const {html, render, useState} = await import ("$:/plugins/bj/unchane/preactsignal.mjs");
+const {setfield,deletetiddler} = await import ("$:/plugins/bj/unchane/utils.mjs");
+
 const {API_KEY} = await import("$:/plugins/bj/simplifai/setting.mjs")
 
 const {init} = await import ("$:/plugins/bj/unchane/towidget.mjs")
@@ -16,7 +18,6 @@ let paramsmodal="$:/plugins/bj/simplifai/paramsModal", paramsname="params and ro
 let forbiddenmodal="$:/plugins/bj/simplifai/forbiddenModal", forbiddenname="Download to Use",  forbiddenmsg=""	
 
 const fobiddenURL =""//add url, to block usage 
-function newChat(){return `<$action-setfield $tiddler="$:/temp/bj/simplifai/CurrentGeminiChat" text="$:/temp/bj/newChat"/>`}
 
 export function sidebar({history,__pwidget}) {
 	const [extended, setExtended] = useState(false)
@@ -24,8 +25,11 @@ export function sidebar({history,__pwidget}) {
 	const [hidTemp, setHidTemp] = useState(true);
 	const {dispatchEvent, invokeActionString} = init(__pwidget)
 	function invokeDelete(chat){
-		if (window.confirm(`delete this chat`)) 
-		  invokeActionString(`<$action-deletetiddler $tiddler="${chat}" /><$action-deletetiddler $tiddler="$:/temp/bj/simplifai/CurrentGeminiChat" />`)
+		if (window.confirm(`delete this chat`)){
+			deletetiddler({$tiddler:chat})
+			deletetiddler({$tiddler:"$:/temp/bj/simplifai/CurrentGeminiChat"})
+			
+		} 
 	}
 	return html`
 	${!hidKeyEntry && html`
@@ -58,7 +62,7 @@ export function sidebar({history,__pwidget}) {
 		</div>
   		<div class="bottom-item btn">
 		    <${ibutton}  name="plus_icon" alt="newchat icon"  
-			   onclick=${() => {invokeActionString(newChat())}}/>
+			   onclick=${() => {setfield({$tiddler:"$:/temp/bj/simplifai/CurrentGeminiChat",text:"$:/temp/bj/newChat"})}}/>
 			${extended ? html`<span>new</span> `: null}
 		</div>
 
