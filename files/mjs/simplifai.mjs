@@ -14,6 +14,8 @@ const {busy,runChat} = await import ("$:/plugins/bj/simplifai/gemini.mjs")
 const {chatRename} = await import('$:/plugins/bj/simplifai/naming.mjs')
 const {API_KEY} = await import("$:/plugins/bj/simplifai/setting.mjs"); 
 
+const save = `<$action-sendmessage $message="tm-save-wiki"/>`
+
 let  ToTid= `<$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/vanilla"/><$action-setfield $tiddler="$:/layout" text="$:/core/ui/PageTemplate"/>`
 
 let  FromTid= `<$action-setfield $tiddler="$:/theme" text="$:/themes/bj/cssreset"/><$action-setfield $tiddler="$:/layout" text="$:/plugins/bj/simplifai/AiApp"/>`
@@ -49,12 +51,14 @@ function ai({__state,__pwidget}) {
 		chatRename(newtitle.title,__pwidget.toTiddlers['history'],__pwidget)
 		busy.value=false
 	}
+	
 	return html`
 	<div class="aic_nav" style="background:${ (() => {if (busy.value) return "pink"; return "#e2e6eb";})() }"> 
 		<${ibutton} class='aic_nav__btn' name="exit_icon" 
 					alt="menu icon"  onclick=${() =>switchMode()}/>
 		<p>Gemini<span style="color:red;" onclick=${()=>invokeRename()}>@</span> ${modStartString(__pwidget.toTiddlers['history'])}</p>
-		<${ibutton} name="user_icon" alt="" />
+		<div><${ibutton} name="dirty_icon" alt="" class="show-on-dirty" onclick=${()=>invokeActionString(save)}/>
+		<${ibutton} name="clean_icon" alt="" class="show-on-clean"/></div>
 	</div>
 	<div class="aic_content_container">
 		    <${sidebar} __pwidget=${__pwidget} history=${__state["history"]}/><${Main} history=${__state["history"]} sysRole=${__state["sysRole"]} params=${__state["params"]} __pwidget=${__pwidget}/>

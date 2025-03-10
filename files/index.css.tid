@@ -12,12 +12,18 @@ type: text/plain
 }
 
 .simplifai{
-  height:90vh;
+  height:100vh;
   display:flex;
   flex-direction:column;
   outline: solid green;
 }
 
+body.tc-dirty .show-on-clean {
+	visibility: hidden;
+}
+body:not(.tc-dirty) .show-on-dirty{
+	visibility: hidden;
+} 
 .aic_nav {
   margin: 0;
   display: flex;

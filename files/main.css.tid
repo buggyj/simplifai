@@ -28,11 +28,11 @@ type: text/plain
 	box-sizing: border-box;
 	flex: 1 1 0; 
 	overflow-y: auto;
-    max-width: 75ch; /* Limits width to 75 characters */
-    min-width: 50ch; /* Ensures a minimum of 50 characters */
+    max-width: 85ch; 
+    min-width: 85ch; 
     margin: 0 auto; /* Centers the container */
     padding: 1rem; /* Adds some space inside */
-    line-height: 1.6; /* Improves readability */
+    line-height: 1.6; 
 }
 
 	

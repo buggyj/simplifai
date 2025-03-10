@@ -17,7 +17,7 @@ let tagsmodal="$:/plugins/bj/simplifai/tagsModal", tagsname="tags",  tagsmsg="ch
 let paramsmodal="$:/plugins/bj/simplifai/paramsModal", paramsname="params and roles",  paramsmsg="choose params"	
 let forbiddenmodal="$:/plugins/bj/simplifai/forbiddenModal", forbiddenname="Download to Use",  forbiddenmsg=""	
 
-const fobiddenURL =""//add url, to block usage 
+const fobiddenURL ="..."//add url, to block usage 
 
 export function sidebar({history,__pwidget}) {
 	const [extended, setExtended] = useState(false)
