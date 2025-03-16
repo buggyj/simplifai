@@ -6,7 +6,7 @@ module-type: library
 const {GoogleGenerativeAI} = await import('https://esm.run/@google/generative-ai') 
 
 const {signal} = await import ("$:/plugins/bj/unchane/preactsignal.mjs")
-
+const {tools,toolHandler} = await import('$:/plugins/bj/simplifai/tools.mjs')
 const {newChatName} = await import('$:/plugins/bj/simplifai/naming.mjs')
 
 const { MODEL_NAME, API_KEY, safetySettings} = await import("$:/plugins/bj/simplifai/setting.mjs");
@@ -25,22 +25,48 @@ export async function runChat(prompt,history,sysRole,params,__pwidget,destinatio
 		},
 	  }); 
       
-	  const chat = model.startChat({
-	    history,
-	    safetySettings,
-	    params
-	  });
+    const chat = model.startChat({
+      history,
+      safetySettings,
+      generationConfig: params,
+      tools: tools
+    });
 
-	  return async (message,destination) => {
-	    try {
-	      const result = await chat.sendMessage(message);
-	      if (destination) destination.title =result.response.text()
-	      return false
-	    } catch (error) {
-	      console.error("Error sending message:", error);
-	      return error
-	    }
-	  }
+    return async (message, destination) => {
+      try {
+        let result = await chat.sendMessage(message);
+        console.log(result)
+        let responseText = result.response.text();
+        let  functionCalls =  result.response.functionCalls()
+        // Check for function calls
+        if (functionCalls && functionCalls.length > 0) {
+		  let responses =[]
+          for (const functionCall of functionCalls) {
+            const { name, args } = functionCall;
+            console.log(`Function called: ${name} with args:`, args);
+            
+            // Execute the function
+            const fResponse = await toolHandler[name](args);
+            responses.push({
+              functionResponse: {
+                name: name,
+                response: fResponse
+              }
+            })
+          }
+		 // Send function response back to the model
+		const functionResponseResult = await chat.sendMessage(responses);
+		// Update response text with function call result
+		responseText = functionResponseResult.response.text();
+        }
+
+        if (destination) destination.title = responseText;
+        return false;
+      } catch (error) {
+        console.error("Error sending message:", error);
+        return error;
+      }
+    };
 	}
   let Previous = null 
   //filter out hidden responses (and questions)
@@ -61,7 +87,7 @@ export async function runChat(prompt,history,sysRole,params,__pwidget,destinatio
   
   let newchat = (history.value.length==0)
   let newhist = [...(hist.slice(lastchat))]//get the latest chat (question and answer)
-  if (Previous) Previous -= 1 //otherwise it is null, a new chat, -1 as we want the last question no response
+  //if (Previous) Previous -= 1 //otherwise it is null, a new chat, -1 as we want the last question no response
   newhist = newhist.map(elem => { elem.parent=Previous; return (elem)})
   history.value = [...history.value,...newhist]
   if (newchat) newChatName(prompt,__pwidget);

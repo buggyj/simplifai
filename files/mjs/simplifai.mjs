@@ -22,11 +22,7 @@ let  FromTid= `<$action-setfield $tiddler="$:/theme" text="$:/themes/bj/cssreset
  
 let  nokey=  `<$action-sendmessage $message="tm-modal" $param="$:/plugins/bj/simplifai/nokeyModal" title="" message=""/>`
 const makeTitlePrompt = 'Give this chat a title, as summary of approx 60 to 80 characters, but do not mention "chat title", . Give only you top answer.'
-let params = {
-  "temperature": 0.9,
-  "topK": 1,
-  "maxOutputTokens": 2048
-}
+
 
 function modStartString(str) {
   if (str=="$:/temp/bj/newChat") {
@@ -46,7 +42,7 @@ function ai({__state,__pwidget}) {
 		const newtitle={title:""}
 		if ( __state["history"].value.length==0) return;//nothing to base title on.
 		if (!API_KEY.value){onNoKey();return}
-		const error = await runChat(makeTitlePrompt, __state["history"],"",params,__pwidget,newtitle)
+		const error = await runChat(makeTitlePrompt, __state["history"],"",__state["params"],__pwidget,newtitle)
 		if (error) return; 
 		chatRename(newtitle.title,__pwidget.toTiddlers['history'],__pwidget)
 		busy.value=false
