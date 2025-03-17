@@ -9,7 +9,7 @@ stylesheet: $:/themes/bj/cssreset
       systid = {{{[<tid>get[sysrole]else[$:/bj/DefaultRole]]}}}
 	  paramstid = {{{[<tid>get[sysparams]else[$:/bj/DefaultParams]]}}}     
       >
-<$pwidget  class="simplifai" $app="$:/plugins/bj/simplifai/simplifai.mjs"  $tids=`[[:history|$(tid)$]] [[sysRole|$(systid)$]] [[:params|$(paramstid)$]]` />
+<$pwidget  class="simplifai" $app="$:/plugins/bj/simplifai/simplifai.mjs"  $tids=`[[:history|$(tid)$]] [[sysRole|$(systid)$]] [[:params|$(paramstid)$]]` enabletools={{$:/state/bj/simplifai/tools}}/>
 </$let>
 \end
 

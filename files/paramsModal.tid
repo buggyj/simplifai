@@ -18,3 +18,4 @@ mask-closable: true
 </$select>
 </div>
 </$let>
+<$checkbox tiddler="$:/state/bj/simplifai/tools" field="text" checked="y" unchecked="n" default="n"> enable tools</$checkbox>

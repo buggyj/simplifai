@@ -3,7 +3,7 @@ title: $:/plugins/bj/simplifai/gemini.mjs
 type: application/javascript
 module-type: library
 \*/
-const {GoogleGenerativeAI} = await import('https://esm.run/@google/generative-ai') 
+const {DynamicRetrievalMode, GoogleGenerativeAI} = await import('https://esm.run/@google/generative-ai') 
 
 const {signal} = await import ("$:/plugins/bj/unchane/preactsignal.mjs")
 const {tools,toolHandler} = await import('$:/plugins/bj/simplifai/tools.mjs')
@@ -12,12 +12,18 @@ const {newChatName} = await import('$:/plugins/bj/simplifai/naming.mjs')
 const { MODEL_NAME, API_KEY, safetySettings} = await import("$:/plugins/bj/simplifai/setting.mjs");
 export const busy = signal (false)
 
-export async function runChat(prompt,history,sysRole,params,__pwidget,destination) {
+export async function runChat(prompt,history,sysRole,params,__pwidget,addtools,destination) {
      
 	function createChat(apiKey, history, sysRole, params) {
 	  const genAI = new GoogleGenerativeAI(apiKey);
 	  const model = genAI.getGenerativeModel({ 
 		 model: MODEL_NAME,
+		 tools: [
+			{
+				googleSearch: {
+			  },
+			},
+		  ],
 		 systemInstruction: {
 		  parts: [
 			{text: sysRole}
@@ -25,13 +31,13 @@ export async function runChat(prompt,history,sysRole,params,__pwidget,destinatio
 		},
 	  }); 
       
-    const chat = model.startChat({
+    const chatsetup = {
       history,
       safetySettings,
-      generationConfig: params,
-      tools: tools
-    });
-
+      generationConfig: params
+    } 
+	if (addtools) chatsetup.tools = tools;
+	const chat = model.startChat(chatsetup);
     return async (message, destination) => {
       try {
         let result = await chat.sendMessage(message);
