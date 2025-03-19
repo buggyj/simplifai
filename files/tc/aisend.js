@@ -35,7 +35,7 @@ exports.run = async function(mode,title,question) {
     const {API_KEY} = settings
     if (!API_KEY.value){return}
     const history ={value:[]}
-    const error = await runChat(question, history,"",params,null,answer)
+    const error = await runChat(question, history,"",params,null,false,answer)
     busy.value=false
     if (error) return; 
    

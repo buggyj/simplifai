@@ -1,8 +1,12 @@
 {
-"plugin-type":"plugin",
+ "plugin-type":"plugin",
+ "name": "simplifai",
+ "description": "ai chat manager",
+ "core-version": ">=5.3.6",
  "type":"application/json",
  "tags":"preact-applet",
  "title":"$:/plugins/bj/simplifai",
  "version":"0.0.3",
+ "plugin-priority": "4",
  "list":"readme license"
 }

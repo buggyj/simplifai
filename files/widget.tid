@@ -7,9 +7,11 @@ stylesheet: $:/themes/bj/cssreset
 <$let tid1={{{[[$:/temp/bj/simplifai/CurrentGeminiChat]get[text]else[$:/temp/bj/newChat]]}}} 
       tid={{{[<tid1>get[title]else[$:/temp/bj/newChat]]}}}
       systid = {{{[<tid>get[sysrole]else[$:/bj/DefaultRole]]}}}
-	  paramstid = {{{[<tid>get[sysparams]else[$:/bj/DefaultParams]]}}}     
+	  paramstid = {{{[<tid>get[sysparams]else[$:/bj/DefaultParams]]}}} 
+	  tools =  {{{[<tid>get[tools]else[n]]}}} 
+	  systools =  {{{[<tid>get[systools]else[n]]}}} 
       >
-<$pwidget  class="simplifai" $app="$:/plugins/bj/simplifai/simplifai.mjs"  $tids=`[[:history|$(tid)$]] [[sysRole|$(systid)$]] [[:params|$(paramstid)$]]` enabletools={{$:/state/bj/simplifai/tools}}/>
+<$pwidget  class="simplifai" $app="$:/plugins/bj/simplifai/simplifai.mjs"  $tids=`[[:history|$(tid)$]] [[sysRole|$(systid)$]] [[:params|$(paramstid)$]]` enabletools=`$(tools)$` enablesystool=`$(systools)$`/>
 </$let>
 \end
 

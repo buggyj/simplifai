@@ -4,5 +4,7 @@ type: application/json
 applicationtype: geminiChats
 sysparams: $:/bj/DefaultParams
 sysrole: $:/bj/DefaultRole
+tools: n
+systools: y
 
 []

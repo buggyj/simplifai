@@ -3,8 +3,10 @@ title: $:/plugins/bj/simplifai/tools.mjs
 type: application/javascript
 module-type: library
 \*/
+
 const {getTextReference,setTextReference} = await import('$:/plugins/bj/unchane/store.js')
 export const tools = [
+
   {
     functionDeclarations: [
       {
@@ -38,7 +40,7 @@ export const tools = [
           },
           required: ["title"]
         }
-      },
+      }
     ]
   }
 ];

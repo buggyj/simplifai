@@ -12,31 +12,32 @@ const {newChatName} = await import('$:/plugins/bj/simplifai/naming.mjs')
 const { MODEL_NAME, API_KEY, safetySettings} = await import("$:/plugins/bj/simplifai/setting.mjs");
 export const busy = signal (false)
 
-export async function runChat(prompt,history,sysRole,params,__pwidget,addtools,destination) {
+export async function runChat(prompt,history,sysRole,params,__pwidget,addtools,addsystool,destination) {
      
 	function createChat(apiKey, history, sysRole, params) {
-	  const genAI = new GoogleGenerativeAI(apiKey);
-	  const model = genAI.getGenerativeModel({ 
-		 model: MODEL_NAME,
-		 tools: [
-			{
-				googleSearch: {
-			  },
-			},
-		  ],
+	  const modelparams = { 
+		 model: MODEL_NAME, 
 		 systemInstruction: {
 		  parts: [
 			{text: sysRole}
 		  ]
 		},
-	  }); 
+	  }
+	  let alltools =[];
+	  if (addtools) alltools = tools;//app tool 
+	  if (addsystool) alltools.push ({googleSearch: {}})
+	  if (addtools||addsystool)  modelparams.tools = alltools;
+	  
+	  
+	  const genAI = new GoogleGenerativeAI(apiKey);
+	  const model = genAI.getGenerativeModel(modelparams); 
       
     const chatsetup = {
       history,
       safetySettings,
       generationConfig: params
     } 
-	if (addtools) chatsetup.tools = tools;
+	//if (addtools) chatsetup.tools = tools;
 	const chat = model.startChat(chatsetup);
     return async (message, destination) => {
       try {
