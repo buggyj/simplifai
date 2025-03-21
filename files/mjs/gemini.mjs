@@ -39,9 +39,12 @@ export async function runChat(prompt,history,sysRole,params,__pwidget,addtools,a
     } 
 	//if (addtools) chatsetup.tools = tools;
 	const chat = model.startChat(chatsetup);
-    return async (message, destination) => {
+	//-------------------------------------
+    return async (message, destination,signal) => {
       try {
-        let result = await chat.sendMessage(message);
+        let result = await chat.sendMessage(message,{
+				  timeout: 30000 // Pass the abort signal here
+				});
         console.log(result)
         let responseText = result.response.text();
         let  functionCalls =  result.response.functionCalls()
@@ -70,6 +73,7 @@ export async function runChat(prompt,history,sysRole,params,__pwidget,addtools,a
         if (destination) destination.title = responseText;
         return false;
       } catch (error) {
+		  console.log(error)
         console.error("Error sending message:", error);
         return error;
       }
@@ -83,8 +87,17 @@ export async function runChat(prompt,history,sysRole,params,__pwidget,addtools,a
   let lastchat = hist.length; 
   busy.value = true
   const chatWithAI = createChat(API_KEY,hist,sysRole,params);//gemini appends history to 'hist'
-  const error  = await chatWithAI(prompt,destination)
-
+  /* the Abort controller seems to return in a promise context and that causes the popup not to work
+   * I have changed to a timeout, but I will leave this here in case I want to add a abort button 
+   * to the app
+  const controller = new AbortController();
+  const timeoutSignal = AbortSignal.timeout(3000);
+  const combinedSignal = AbortSignal.any([controller.signal, timeoutSignal]);
+  
+  const error  = await chatWithAI(prompt,destination,combinedSignal)
+*/
+  const error  = await chatWithAI(prompt,destination,null)
+  
   if (error !== false) {
 	  busy.value=false
 	  return error;
