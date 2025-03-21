@@ -5,6 +5,7 @@ module-type: library
 \*/
 
 const {getTextReference,setTextReference} = await import('$:/plugins/bj/unchane/store.js')
+const {createtiddler} = await import ("$:/plugins/bj/unchane/utils.mjs");
 export const tools = [
 
   {
@@ -40,6 +41,24 @@ export const tools = [
           },
           required: ["title"]
         }
+	  },
+      {
+        name: "createTiddler",
+        description: "create a tiddler by copying a template tiddler",
+        parameters: {
+          type: "OBJECT",
+          properties: {
+            title: { 
+              type: "STRING", 
+              description: "The title of the tiddler" 
+            },
+            template: { 
+              type: "STRING", 
+              description: "The title of the template tiddler" 
+            }                
+          },
+          required: ["title", "template"]
+        }
       }
     ]
   }
@@ -70,6 +89,22 @@ export const toolHandler = {
 		} catch (error) {
 		console.error("Error writing tiddler: " + error);
 		return { error: `Failed to write tiddler ${title}` };
+		}
+	},
+	createTiddler: async ({title, template}) => {
+		try {
+			console.log(`creating: ${title}`);
+			createtiddler({$basetitle:title,$template:template});
+			return {
+			  success: true,
+			  message: `Successfully created tiddler "${title}"`,
+			  tiddler: {
+				title: title
+			  }
+			};
+		} catch (error) {
+		console.error("Error writing tiddler: " + error);
+		return { error: `Failed to create tiddler ${title}` };
 		}
 	}
 };
