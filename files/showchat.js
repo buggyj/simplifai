@@ -29,11 +29,11 @@ exports.run = function renderHistory(chattid) {
                     <pre style="background: #eafffe;"><code>${$tw.utils.htmlEncode(message.parts[0].text)}</code></pre>
                 </div>
             `;
-        } else {
-            return `
+        } else if (message.parts.some(part => part.text)){
+            return  `
                 <div class="result-data">
                     <img src="${getimg('$:/plugins/bj/simplifai/gemini_icon.png')}"/>
-                    ${message.parts.map(part => `<p>${marked(part.text)}</p>`).join('')}
+                    ${message.parts.map(part => {if (part.text) return`<p>${marked(part.text)}</p>`}).join('')}
                 </div>
             `;
         }
