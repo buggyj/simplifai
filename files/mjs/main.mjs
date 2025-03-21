@@ -17,11 +17,13 @@ let modal="$:/plugins/bj/simplifai/nokeyModal", title="",  msg=""
 let errorModal="$:/plugins/bj/simplifai/errorModal", errtitle="",  errmsg=""
 
 export const Input=signal("")
+export const Search=signal(false)
 
-export function Main({history,sysRole,params,__pwidget,addtools,addsystool}) {
+export function Main({history,sysRole,params,__pwidget,addtools}) {
 	const onSent = async (prompt) => {
      if (!API_KEY.value){onNoKey();return}	
-         const error = await runChat(prompt, history,sysRole.value,params.value,__pwidget,addtools,addsystool )
+         const tools = (Search.value?false:addtools)
+         const error = await runChat(prompt, history,sysRole.value,params.value,__pwidget,tools,Search.value )
          if (error === false) Input.value = ''//clear prompt
          else onError()
 	}
@@ -63,7 +65,7 @@ export function Main({history,sysRole,params,__pwidget,addtools,addsystool}) {
          }
         </div>   
 		<div class="main-bottom">
-		  <${SearchBox} onSent=${onSent} API_KEY=${API_KEY} Input=${Input} ibutton=${ibutton}/>
+		  <${SearchBox} onSent=${onSent} API_KEY=${API_KEY} Input=${Input} Search=${Search} ibutton=${ibutton}/>
 		  <p class="bottom-info">
 			BUT: Gemini may be inaccurate so
 			double-check its responses.
@@ -73,7 +75,7 @@ export function Main({history,sysRole,params,__pwidget,addtools,addsystool}) {
   `;
 }
 
-function SearchBox({ onSent, API_KEY, Input, ibutton }) {
+function SearchBox({ onSent, API_KEY, Input, ibutton, Search }) {
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -113,8 +115,16 @@ function SearchBox({ onSent, API_KEY, Input, ibutton }) {
         placeholder="Don't be shy..."
       />
       <div>
-        <${ibutton} name="input_icon" alt="" onclick=${() => {
-          onSent(Input.value);
+      ${(Search.value)  ? html `
+        <${ibutton} name="world_icon" alt="" onclick=${() => {
+          Search.value = !Search.value;
+        }}/>`
+        : html`
+        <${ibutton} name="greyworld_icon" alt="" onclick=${() => {
+          Search.value = !Search.value;
+        }}/>`}
+         <${ibutton} name="input_icon" alt="" onclick=${() => {
+           onSent(Input.value);
         }}/>
       </div>
     </div>
