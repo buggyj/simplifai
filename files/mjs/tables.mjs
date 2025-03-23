@@ -32,13 +32,13 @@ export function tables({ hashtagData, selectedHashtags, __pwidget }) {
 return html`
     <div>
       ${Object.entries(hashtagData).map(([categoryName, categoryData], index) => html`
-        <div key=${categoryName}><br/>
+        <div key=${categoryName}>
           <h3 	style="color:blue;" 
 				onclick=${() => {invokeActionString(mssg(categoryName));invokeActionString(mssgClose())}} 
 				title=${categoryName}
 		   >
 		     ${categoryData.name}
-		   </h3><br/>
+		   </h3>
           <table style="margin-right:auto;margin-left:0px">
             <tbody>
               ${Object.entries(categoryData.values).map(([subcategoryName, hashtags]) => html`
