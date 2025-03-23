@@ -12,10 +12,10 @@ mask-closable: true
 
 select: <$select tiddler='$:/temp/bj/simplifai/CurrentGeminiChat' tooltip='Choose a chat' 
 		 actions='<$action-sendmessage $message="tm-close-tiddler"/>'>
-        <$list filter="[enlist{temp/bj/simplifai/tagsSearch}bjalltag[]]">
+        <$list filter="[enlist{$:/temp/bj/simplifai/tagsSearch}bjalltag[]]">
                  <option><$view field='title'/></option>
         </$list>
-</$select> matches: <$list filter="[enlist{temp/bj/simplifai/tagsSearch}bjalltag[]count[]]"/>
+</$select> matches: <$list filter="[enlist{$:/temp/bj/simplifai/tagsSearch}bjalltag[]count[]]"/>
 
 
-<$macrocall $name=seltags tid="temp/bj/simplifai/tagsSearch"/>
+<$macrocall $name=seltags tid="$:/temp/bj/simplifai/tagsSearch"/>

@@ -85,7 +85,7 @@ export async function runChat(prompt,history,sysRole,params,__pwidget,addtools,a
   let hist = history.value.filter((entry,index) => {  if (!entry.hidden) Previous=index; return(!entry.hidden)});
   //Previous now contains index (within history) of last active response 
   if (Search.value) hist = hist.filter((entry,index) => {  if ("model"===entry.role && entry.parts.some(part => part.functionCall)) {return false}; return true});
-  if (Search.value) hist = hist.filter((entry,index) => {  if ("function"===entry.role) {return false}; return true});console.log(hist)
+  if (Search.value) hist = hist.filter((entry,index) => {  if ("function"===entry.role) {return false}; return true});
   hist = hist.map(entry=>{return {role: entry.role, parts:entry.parts}}); 
   let lastchat = hist.length; 
   busy.value = true
