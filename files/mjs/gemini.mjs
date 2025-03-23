@@ -11,6 +11,7 @@ const {newChatName} = await import('$:/plugins/bj/simplifai/naming.mjs')
 
 const { MODEL_NAME, API_KEY, safetySettings} = await import("$:/plugins/bj/simplifai/setting.mjs");
 export const busy = signal (false)
+export const Search = signal(false)
 
 export async function runChat(prompt,history,sysRole,params,__pwidget,addtools,addsystool,destination) {
      
@@ -83,6 +84,8 @@ export async function runChat(prompt,history,sysRole,params,__pwidget,addtools,a
   //filter out hidden responses (and questions)
   let hist = history.value.filter((entry,index) => {  if (!entry.hidden) Previous=index; return(!entry.hidden)});
   //Previous now contains index (within history) of last active response 
+  if (Search.value) hist = hist.filter((entry,index) => {  if ("model"===entry.role && entry.parts.some(part => part.functionCall)) {return false}; return true});
+  if (Search.value) hist = hist.filter((entry,index) => {  if ("function"===entry.role) {return false}; return true});console.log(hist)
   hist = hist.map(entry=>{return {role: entry.role, parts:entry.parts}}); 
   let lastchat = hist.length; 
   busy.value = true

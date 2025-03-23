@@ -7,7 +7,7 @@ module-type: library
 const {html, render,useContext,useState, useRef, useEffect, signal} = await import ("$:/plugins/bj/unchane/preactsignal.mjs");
 
 const {ibutton} = await import("$:/plugins/bj/simplifai/iconbutton.mjs");
-const { runChat } = await import ('$:/plugins/bj/simplifai/gemini.mjs');
+const { runChat,Search } = await import ('$:/plugins/bj/simplifai/gemini.mjs');
 const {API_KEY} = await import("$:/plugins/bj/simplifai/setting.mjs"); 
 const {init} = await import ("$:/plugins/bj/unchane/towidget.mjs");
 const {newChatName} = await import('$:/plugins/bj/simplifai/naming.mjs');
@@ -17,7 +17,7 @@ let modal="$:/plugins/bj/simplifai/nokeyModal", title="",  msg=""
 let errorModal="$:/plugins/bj/simplifai/errorModal", errtitle="",  errmsg=""
 
 export const Input=signal("")
-export const Search=signal(false)
+
 
 export function Main({history,sysRole,params,__pwidget,addtools}) {
 	const onSent = async (prompt) => {
