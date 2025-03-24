@@ -1,0 +1,8 @@
+tags: geminiParams
+title: zerotempParams
+type: application/json
+
+{
+  "temperature": 0,
+  "maxOutputTokens": 16384
+}

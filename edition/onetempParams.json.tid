@@ -1,0 +1,7 @@
+tags: geminiParams
+title: onetempParams
+type: application/json
+
+{
+  "temperature": 1
+}

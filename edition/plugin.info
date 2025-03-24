@@ -1,0 +1,10 @@
+{
+	"title": "$:/zedition/bj/simplifaiEdition",
+	"description": "wikisetup for ai",
+	"author": "JeffreyWilkinson",
+	"version": "0.0.1",
+	"list": "license readme",
+	"core-version": ">=5.3.1",
+	"source": "https://github.com/buggyj/simplifai",
+	"plugin-type": "plugin"
+}

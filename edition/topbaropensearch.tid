@@ -1,0 +1,13 @@
+caption: OpenSearch
+custom-menu-content: {{$:/bj/topbaropensearch!!text}}
+description: opens search
+revision: 0
+tags: $:/tags/MenuBar
+title: $:/bj/topbaropensearch
+type: text/vnd.tiddlywiki
+
+
+<$button tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible">
+<$action-navigate $to="$:/AdvancedSearch"/>
+{{$:/core/images/advanced-search-button}}
+</$button>

@@ -1,0 +1,64 @@
+tags: $:/tags/PageTemplate
+title: $:/core/ui/PageTemplate/sidebar
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+\define config-title()
+$:/config/SideBarSegments/Visibility/$(listItem)$
+\end
+
+
+\define if-fluid-fixed(text,hiddenSidebarText)
+<$reveal state="$:/themes/tiddlywiki/vanilla/options/sidebarlayout" type="match" text="fluid-fixed">
+$text$
+<$reveal state="$:/state/sidebar" type="nomatch" text="yes" default="yes">
+$hiddenSidebarText$
+</$reveal>
+</$reveal>
+\end
+
+
+<$reveal type="nomatch" state="$:/state/AISide" text="show">
+
+
+<$reveal state="$:/themes/tiddlywiki/vanilla/options/sidebarlayout" type="match" text="fluid-fixed">
+<style>
+	.tc-sidebar-ai {
+ 		position: fixed;
+		left: auto;
+        top: 5px;
+		bottom: 0;
+		right: 0;
+  padding-left: 1.5em;
+		width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};
+        background-color: <<colour tiddler-background>>;
+  </style>
+</$reveal>
+
+<$reveal state="$:/themes/tiddlywiki/vanilla/options/sidebarlayout" type="nomatch" text="fluid-fixed">
+<style>
+	.tc-sidebar-ai {
+		position: fixed;
+		top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
+		left: {{$:/themes/tiddlywiki/vanilla/metrics/storyright}};
+		bottom: 0;
+		right: 0;
+       	background-color: <<colour tiddler-background>>;
+
+
+	}
+</style>
+</$reveal>
+<div  class="tc-sidebar-ai">
+
+
+
+<$transclude tiddler="$:/plugins/bj/simplifai/AiApp"/>
+
+
+
+</div>
+</$reveal>
+<$reveal type="match" state="$:/state/AISide" text="show">
+<$transclude tiddler="$:/core" subtiddler="$:/core/ui/PageTemplate/sidebar"/>
+</$reveal>

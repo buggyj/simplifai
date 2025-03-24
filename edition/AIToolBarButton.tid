@@ -1,0 +1,15 @@
+caption: AI
+custom-menu-content: {{$:/bj/AIapp/AIToolBarButton}}
+revision: 0
+tags: $:/tags/MenuBar
+title: $:/bj/AIapp/AIToolBarButton
+type: text/vnd.tiddlywiki
+
+
+<$reveal type="nomatch" state="$:/state/AISide" text="show">
+<$button set="$:/state/AISide" setTo="show">Hide AI</$button>
+</$reveal>
+<$reveal type="match" state="$:/state/AISide" text="show">
+<$button set="$:/state/AISide" setTo="hide">Show AI</$button>
+</$reveal>
+

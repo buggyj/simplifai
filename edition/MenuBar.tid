@@ -1,0 +1,3 @@
+list: $:/plugins/tiddlywiki/menubar/items/hamburger $:/plugins/tiddlywiki/menubar/items/topleftbar $:/plugins/tiddlywiki/menubar/items/contents $:/plugins/tiddlywiki/menubar/items/search $:/bj/topbar $:/plugins/tiddlywiki/menubar/items/pagecontrols $:/plugins/tiddlywiki/menubar/items/server $:/plugins/tiddlywiki/menubar/items/toprightbar $:/plugins/tiddlywiki/menubar/items/sidebar [[Draft of '$:/plugins/tiddlywiki/menubar/items/pagecontrols']]
+title: $:/tags/MenuBar
+type: text/vnd.tiddlywiki
