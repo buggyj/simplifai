@@ -5,7 +5,7 @@ tags: ModalMessage
 mask-closable: true
 
 \define seltags(tid)
-<$set name=hashtags  filter='[tag[hashtags]]'> <<itd>>
+<$set name=hashtags  filter='[all[shadows+tiddlers]tag[hashtags]]'> <<itd>>
 <$pwidget  $app="$:/plugins/bj/simplifai/calltables.mjs" $tids="[[tags|$tid$]]"  hashtags=<<hashtags>>   errorMessage="Error in app" />
 </$set>
 \end
