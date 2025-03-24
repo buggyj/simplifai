@@ -1,6 +1,7 @@
 {
 	"plugins": [
-		"bj/simplifai"
+		"bj/simplifai",
+		"bj/simplifai/edition"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
