@@ -41,17 +41,18 @@ export async function runChat(prompt,history,sysRole,params,__pwidget,addtools,a
 	//if (addtools) chatsetup.tools = tools;
 	const chat = model.startChat(chatsetup);
 	//-------------------------------------
-    return async (message, destination,signal) => {
+    return async function send(message, destination){
+	  let responses =[], responseText
       try {
         let result = await chat.sendMessage(message,{
 				  timeout: 30000 // Pass the abort signal here
 				});
         console.log(result)
-        let responseText = result.response.text();
+        responseText = result.response.text();
         let  functionCalls =  result.response.functionCalls()
         // Check for function calls
         if (functionCalls && functionCalls.length > 0) {
-		  let responses =[]
+		  
           for (const functionCall of functionCalls) {
             const { name, args } = functionCall;
             console.log(`Function called: ${name} with args:`, args);
@@ -65,20 +66,23 @@ export async function runChat(prompt,history,sysRole,params,__pwidget,addtools,a
               }
             })
           }
-		 // Send function response back to the model
-		const functionResponseResult = await chat.sendMessage(responses);
-		// Update response text with function call result
-		responseText = functionResponseResult.response.text();
-        }
-
-        if (destination) destination.title = responseText;
-        return false;
+		}
       } catch (error) {
 		  console.log(error)
         console.error("Error sending message:", error);
         return error;
       }
+       if (responses.length > 0) await send (responses) 
+      		 // Send function response back to the model
+		//const functionResponseResult = await chat.sendMessage(responses);
+		// Update response text with function call result
+		//responseText = functionResponseResult.response.text();
+        
+		//immediate (one-off) question - should not call function BJ guru mediation -maybe??
+        if (destination) destination.title = responseText;
+        return false;
     };
+;
 	}
   let Previous = null 
   //filter out hidden responses (and questions)
