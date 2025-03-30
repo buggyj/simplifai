@@ -124,8 +124,8 @@ export const toolHandler = {
 				fext = getFileExtension(title)
 				if (fext === "mjs") templ = "template.mjs"
 			}
-			console.log(`creating: ${title} with template ${tmpl}`);
-			createtiddler({$basetitle:title,$template:template});
+			console.log(`creating: ${title} with template ${templ}`);
+			createtiddler({$basetitle:title,$template:templ});
 			return {
 			  status: "success",
 			  message: `Successfully created tiddler "${title}"`,
