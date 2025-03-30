@@ -63,7 +63,28 @@ export const tools = [
     ]
   }
 ];
+function getFileExtension(urlOrPath) {
+  if (!urlOrPath) {
+    return null;
+  }
 
+  const parts = urlOrPath.split('.');
+  if (parts.length <= 1) {
+    return null; // No dot, no extension
+  }
+
+  const lastPart = parts.pop();
+  if (!lastPart) {
+    return null; // Trailing dot
+  }
+
+  // Check if the last part contains a path separator (e.g., / or \)
+  if (lastPart.includes('/') || lastPart.includes('\\')) {
+    return null; // It's part of the path, not an extension
+  }
+
+  return lastPart;
+}
 export const toolHandler = {
 	readTiddler: async ({title}) => {
 		try {
@@ -77,6 +98,11 @@ export const toolHandler = {
 	},
 	writeTiddler: async ({title, text }) => {
 		try {
+            let fext, exists = getTextReference(`${title}!!text`,null)
+            //create if not existing with file extension template
+            if (exists === null) {
+			  await toolHandler.createTiddler({title,template:""})
+            }
 			console.log(`writing: ${title}, with ${text}`);
 			setTextReference(`${title}!!text`, text);
 			return {
@@ -93,7 +119,12 @@ export const toolHandler = {
 	},
 	createTiddler: async ({title, template}) => {
 		try {
-			console.log(`creating: ${title} with template ${template}`);
+			let fext, templ = template
+			if (template==="") {
+				fext = getFileExtension(title)
+				if (fext === "mjs") templ = "template.mjs"
+			}
+			console.log(`creating: ${title} with template ${tmpl}`);
 			createtiddler({$basetitle:title,$template:template});
 			return {
 			  status: "success",
