@@ -12,13 +12,13 @@ export const tools = [
     functionDeclarations: [
       {
         name: "readTiddler",
-        description: "Get the contents of specific tiddler",
+        description: "Read the contents of tiddler",
         parameters: {
           type: "OBJECT",
           properties: {
             title: {
               type: "STRING",
-              description: "title of the tiddler to read"
+              description: "name of the tiddler to read"
             }
           },
           required: ["title"]
@@ -26,35 +26,35 @@ export const tools = [
       },
       {
         name: "writeTiddler",
-        description: "Modify an existing specific tiddler",
+        description: "Write to an existing tiddler",
         parameters: {
           type: "OBJECT",
           properties: {
             title: { 
               type: "STRING", 
-              description: "The title of the tiddler" 
+              description: "name of the tiddler" 
             },
-            content: { 
+            text: { 
               type: "STRING", 
-              description: "The text content of the tiddler to write" 
+              description: "The text the tiddler to write" 
             }                
           },
-          required: ["title"]
+          required: ["title", "text"]
         }
 	  },
       {
         name: "createTiddler",
-        description: "create a tiddler by copying a template tiddler",
+        description: "create a tiddler using a template",
         parameters: {
           type: "OBJECT",
           properties: {
             title: { 
               type: "STRING", 
-              description: "The title of the tiddler" 
+              description: "The name of the tiddler" 
             },
             template: { 
               type: "STRING", 
-              description: "The title of the template tiddler" 
+              description: "The name of the template" 
             }                
           },
           required: ["title", "template"]
@@ -67,20 +67,20 @@ export const tools = [
 export const toolHandler = {
 	readTiddler: async ({title}) => {
 		try {
-		console.log(title)//console.log(`reading: ${title}`);
-		  return {text:getTextReference(`${title}!!text`)}
+		console.log(`read ${title}`)//console.log(`reading: ${title}`);
+		  return {status: "success",text:getTextReference(`${title}!!text`)}
 
 		} catch (error) {
 		  console.error("Error fetching tiddler: "+ error);
-		  return { error: `Failed to find tiddler ${title}` };
+		  return { status:"error",error: `Failed to find tiddler ${title}` };
 		}
 	},
-	writeTiddler: async ({title, content}) => {
+	writeTiddler: async ({title, text }) => {
 		try {
-			console.log(`writing: ${title}`);
-			setTextReference(`${title}!!text`, content);
+			console.log(`writing: ${title}, with ${text}`);
+			setTextReference(`${title}!!text`, text);
 			return {
-			  success: true,
+			  status: "success",
 			  message: `Successfully updated tiddler "${title}"`,
 			  tiddler: {
 				title: title
@@ -88,15 +88,15 @@ export const toolHandler = {
 			};
 		} catch (error) {
 		console.error("Error writing tiddler: " + error);
-		return { error: `Failed to write tiddler ${title}` };
+		return { status:"error", error: `Failed to write tiddler ${title}` };
 		}
 	},
 	createTiddler: async ({title, template}) => {
 		try {
-			console.log(`creating: ${title}`);
+			console.log(`creating: ${title} with template ${template}`);
 			createtiddler({$basetitle:title,$template:template});
 			return {
-			  success: true,
+			  status: "success",
 			  message: `Successfully created tiddler "${title}"`,
 			  tiddler: {
 				title: title
@@ -104,7 +104,7 @@ export const toolHandler = {
 			};
 		} catch (error) {
 		console.error("Error writing tiddler: " + error);
-		return { error: `Failed to create tiddler ${title}` };
+		return {status:"error", error: `Failed to create tiddler ${title}` };
 		}
 	}
 };
