@@ -57,13 +57,15 @@ export const tools = [
               description: "The name of the template" 
             }                
           },
-          required: ["title", "template"]
+          required: ["title"]
         }
       }
     ]
   }
 ];
-function getFileExtension(urlOrPath) {
+function getTemplate(urlOrPath) {
+  let tmpl = null;
+
   if (!urlOrPath) {
     return null;
   }
@@ -82,8 +84,8 @@ function getFileExtension(urlOrPath) {
   if (lastPart.includes('/') || lastPart.includes('\\')) {
     return null; // It's part of the path, not an extension
   }
-
-  return lastPart;
+  if (lastPart === "mjs") tmpl = "$:/plugins/bj/simplifai/template.mjs"
+  return tmpl ;
 }
 export const toolHandler = {
 	readTiddler: async ({title}) => {
@@ -96,7 +98,7 @@ export const toolHandler = {
 		  return { status:"error",error: `Failed to find tiddler ${title}` };
 		}
 	},
-	writeTiddler: async ({title, text }) => {
+	writeTiddler: async ({title, text }) => {console.log(`writing`);
 		try {
             let fext, exists = getTextReference(`${title}!!text`,null)
             //create if not existing with file extension template
@@ -117,12 +119,11 @@ export const toolHandler = {
 		return { status:"error", error: `Failed to write tiddler ${title}` };
 		}
 	},
-	createTiddler: async ({title, template}) => {
+	createTiddler: async ({title, template}) => { console.log(`creating`);
 		try {
 			let fext, templ = template
-			if (template==="") {
-				fext = getFileExtension(title)
-				if (fext === "mjs") templ = "template.mjs"
+			if (!templ) {
+				templ = getTemplate(title)
 			}
 			console.log(`creating: ${title} with template ${templ}`);
 			createtiddler({$basetitle:title,$template:templ});

@@ -123,7 +123,7 @@ export function MessageItem({ message, index, lastMessageRef, history, ibutton, 
    
   function toClipBoard(parts) {
     let text = '';
-    for (const item = 0; item < parts.length - 1; item++) text += (parts[item]).text + ' ';
+    for (let item = 0; item < parts.length - 1; item++) text += (parts[item]).text + ' ';
     text += (parts[parts.length-1]).text;
     navigator.clipboard.writeText(text);
   }
