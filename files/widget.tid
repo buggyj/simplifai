@@ -8,9 +8,10 @@ stylesheet: $:/themes/bj/cssreset
       tid={{{[<tid1>get[title]else[$:/temp/bj/newChat]]}}}
       systid = {{{[<tid>get[sysrole]else[$:/bj/DefaultRole]]}}}
 	  paramstid = {{{[<tid>get[sysparams]else[$:/bj/DefaultParams]]}}} 
+	  prefixtid = {{{[<tid>get[sysprefix]else[$:/bj/DefaultPrefix]]}}}
 	  tools =  {{{[<tid>get[tools]else[n]]}}} 
       >
-<$pwidget  class="simplifai" $app="$:/plugins/bj/simplifai/simplifai.mjs"  $tids=`[[:history|$(tid)$]] [[sysRole|$(systid)$]] [[:params|$(paramstid)$]]` enabletools=`$(tools)$` />
+<$pwidget  class="simplifai" $app="$:/plugins/bj/simplifai/simplifai.mjs"  $tids=`[[:history|$(tid)$]] [[sysRole|$(systid)$]] [[:params|$(paramstid)$]] [[:prefixes|$(prefixtid)$]]` enabletools=`$(tools)$` />
 </$let>
 \end
 

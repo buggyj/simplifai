@@ -13,7 +13,7 @@ const { MODEL_NAME, API_KEY, safetySettings} = await import("$:/plugins/bj/simpl
 export const busy = signal (false)
 export const Search = signal(false)
 
-export async function runChat(prompt,history,sysRole,params,__pwidget,addtools,addsystool,destination) {
+export async function runChat(prompt,history,sysRole,params,prefixes,__pwidget,addtools,addsystool,destination) {
      
 	function createChat(apiKey, history, sysRole, params) {
 	  const modelparams = { 
@@ -58,7 +58,7 @@ export async function runChat(prompt,history,sysRole,params,__pwidget,addtools,a
             console.log(`Function called: ${name} with args:`, args);
             
             // Execute the function
-            const fResponse = await toolHandler[name](args);
+            const fResponse = await toolHandler[name](args,prefixes);
             responses.push({
               functionResponse: {
                 name: name,

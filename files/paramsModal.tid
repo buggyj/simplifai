@@ -16,6 +16,11 @@ mask-closable: true
 <option><$view field='title'/></option>
 </$list>
 </$select>
+<$select tiddler=<<tid>> field='sysprefix' tooltip='write permissions' default="$:/bj/DefaultPrefix">
+<$list filter='[all[shadows+tiddlers]tag[geminiPrefix]]'>
+<option><$view field='title'/></option>
+</$list>
+</$select>
 </div>
 <$checkbox tiddler=<<tid>> field="tools" checked="y" unchecked="n" default="n"> enable tools</$checkbox>
 </$let>

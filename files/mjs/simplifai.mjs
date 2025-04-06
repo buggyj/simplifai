@@ -43,7 +43,7 @@ function ai({__state,__pwidget,enabletools}) {
 		const newtitle={title:""}
 		if ( __state["history"].value.length==0) return;//nothing to base title on.
 		if (!API_KEY.value){onNoKey();return}
-		const error = await runChat(makeTitlePrompt, __state["history"],"",__state["params"],__pwidget,addtools,false,newtitle)
+		const error = await runChat(makeTitlePrompt, __state["history"],"",__state["params"],__state["prefixes"],__pwidget,addtools,false,newtitle)
 		if (error) return; 
 		chatRename(newtitle.title,__pwidget.toTiddlers['history'],__pwidget)
 		busy.value=false
@@ -58,11 +58,11 @@ function ai({__state,__pwidget,enabletools}) {
 		<${ibutton} name="clean_icon" alt="" class="show-on-clean"/></div>
 	</div>
 	<div class="aic_content_container">
-		    <${sidebar} __pwidget=${__pwidget} history=${__state["history"]}/><${Main} history=${__state["history"]} sysRole=${__state["sysRole"]} params=${__state["params"]} addtools=${addtools} __pwidget=${__pwidget}/>
+		    <${sidebar} __pwidget=${__pwidget} history=${__state["history"]}/><${Main} history=${__state["history"]} sysRole=${__state["sysRole"]} params=${__state["params"]} prefixes=${__state["prefixes"]} addtools=${addtools} __pwidget=${__pwidget}/>
 	</div>
   `;
 }
 
 //check binding for
-export var psignals = [":history", "sysRole",":params"]
+export var psignals = [":history", "sysRole",":params",":prefixes"]
 export  {ai as start};

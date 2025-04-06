@@ -63,6 +63,16 @@ export const tools = [
     ]
   }
 ];
+
+function prefix(str, prefixes) {
+  for (let i = 0; i < prefixes.length; i++) {
+    if (str.startsWith(prefixes[i])) {
+      return true;
+    }
+  }
+  return false;
+}
+
 function getTemplate(urlOrPath) {
   let tmpl = null;
 
@@ -98,12 +108,13 @@ export const toolHandler = {
 		  return { status:"error",error: `Failed to find tiddler ${title}` };
 		}
 	},
-	writeTiddler: async ({title, text }) => {console.log(`writing`);
+	writeTiddler: async ({title, text },pfix) => {console.log(`writing`);
+		if (!prefix(title,pfix)) return{ status:"error",error: `Failed to write tiddler ${title}`};
 		try {
             let fext, exists = getTextReference(`${title}!!text`,null)
             //create if not existing with file extension template
             if (exists === null) {
-			  await toolHandler.createTiddler({title,template:""})
+			  await toolHandler.createTiddler({title,template:""},pfix)
             }
 			console.log(`writing: ${title}, with ${text}`);
 			setTextReference(`${title}!!text`, text);
@@ -119,7 +130,8 @@ export const toolHandler = {
 		return { status:"error", error: `Failed to write tiddler ${title}` };
 		}
 	},
-	createTiddler: async ({title, template}) => { console.log(`creating`);
+	createTiddler: async ({title, template},pfix) => { console.log(`creating`);
+		if (!prefix(title,pfix)) return {status:"error",error: `Failed to create tiddler ${title}`};
 		try {
 			let fext, templ = template
 			if (!templ) {
