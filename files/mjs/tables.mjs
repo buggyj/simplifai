@@ -8,10 +8,10 @@ const { signal, useComputed, useSignal, render,html} =  await import ("$:/plugin
 const {parseStringArray,stringifyList} = await import ("$:/plugins/bj/unchane/storeutils.js")
 const {init} = await import ("$:/plugins/bj/unchane/towidget.mjs")
 
-function mssg(tid) {return `<$action-sendmessage $message="tm-modal" $param="$:/plugins/bj/simplifai/edittagfile" title="edit" message="${tid}"/>`}
-function mssgClose(){return `<$action-sendmessage $message="tm-close-tiddler"/>`}
+function mssg(tid) {sendmessage({$message:"tm-modal", $param:"$:/plugins/bj/simplifai/edittagfile", title:"edit", message:tid})}
+function mssgClose(){sendmessage({$message:"tm-close-tiddler"})}
 export function tables({ hashtagData, selectedHashtags, __pwidget }) {
-	const {dispatchEvent, invokeActionString} = init(__pwidget)
+	const {sendmessage} = init(__pwidget)
   // Convert string to array
   const selectedHashtagsArray = useComputed(() => {
       return parseStringArray(selectedHashtags.value); 
@@ -34,7 +34,7 @@ return html`
       ${Object.entries(hashtagData).map(([categoryName, categoryData], index) => html`
         <div key=${categoryName}>
           <h3 	style="color:blue;" 
-				onclick=${() => {invokeActionString(mssg(categoryName));invokeActionString(mssgClose())}} 
+				onclick=${() => {mssg(categoryName);mssgClose()}} 
 				title=${categoryName}
 		   >
 		     ${categoryData.name}

@@ -11,7 +11,7 @@ const {API_KEY} = await import("$:/plugins/bj/simplifai/setting.mjs")
 
 const {init} = await import ("$:/plugins/bj/unchane/towidget.mjs")
 
-function mssg(modal, name, msg) {return `<$action-sendmessage $message="tm-modal" $param="${modal}" title="${name}" message="${msg}"/>`}
+function mssg(modal, name, msg) {return {$message:"tm-modal", $param:modal, title:name, message:msg}}
 let chatsmodal="$:/plugins/bj/simplifai/SelectModal", chatsname="chats",  chatsmsg="choose chat"	
 let tagsmodal="$:/plugins/bj/simplifai/tagsModal", tagsname="tags",  tagsmsg="choose tags"	
 let paramsmodal="$:/plugins/bj/simplifai/paramsModal", paramsname="params and roles",  paramsmsg="choose params"	
@@ -23,7 +23,7 @@ export function sidebar({history,__pwidget}) {
 	const [extended, setExtended] = useState(false)
 	const [hidKeyEntry, setHidKeyEntry] = useState(true);
 	const [hidTemp, setHidTemp] = useState(true);
-	const {dispatchEvent, invokeActionString} = init(__pwidget)
+	const {sendmessage} = init(__pwidget)
 	function invokeDelete(chat){
 		if (window.confirm(`delete this chat`)){
 			deletetiddler({$tiddler:chat})
@@ -47,17 +47,17 @@ export function sidebar({history,__pwidget}) {
 		</div>
 		<div class="bottom-item btn">
 		    <${ibutton}  name="cog_icon" alt="sysrole icon"  
-			   onclick=${() => (invokeActionString(mssg(paramsmodal, paramsname, paramsmsg)))}/>
+			   onclick=${() => (sendmessage(mssg(paramsmodal, paramsname, paramsmsg)))}/>
 			${extended ? html`<span>settings</span> `: null}
 		</div>
 		<div class="bottom-item btn">
 		    <${ibutton}  name="colorwheel_icon" alt="colorwheel icon"  
-			   onclick=${() => (invokeActionString(mssg(tagsmodal, tagsname, tagsmsg)))}/>
+			   onclick=${() => (sendmessage(mssg(tagsmodal, tagsname, tagsmsg)))}/>
 			${extended ? html`<span>tags</span> `: null}
 		</div>
 		<div class="bottom-item btn">
 		    <${ibutton}  name="tids_icon" alt="chats icon"  
-			   onclick=${() => (invokeActionString(mssg(chatsmodal, chatsname, chatsmsg)))}/>
+			   onclick=${() => (sendmessage(mssg(chatsmodal, chatsname, chatsmsg)))}/>
 			${extended ? html`<span>chats</span> `: null}
 		</div>
   		<div class="bottom-item btn">
@@ -69,7 +69,7 @@ export function sidebar({history,__pwidget}) {
 		<div class="bottom-item btn">
 		  <${ibutton} name="key_icon" alt="enter key" visable="0.5"
 		  onclick=${() => {if (window.location.hostname===fobiddenURL) {
-			 invokeActionString(mssg(forbiddenmodal, forbiddenname, forbiddenmsg))
+			 sendmessage(mssg(forbiddenmodal, forbiddenname, forbiddenmsg))
 			 return
 			}
 			setHidKeyEntry((prev) => !prev)}}/>
