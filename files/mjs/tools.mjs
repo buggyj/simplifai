@@ -26,7 +26,7 @@ export const tools = [
       },
       {
         name: "writeTiddler",
-        description: "Write to an existing tiddler",
+        description: "Write to a existing tiddler or a new tiddler",
         parameters: {
           type: "OBJECT",
           properties: {
