@@ -1,0 +1,10 @@
+caption: AI
+custom-menu-content: {{$:/bj/AIapp/AIToolBarLaunch}}
+revision: 0
+tags: $:/tags/MenuBar
+title: $:/bj/AIapp/AIToolBarLaunch
+type: text/vnd.tiddlywiki
+
+
+<$pwidget $app="$:/plugins/bj/unchane/dev/reload.mjs" errorMessage=" ">
+
