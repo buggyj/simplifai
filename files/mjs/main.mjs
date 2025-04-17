@@ -81,11 +81,6 @@ function SearchBox({ onSent, API_KEY, Input, ibutton, Search }) {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault(); // Prevent default behavior (new line)
       onSent(e.target.value);
-      if (API_KEY.value) {
-        e.target.value = '';
-        e.target.parentElement.style.height = 'auto';
-        e.target.style.height = 'auto';
-      }
     }
   };
 
@@ -94,6 +89,7 @@ function SearchBox({ onSent, API_KEY, Input, ibutton, Search }) {
     e.target.parentElement.style.height = 'auto';
     e.target.style.height = (e.target.scrollHeight) + 'px';
     e.target.parentElement.style.height = (e.target.scrollHeight) + 'px';
+    Input.value = e.target.value;
   };
 
   const handleChange = (e) => {
@@ -101,7 +97,7 @@ function SearchBox({ onSent, API_KEY, Input, ibutton, Search }) {
     e.target.parentElement.style.height = (e.target.scrollHeight) + 'px';
     e.target.style.height = 'auto';
     e.target.style.height = (e.target.scrollHeight) + 'px';
-    Input.value = e.target.value;
+    
   };
 
   return html`
