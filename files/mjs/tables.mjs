@@ -8,8 +8,8 @@ const { signal, useComputed, useSignal, render,html} =  await import ("$:/plugin
 const {parseStringArray,stringifyList} = await import ("$:/plugins/bj/unchane/storeutils.js")
 const {init} = await import ("$:/plugins/bj/unchane/towidget.mjs")
 
-function mssg(tid) {sendmessage({$message:"tm-modal", $param:"$:/plugins/bj/simplifai/edittagfile", title:"edit", message:tid})}
-function mssgClose(){sendmessage({$message:"tm-close-tiddler"})}
+function mssg(tid,sendmessage) {sendmessage({$message:"tm-modal", $param:"$:/plugins/bj/simplifai/edittagfile", title:"edit", message:tid})}
+function mssgClose(sendmessage){sendmessage({$message:"tm-close-tiddler"})}
 export function tables({ hashtagData, selectedHashtags, __pwidget }) {
 	const {sendmessage} = init(__pwidget)
   // Convert string to array
@@ -33,9 +33,9 @@ return html`
     <div>
       ${Object.entries(hashtagData).map(([categoryName, categoryData], index) => html`
         <div key=${categoryName}>
-          <h3 	style="color:blue;" 
-				onclick=${() => {mssg(categoryName);mssgClose()}} 
-				title=${categoryName}
+          <h3 	style="color:blue;cursor: pointer;" 
+				onclick=${() => {mssg(categoryName,sendmessage);mssgClose(sendmessage)}} 
+				title="edit tags"
 		   >
 		     ${categoryData.name}
 		   </h3>

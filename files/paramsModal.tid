@@ -6,22 +6,28 @@ mask-closable: true
 
 <$let tid={{{[[$:/temp/bj/simplifai/CurrentGeminiChat]get[text]else[$:/temp/bj/newChat]]}}}>
 <div class="paramsModal">
+
+!!Creativity
 <$select tiddler=<<tid>> field='sysparams' tooltip='Choose a configuration' default="$:/bj/DefaultParams">
 <$list filter='[all[shadows+tiddlers]tag[geminiParams]]'>
 <option><$view field='title'/></option>
 </$list>
 </$select>
+
+!!Role
 <$select tiddler=<<tid>> field='sysrole' tooltip='Choose a role' default="$:/bj/DefaultRole">
 <$list filter='[all[shadows+tiddlers]tag[geminiRoles]]'>
 <option><$view field='title'/></option>
 </$list>
 </$select>
-<$select tiddler=<<tid>> field='sysprefix' tooltip='write permissions' default="$:/bj/DefaultPrefix">
+
+!!Access to Tiddlers Permission
+<$select tiddler=<<tid>> field='sysprefix' tooltip='write permissions' default="$:/bj/AllTiddlers">
 <$list filter='[all[shadows+tiddlers]tag[geminiPrefix]]'>
 <option><$view field='title'/></option>
 </$list>
 </$select>
+<$checkbox tiddler=<<tid>> field="tools" checked="y" unchecked="n" default="n">Enable access to tiddlers</$checkbox>
 </div>
-<$checkbox tiddler=<<tid>> field="tools" checked="y" unchecked="n" default="n"> enable tools</$checkbox>
 </$let>
 
