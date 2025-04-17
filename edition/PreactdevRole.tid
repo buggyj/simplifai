@@ -47,11 +47,11 @@ const { exampleComponent } = await import ('$:/bj/exampleComponent/preactjs/exam
  
 export function start({__state}) {
 	return html`
-      <${exampleComponent} aStrParam=${__state['astrparam']},aNumParam=${__state['anumparam']} >
+      <${exampleComponent} aStringProp=${__state['astrparam']} aNumberProp=${__state['anumparam']} anObjectProp=${__state['aobjectparam']} aBooleanProp=${__state['abooleanparam']}/>
   `;
 }
 
-export var psignals = [{"aparam":"string"},{"anumparam":"number"}]
+export var psignals = [{"aparam":"string"},{"anumparam":"number"},{"aobjectparam":"object"},{"abooleanparam":"boolean"}]
 
 ```
 
