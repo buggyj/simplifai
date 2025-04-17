@@ -59,6 +59,20 @@ export const tools = [
           },
           required: ["title"]
         }
+      },
+      {
+        name: "launchTiddler",
+        description: "opens a tiddler within the tiddlywiki",
+        parameters: {
+          type: "OBJECT",
+          properties: {
+            title: { 
+              type: "STRING", 
+              description: "The name of the tiddler" 
+            }              
+          },
+          required: ["title"]
+        }
       }
     ]
   }
@@ -149,6 +163,17 @@ export const toolHandler = {
 		} catch (error) {
 		console.error("Error writing tiddler: " + error);
 		return {status:"error", error: `Failed to create tiddler ${title}` };
+		}
+	},
+	launchTiddler: async ({title},notused,__pwidget) => {
+		try {
+		console.log(`launch ${title}`)//console.log(`reading: ${title}`);
+		__pwidget.dispatchEvent({type: 'tm-navigate', navigateTo: title});
+		  return {status: "success"}
+
+		} catch (error) {
+		  console.error("Error fetching tiddler: "+ error);
+		  return { status:"error",error: `Failed to find tiddler ${title}` };
 		}
 	}
 };

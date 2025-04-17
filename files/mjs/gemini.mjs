@@ -58,7 +58,7 @@ export async function runChat(prompt,history,sysRole,params,prefixes,__pwidget,a
             console.log(`Function called: ${name} with args:`, args);
             
             // Execute the function
-            const fResponse = await toolHandler[name](args,prefixes);
+            const fResponse = await toolHandler[name](args,prefixes,__pwidget);
             responses.push({
               functionResponse: {
                 name: name,
