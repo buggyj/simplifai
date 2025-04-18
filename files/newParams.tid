@@ -3,6 +3,5 @@ type: application/json
 tags: geminiParams
 
 {
-  "temperature": 0.8,
-  "maxOutputTokens": 2048
+  "temperature": 0.8
 }
