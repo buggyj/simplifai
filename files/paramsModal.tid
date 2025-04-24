@@ -28,6 +28,13 @@ mask-closable: true
 </$list>
 </$select>
 <$checkbox tiddler=<<tid>> field="tools" checked="y" unchecked="n" default="n">Enable access to tiddlers</$checkbox>
+
+!!Model
+<$select tiddler=<<tid>> field='sysmodel' tooltip='model' default="$:/bj/DefaultModel">
+<$list filter='[all[shadows+tiddlers]tag[geminiModel]]'>
+<option><$view field='title'/></option>
+</$list>
+</$select>
 </div>
 </$let>
 

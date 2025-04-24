@@ -13,17 +13,19 @@ const { MODEL_NAME, API_KEY, safetySettings} = await import("$:/plugins/bj/simpl
 export const busy = signal (false)
 export const Search = signal(false)
 
-export async function runChat(prompt,history,sysRole,params,prefixes,__pwidget,addtools,addsystool,destination) {
+export async function runChat(prompt,history,sysRole,params,prefixes,aModel,__pwidget,addtools,addsystool,destination) {
      
-	function createChat(apiKey, history, sysRole, params) {
+	function createChat(apiKey, history, sysRole, aParams, aModel, buget) {
 	  const modelparams = { 
-		 model: MODEL_NAME, 
+		 model: aModel, 
 		 systemInstruction: {
 		  parts: [
 			{text: sysRole}
 		  ]
 		},
 	  }
+	  let params = aParams;
+	  if (buget !==null) params.thinkingConfig = { thinkingBudget: buget }
 	  let alltools =[];
 	  if (addtools) alltools = tools;//app tool 
 	  if (addsystool) alltools.push ({googleSearch: {}})
@@ -39,6 +41,7 @@ export async function runChat(prompt,history,sysRole,params,prefixes,__pwidget,a
       generationConfig: params
     } 
 	//if (addtools) chatsetup.tools = tools;
+	console.log(params)
 	const chat = model.startChat(chatsetup);
 	//-------------------------------------
     return async function send(message, destination){
@@ -84,6 +87,16 @@ export async function runChat(prompt,history,sysRole,params,prefixes,__pwidget,a
     };
 ;
 	}
+	
+  function splitModel(str) {
+	  const index = str.lastIndexOf('::');
+	  if (index === -1) return [str]; // '::' not found
+	  return [str.slice(0, index), str.slice(index + 2)];
+  }
+console.log(aModel," model")
+  let buget = null;
+  let modelParts = splitModel(aModel)
+  if (modelParts.length === 2) {buget=modelParts[1]}
   let Previous = null 
   //filter out hidden responses (and questions)
   let hist = history.value.filter((entry,index) => {  if (!entry.hidden) Previous=index; return(!entry.hidden)});
@@ -93,7 +106,7 @@ export async function runChat(prompt,history,sysRole,params,prefixes,__pwidget,a
   hist = hist.map(entry=>{return {role: entry.role, parts:entry.parts}}); 
   let lastchat = hist.length; 
   busy.value = true
-  const chatWithAI = createChat(API_KEY,hist,sysRole,params);//gemini appends history to 'hist'
+  const chatWithAI = createChat(API_KEY,hist,sysRole,params,modelParts[0],buget);//gemini appends history to 'hist'
   /* the Abort controller seems to return in a promise context and that causes the popup not to work
    * I have changed to a timeout, but I will leave this here in case I want to add a abort button 
    * to the app

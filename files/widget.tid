@@ -10,8 +10,9 @@ stylesheet: $:/themes/bj/cssreset
 	  paramstid = {{{[<tid>get[sysparams]else[$:/bj/DefaultParams]]}}} 
 	  prefixtid = {{{[<tid>get[sysprefix]else[$:/bj/AllTiddlers]]}}}
 	  tools =  {{{[<tid>get[tools]else[n]]}}} 
+	  model = {{{[<tid>get[sysmodel]else[$:/bj/DefaultModel]]}}}
       >
-<$pwidget  class="simplifai" $app="$:/plugins/bj/simplifai/simplifai.mjs"  $tids=`[[:history|$(tid)$]] [[sysRole|$(systid)$]] [[:params|$(paramstid)$]] [[:prefixes|$(prefixtid)$]]` enabletools=`$(tools)$` />
+<$pwidget  class="simplifai" $app="$:/plugins/bj/simplifai/simplifai.mjs"  $tids=`[[:history|$(tid)$]] [[sysRole|$(systid)$]] [[:params|$(paramstid)$]] [[:prefixes|$(prefixtid)$]] [[model|$(model)$]]` enabletools=`$(tools)$` />
 </$let>
 \end
 
