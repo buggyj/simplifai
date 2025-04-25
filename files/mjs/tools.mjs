@@ -6,6 +6,8 @@ module-type: library
 
 const {getTextReference,setTextReference} = await import('$:/plugins/bj/unchane/store.js')
 const {createtiddler} = await import ("$:/plugins/bj/unchane/utils.mjs");
+const {parseStringArray} = await import ("$:/plugins/bj/unchane/storeutils.js")
+
 export const tools = [
 
   {
@@ -78,7 +80,9 @@ export const tools = [
   }
 ];
 
-function prefix(str, prefixes) {
+function prefix(str, prefixeslist) {
+  if (prefixeslist === null) return true; 
+  let prefixes = parseStringArray(prefixeslist);
   for (let i = 0; i < prefixes.length; i++) {
     if (str.startsWith(prefixes[i])) {
       return true;
@@ -112,7 +116,8 @@ function getTemplate(urlOrPath) {
   return tmpl ;
 }
 export const toolHandler = {
-	readTiddler: async ({title}) => {
+	readTiddler: async ({title},pfix) => {
+		if (!prefix(title,pfix.read)) return{ status:"error",error: `Failed to read tiddler ${title}`};
 		try {
 		console.log(`read ${title}`)//console.log(`reading: ${title}`);
 		  return {status: "success",text:getTextReference(`${title}!!text`)}
@@ -123,7 +128,7 @@ export const toolHandler = {
 		}
 	},
 	writeTiddler: async ({title, text },pfix) => {console.log(`writing`);
-		if (!prefix(title,pfix)) return{ status:"error",error: `Failed to write tiddler ${title}`};
+		if (!prefix(title,pfix.write)) return{ status:"error",error: `Failed to write tiddler ${title}`};
 		try {
             let fext, exists = getTextReference(`${title}!!text`,null)
             //create if not existing with file extension template
@@ -145,7 +150,7 @@ export const toolHandler = {
 		}
 	},
 	createTiddler: async ({title, template},pfix) => { console.log(`creating`);
-		if (!prefix(title,pfix)) return {status:"error",error: `Failed to create tiddler ${title}`};
+		if (!prefix(title,pfix.write)) return {status:"error",error: `Failed to create tiddler ${title}`};
 		try {
 			let fext, templ = template
 			if (!templ) {
