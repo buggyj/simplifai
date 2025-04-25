@@ -33,7 +33,7 @@ export function sidebar({history,__pwidget}) {
 	}
 	return html`
 	${!hidKeyEntry && html`
-	<div class="bj_key-entry-overlay "></div>
+	  <div class="bj_warning-overlay"><div style="padding:1em;width:70%;background:yellow">WARNING remember that data that is typed into gemini (and tiddlers that are read by gemini) are send to google and in some cases are used by them to train the AI models and may be seen by their employees.</div></div>
 	`}
     <div class="aic_sidebar">
 		<div class="bottom-item btn">
@@ -49,8 +49,7 @@ export function sidebar({history,__pwidget}) {
 		    <${ibutton}  name="cog_icon" alt="sysrole icon"  
 			   onclick=${() => (sendmessage(mssg(paramsmodal, paramsname, paramsmsg)))}/>
 			${extended ? html`<span>settings</span> `: null}
-		</div>
-		<div class="bottom-item btn">
+		</div>		<div class="bottom-item btn">
 		    <${ibutton}  name="colorwheel_icon" alt="colorwheel icon"  
 			   onclick=${() => (sendmessage(mssg(tagsmodal, tagsname, tagsmsg)))}/>
 			${extended ? html`<span>tags</span> `: null}
@@ -86,6 +85,3 @@ export function sidebar({history,__pwidget}) {
 	</div>
   `;
 }
-
-
-      

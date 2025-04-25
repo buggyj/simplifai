@@ -1,7 +1,5 @@
-created: 20241009212421654
 title: $:/plugins/bj/simplifai/sidebar.css
 tags: $:/tags/Stylesheet
-modified: 20241022171843632
 type: text/plain
 
 /*$:/plugins/bj/simplifai/simplifai.css*/
@@ -39,7 +37,7 @@ type: text/plain
 .bj_key-entry {
   position :absolute;
   background:red;
-  z-index:11;
+  z-index:100001; /* Increased z-index to be above the warning overlay */
 }
 
 
@@ -52,4 +50,20 @@ type: text/plain
   background: #000000;
   opacity: 0.8;
   z-index: 10;
+}
+
+.bj_warning-overlay {
+  position: absolute; /* Position relative to the viewport */
+  top: 0;
+  left: 0;
+  width: 100%; /* Cover the full width */
+  height: 100%; /* Cover the full height */
+  background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent red background */
+  color: red; /* White text color */
+  font-size: 1.5em; /* Large font size for WARNING */
+  line-height: normal;
+  display: flex; /* Use flexbox to center text */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  z-index: 1000; /* Ensure it's on top of most elements, but below key entry */
 }
