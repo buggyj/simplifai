@@ -81,7 +81,7 @@ export const tools = [
 ];
 
 function prefix(str, prefixeslist) {
-  if (prefixeslist === null) return true; 
+  if (typeof prefixeslist !== "string") return true; 
   let prefixes = parseStringArray(prefixeslist);
   for (let i = 0; i < prefixes.length; i++) {
     if (str.startsWith(prefixes[i])) {

@@ -1,0 +1,45 @@
+title: $:/plugins/bj/simplifai/paramsSideBarTool
+tags: $:/tags/SideBar
+caption: simplifai options
+
+
+\define Create(tag, template, base)
+<$action-createtiddler $basetitle="$base$" tags="$tag$" $template="$template$">
+	<$action-navigate $to=<<createTiddler-title>>/>
+</$action-createtiddler>
+\end
+
+\define buttonCreate(tag, template, base)
+<$button actions=<<Create "$tag$"  "$template$" "$base$">>>
++
+</$button>
+\end
+
+<$let tid={{{[[$:/temp/bj/simplifai/CurrentGeminiChat]get[text]else[$:/temp/bj/newChat]]}}}>
+<div class="paramsModal">
+
+!!Creativity <<buttonCreate "geminiParams" "$:/bj/DefaultParams" "geminiModelParams">>
+<$list filter='[all[shadows+tiddlers]tag[geminiParams]]'>
+
+</$list>
+
+!!Role <<buttonCreate "geminiRoles" "$:/bj/DefaultRole" "geminiRole">>
+<$list filter='[all[shadows+tiddlers]tag[geminiRoles]]'>
+
+</$list>
+
+
+<h2>Access to Tiddlers Permission<<buttonCreate "geminiPrefix" "$:/bj/AllTiddlers" "geminiPrefixPermissions">></h2>
+<$list filter='[all[shadows+tiddlers]tag[geminiPrefix]]'>
+
+</$list>
+
+
+!!Model <<buttonCreate "geminiModel" "$:/bj/DefaultModel" "geminiModelVersion">>
+<$list filter='[all[shadows+tiddlers]tag[geminiModel]]'>
+
+</$list>
+
+</div>
+</$let>
+
