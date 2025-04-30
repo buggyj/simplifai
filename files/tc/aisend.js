@@ -29,16 +29,20 @@ var settings
 if (!settings) settings = await loadModule("$:/plugins/bj/simplifai/setting.mjs"); 
 })()
 
-exports.run = async function(mode,title,question) {
+exports.run = async function(model,callback,question,...options) {
     const {busy,runChat} = gemini
     const answer={title:""}
     const {API_KEY} = settings
     if (!API_KEY.value){return}
     const history ={value:[]}
-    const error = await runChat(question, history,"",params,[],null,false,false,answer)
+    const error = await runChat(question, history,"",params,[],model,null,false,true,answer)
     busy.value=false
     if (error) return; 
-   
-    tiddlyclip.macro["send"](mode,title,answer.title)
+    if (!tiddlyclip.macro.callback) {
+		console.log(callback," not found");
+		return;	
+	}
+
+	tiddlyclip.macro[callback](answer.title,question,...options)
 }
 })();

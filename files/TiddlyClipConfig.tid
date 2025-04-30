@@ -8,3 +8,4 @@ type: text/vnd.tiddlywiki
 |Pin|pin it||[[defaultPin]]||
 |Snap|screen shot||[[defaultSnap]]|snap|
 |AI|||[[$:/bj/AIQuestionRule]]|nosave userstring|
+|AISetKey|||[[$:/bj/AISetKeyRule]]|nosave|

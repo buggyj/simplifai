@@ -4,5 +4,6 @@ type: application/x-bclip
 #title=
 #askai=summarize this text: 
 
-#msg=((*#askai*)) ((*@text*))
-#nul=((*@aisend(alert,#title,#msg)*))
+#model:={{$:/bj/DefaultModel}}
+#question=((*#askai*)) ((*@text*))
+#nul=((*@aisend(#model,callSend,#question,alert,#title)*))
