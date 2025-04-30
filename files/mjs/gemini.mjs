@@ -48,7 +48,7 @@ export async function runChat(prompt,history,sysRole,params,prefixes,aModel,__pw
 	  let responses =[], responseText
       try {
         let result = await chat.sendMessage(message,{
-				  timeout: 30000 // Pass the abort signal here
+				  timeout: 120000 // Pass the abort signal here
 				});
         console.log(result)
         responseText = result.response.text();
