@@ -33,7 +33,7 @@ export function sidebar({history,__pwidget}) {
 	}
 	return html`
 	${!hidKeyEntry && html`
-	  <div class="bj_warning-overlay"><div style="padding:1em;width:70%;background:yellow">WARNING remember that data that is typed into gemini (and tiddlers that are read by gemini) are send to google and in some cases are used by them to train the AI models and may be seen by their employees.</div></div>
+	  <div class="bj_warning-overlay"><div style="padding:1em;width:70%;background:yellow">WARNING remember that data that are typed into gemini (and tiddlers that are read by gemini) are sent to google and in some cases are used by them to train the AI models and may be seen by their employees.</div></div>
 	`}
     <div class="aic_sidebar">
 		<div class="bottom-item btn">
