@@ -52,7 +52,7 @@ export function sidebar({history,__pwidget}) {
 		</div>		<div class="bottom-item btn">
 		    <${ibutton}  name="colorwheel_icon" alt="colorwheel icon"  
 			   onclick=${() => (sendmessage(mssg(tagsmodal, tagsname, tagsmsg)))}/>
-			${extended ? html`<span>tags</span> `: null}
+			${extended ? html`<span>add tags</span> `: null}
 		</div>
 		<div class="bottom-item btn">
 		    <${ibutton}  name="tids_icon" alt="chats icon"  

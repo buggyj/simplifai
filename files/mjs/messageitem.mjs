@@ -132,20 +132,20 @@ export function MessageItem({ message, index, lastMessageRef, history, ibutton, 
     <div key=${index} ref=${index === history.value.length - 1 ? lastMessageRef : null}>
       ${message.role === "user" ? html`
         <div class="result-title" class=${!message.hidden ? '' : 'noshow'}>#${index}#
-          <${ibutton} name="user_icon" alt="" onclick=${() => { history.value = onlyPathToRoot(history, index);}} title="toggle" />
-          <${ibutton} name="copy_icon" alt="copy request" style="width:12px;margin:4px;" title="copy" onClick=${() => toClipBoard(message.parts)} />
-          <${ibutton} name="bud_icon" alt="bud chat"  style="width:12px;margin:4px;" onclick=${() => { 
+          <${ibutton} name="user_icon" alt="" style="cursor: pointer;" onclick=${() => { history.value = onlyPathToRoot(history, index);}} title="last" />
+          <${ibutton} name="copy_icon" alt="copy request" style="width:12px;margin:4px;cursor: pointer;" title="copy" onClick=${() => toClipBoard(message.parts)} />
+          <${ibutton} name="bud_icon" alt="bud chat"  style="width:12px;margin:4px;cursor: pointer;" onclick=${() => { 
             var base = __pwidget.toTiddlers['history'],newtitle;
             newtitle = newTiddler({basetitle:base,template:base,fields:{text:JSON.stringify(subTree(history, index))}});
             setTextReference("$:/temp/bj/simplifai/CurrentGeminiChat",newtitle);
-          }} title="toggle" />
+          }} title="clone" />
           <p>${message.parts[0].text}</p>
         </div>
       ` : html`
         ${message.parts.some(part => part.text) ? html`
           <div class="result-data" style=${{ display: !message.hidden ? 'block' : 'none' }}>
             <${ibutton} name="gemini_icon" alt="" />
-            <${ibutton} name="copy_icon" alt="copy reply" style="width:12px;margin:4px;" title="copy" onClick=${() => toClipBoard(message.parts)} />
+            <${ibutton} name="copy_icon" alt="copy reply" style="width:12px;margin:4px;cursor: pointer;" title="copy" onClick=${() => toClipBoard(message.parts)} />
             ${message.parts.map((part, i) => {if (part.text) return html`<${MarkdownRenderer} key=${i} markdown=${part.text} />`})}
           </div>
         ` : ''}
