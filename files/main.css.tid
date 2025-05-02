@@ -31,7 +31,10 @@ type: text/plain
     max-width: 85ch; 
     min-width: 85ch; 
     margin: 0 auto; /* Centers the container */
-    padding: 1rem; /* Adds some space inside */
+	padding-top: 1rem;
+	padding-right: 1.5rem;
+	padding-bottom: 1rem;
+	padding-left: 1rem;
     line-height: 1.6; 
 }
 
