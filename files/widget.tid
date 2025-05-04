@@ -11,8 +11,9 @@ stylesheet: $:/themes/bj/cssreset
 	  prefixtid = {{{[<tid>get[sysprefix]else[$:/bj/AllTiddlers]]}}}
 	  tools =  {{{[<tid>get[tools]else[n]]}}} 
 	  model = {{{[<tid>get[sysmodel]else[$:/bj/DefaultModel]]}}}
+	  toolstid = {{{[<tid>get[systools]else[$:/plugins/bj/simplifai/toolslight.mjs]]}}}
       >
-<$pwidget  class="simplifai" $app="$:/plugins/bj/simplifai/simplifai.mjs"  $tids=`[[:history|$(tid)$]] [[sysRole|$(systid)$]] [[:params|$(paramstid)$]] [[:prefixes|$(prefixtid)$]] [[model|$(model)$]]` enabletools=`$(tools)$` />
+<$pwidget  class="simplifai" $app="$:/plugins/bj/simplifai/simplifai.mjs"  $tids=`[[:history|$(tid)$]] [[sysRole|$(systid)$]] [[:params|$(paramstid)$]] [[:prefixes|$(prefixtid)$]] [[model|$(model)$]]` toolstid=`$(toolstid)$` enabletools=`$(tools)$` />
 </$let>
 \end
 

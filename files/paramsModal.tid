@@ -29,6 +29,14 @@ mask-closable: true
 </$select>
 <$checkbox tiddler=<<tid>> field="tools" checked="y" unchecked="n" default="n">Enable access to tiddlers</$checkbox>
 
+!!tools
+<$select tiddler=<<tid>> field='systools' tooltip='choose tools' default="$:/plugins/bj/simplifai/toolslight.mjs">
+<$list filter='[all[shadows+tiddlers]tag[geminiTools]]'>
+<option><$view field='title'/></option>
+</$list>
+</$select>
+
+
 !!Model
 <$select tiddler=<<tid>> field='sysmodel' tooltip='model' default="$:/bj/DefaultModel">
 <$list filter='[all[shadows+tiddlers]tag[geminiModel]]'>
@@ -37,4 +45,3 @@ mask-closable: true
 </$select>
 </div>
 </$let>
-

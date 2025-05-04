@@ -19,11 +19,11 @@ let errorModal="$:/plugins/bj/simplifai/errorModal", errtitle="",  errmsg=""
 export const Input=signal("")
 
 
-export function Main({history,sysRole,params,prefixes,model,__pwidget,addtools}) {
+export function Main({history,sysRole,params,prefixes,model,__pwidget,toolstid,addtools}) {
 	const onSent = async (prompt) => {
      if (!API_KEY.value){onNoKey();return}	
          const tools = (Search.value?false:addtools)
-         const error = await runChat(prompt, history,sysRole.value,params.value,prefixes.value,model.value,__pwidget,tools,Search.value )
+         const error = await runChat(prompt, history,sysRole.value,toolstid,params.value,prefixes.value,model.value,__pwidget,tools,Search.value )
          if (error === false) Input.value = ''//clear prompt
          else onError()
 	}

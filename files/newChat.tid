@@ -5,6 +5,7 @@ applicationtype: geminiChats
 sysparams: $:/bj/DefaultParams
 sysrole: $:/bj/DefaultRole
 tools: n
-systools: y
+systools: $:/plugins/bj/simplifai/toolslight.mjs
+
 
 []

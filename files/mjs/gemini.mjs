@@ -6,15 +6,20 @@ module-type: library
 const {DynamicRetrievalMode, GoogleGenerativeAI} = await import('https://esm.run/@google/generative-ai') 
 
 const {signal} = await import ("$:/plugins/bj/unchane/preactsignal.mjs")
-const {tools,toolHandler} = await import('$:/plugins/bj/simplifai/tools.mjs')
+const {getTools} = await import('$:/plugins/bj/simplifai/tools.mjs')
 const {newChatName} = await import('$:/plugins/bj/simplifai/naming.mjs')
 
 const { MODEL_NAME, API_KEY, safetySettings} = await import("$:/plugins/bj/simplifai/setting.mjs");
 export const busy = signal (false)
 export const Search = signal(false)
 
-export async function runChat(prompt,history,sysRole,params,prefixes,aModel,__pwidget,addtools,addsystool,destination) {
-     
+export async function runChat(prompt,history,sysRole,toolset,params,prefixes,aModel,__pwidget,addtools,addsystool,destination) {
+    let tools,toolHandler;
+    if (addtools){
+		const api = await getTools(toolset);
+		({tools,toolHandler} = api);
+		  console.log (tools)
+	}
 	function createChat(apiKey, history, sysRole, aParams, aModel, buget) {
 	  const modelparams = { 
 		 model: aModel, 

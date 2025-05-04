@@ -114,6 +114,24 @@
       }
     },
     {
+      "file": "toolslight.mjs",
+      "fields": {
+        "type": "application/javascript",
+        "module-type": "library",
+        "title": "$:/plugins/bj/simplifai/toolslight.mjs",
+        "tags": "geminiTools"
+      }
+    },
+    {
+      "file": "toolsnormal.mjs",
+      "fields": {
+        "type": "application/javascript",
+        "module-type": "library",
+        "title": "$:/plugins/bj/simplifai/toolsnormal.mjs",
+        "tags": "geminiTools"
+      }
+    },
+    {
       "file": "calltables.mjs",
       "fields": {
         "type": "application/javascript",

@@ -35,7 +35,7 @@ function modStartString(str) {
   return str;
 }
 
-function ai({__state,__pwidget,enabletools}) {
+function ai({__state,__pwidget,toolstid,enabletools}) {
 	const {sendmessage} = init(__pwidget)
 	const addtools = (enabletools ==="y")
 	function switchMode() {
@@ -47,7 +47,7 @@ function ai({__state,__pwidget,enabletools}) {
 		const newtitle={title:""}
 		if ( __state["history"].value.length==0) return;//nothing to base title on.
 		if (!API_KEY.value){onNoKey();return}
-		const error = await runChat(makeTitlePrompt, __state["history"],"",__state["params"],__state["prefixes"],__state["model"],__pwidget,addtools,false,newtitle)
+		const error = await runChat(makeTitlePrompt, __state["history"],"","",__state["params"].value,"",__state["model"].value,__pwidget,false,false,newtitle)
 		if (error) return; 
 		chatRename(newtitle.title,__pwidget.toTiddlers['history'],__pwidget)
 		busy.value=false
@@ -62,7 +62,7 @@ function ai({__state,__pwidget,enabletools}) {
 		<${ibutton} name="clean_icon" alt="" class="show-on-clean"/></div>
 	</div>
 	<div class="aic_content_container">
-		    <${sidebar} __pwidget=${__pwidget} history=${__state["history"]}/><${Main} history=${__state["history"]} sysRole=${__state["sysRole"]} params=${__state["params"]} prefixes=${__state["prefixes"]} model=${__state["model"]} addtools=${addtools} __pwidget=${__pwidget}/>
+		    <${sidebar} __pwidget=${__pwidget} history=${__state["history"]}/><${Main} history=${__state["history"]} sysRole=${__state["sysRole"]} params=${__state["params"]} prefixes=${__state["prefixes"]} model=${__state["model"]} toolstid=${toolstid} addtools=${addtools} __pwidget=${__pwidget}/>
 	</div>
   `;
 }
