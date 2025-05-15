@@ -135,7 +135,7 @@ console.log(aModel," model")
   //if (Previous) Previous -= 1 //otherwise it is null, a new chat, -1 as we want the last question no response
   newhist = newhist.map(elem => { elem.parent=Previous; return (elem)})
   history.value = [...history.value,...newhist]
-  if (newchat) newChatName(prompt,__pwidget);
+  if (newchat) newChatName(prompt);
   busy.value=false
   //return response
   return false

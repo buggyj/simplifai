@@ -21,3 +21,6 @@ export const safetySettings = [
 	  }
 	]
 	
+export const generationConfig = {
+	  temperature: 0.9
+	}

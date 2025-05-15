@@ -38,20 +38,13 @@ const uniquetitle = function(baseTitle,ext) {
 	return title;
 }
 	
-export function newChatName(prompt,__pwidget) {
-    const {sendmessage} = init(__pwidget)
+export function newChatName(prompt) {
    
 	let title = makeTitle(prompt)
-	title = uniquetitle(title)
-	// create a unique title from the returned title
-	// by checking if title exist and if so appending a number
-	sendmessage({$message:"tm-rename-tiddler", from:"$:/temp/bj/newChat", to:title, renameInTags:"no", renameInLists:"no"})
-	// rename $:/temp/bj/newChat to the title
-	setfield({$tiddler:"$:/temp/bj/simplifai/CurrentGeminiChat", text:title})
+	chatRename(title,"$:/temp/bj/newChat")
 }
 	
-export function chatRename(newname, oldname,__pwidget) {
-    const {invokeActionString} = init(__pwidget)
+export function chatRename(newname, oldname) {
    
 	let title = uniquetitle(newname)
 	//changing title will make a complete copy

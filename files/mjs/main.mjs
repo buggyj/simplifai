@@ -10,7 +10,6 @@ const {ibutton} = await import("$:/plugins/bj/simplifai/iconbutton.mjs");
 const { runChat,Search } = await import ('$:/plugins/bj/simplifai/gemini.mjs');
 const {API_KEY} = await import("$:/plugins/bj/simplifai/setting.mjs"); 
 const {init} = await import ("$:/plugins/bj/unchane/towidget.mjs");
-const {newChatName} = await import('$:/plugins/bj/simplifai/naming.mjs');
 const {MessageItem} = await import('$:/plugins/bj/simplifai/messageitem.mjs');
 
 let modal="$:/plugins/bj/simplifai/nokeyModal", title="",  msg=""	

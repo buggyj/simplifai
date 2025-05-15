@@ -35,7 +35,7 @@ exports.run = async function(model,callback,question,...options) {
     const {API_KEY} = settings
     if (!API_KEY.value){return}
     const history ={value:[]}
-    const error = await runChat(question, history,"",params,[],model,null,false,true,answer)
+    const error = await runChat(question, history,"","",params,[],model,null,false,true,answer)
     busy.value=false
     if (error) return; 
     if (!tiddlyclip.macro.callback) {

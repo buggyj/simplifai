@@ -49,7 +49,7 @@ function ai({__state,__pwidget,toolstid,enabletools}) {
 		if (!API_KEY.value){onNoKey();return}
 		const error = await runChat(makeTitlePrompt, __state["history"],"","",__state["params"].value,"",__state["model"].value,__pwidget,false,false,newtitle)
 		if (error) return; 
-		chatRename(newtitle.title,__pwidget.toTiddlers['history'],__pwidget)
+		chatRename(newtitle.title,__pwidget.toTiddlers['history'])
 		busy.value=false
 	}
 	
