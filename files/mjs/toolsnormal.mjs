@@ -7,7 +7,7 @@ tags: geminiTools
 
 const {getTextReference,setTextReference} = await import('$:/plugins/bj/unchane/store.js')
 const {createtiddler} = await import ("$:/plugins/bj/unchane/utils.mjs");
-const {parseStringArray} = await import ("$:/plugins/bj/unchane/storeutils.js")
+const {parsestringArray} = await import ("$:/plugins/bj/unchane/storeutils.js")
 
 export const tools = [
 
@@ -17,10 +17,10 @@ export const tools = [
         name: "readTiddler",
         description: "Read the contents of tiddler",
         parameters: {
-          type: "OBJECT",
+          type: "object",
           properties: {
             title: {
-              type: "STRING",
+              type: "string",
               description: "name of the tiddler to read"
             }
           },
@@ -31,14 +31,14 @@ export const tools = [
         name: "writeTiddler",
         description: "Write to a existing tiddler or a new tiddler",
         parameters: {
-          type: "OBJECT",
+          type: "object",
           properties: {
             title: { 
-              type: "STRING", 
+              type: "string", 
               description: "name of the tiddler" 
             },
             text: { 
-              type: "STRING", 
+              type: "string", 
               description: "The text the tiddler to write" 
             }                
           },
@@ -49,14 +49,14 @@ export const tools = [
         name: "createTiddler",
         description: "create a tiddler using a template",
         parameters: {
-          type: "OBJECT",
+          type: "object",
           properties: {
             title: { 
-              type: "STRING", 
+              type: "string", 
               description: "The name of the tiddler" 
             },
             template: { 
-              type: "STRING", 
+              type: "string", 
               description: "The name of the template" 
             }                
           },
@@ -67,10 +67,10 @@ export const tools = [
         name: "launchTiddler",
         description: "opens a tiddler within the tiddlywiki",
         parameters: {
-          type: "OBJECT",
+          type: "object",
           properties: {
             title: { 
-              type: "STRING", 
+              type: "string", 
               description: "The name of the tiddler" 
             }              
           },
@@ -81,10 +81,10 @@ export const tools = [
         name: "filterTiddlers",
         description: "Execute a TiddlyWiki filter and return a list of tiddler titles.",
         parameters: {
-          type: "OBJECT",
+          type: "object",
           properties: {
             filter: {
-              type: "STRING",
+              type: "string",
               description: "The TiddlyWiki filter expression to execute."
             }
           },
@@ -95,14 +95,14 @@ export const tools = [
         name: "getTiddlerFields",
         description: "Retrieve specific fields from a tiddler.",
         parameters: {
-          type: "OBJECT",
+          type: "object",
           properties: {
             title: {
-              type: "STRING",
+              type: "string",
               description: "The title of the tiddler."
             },
             fields: {
-              type: "STRING",
+              type: "string",
               description: "A comma-separated list of field names to retrieve."
             }
           },
@@ -113,14 +113,14 @@ export const tools = [
         name: "saveTiddlerFields",
         description: "Save specific fields to a tiddler.",
         parameters: {
-          type: "OBJECT",
+          type: "object",
           properties: {
             title: {
-              type: "STRING",
+              type: "string",
               description: "The title of the tiddler."
             },
             fields: {
-              type: "OBJECT",
+              type: "object",
               description: "An object containing the field names and their new values."
             }
           },
@@ -133,7 +133,7 @@ export const tools = [
 
 function prefix(str, prefixeslist) {
   if (typeof prefixeslist !== "string") return true; 
-  let prefixes = parseStringArray(prefixeslist);
+  let prefixes = parsestringArray(prefixeslist);
   for (let i = 0; i < prefixes.length; i++) {
     if (str.startsWith(prefixes[i])) {
       return true;
@@ -221,7 +221,7 @@ export const toolHandler = {
 		return {status:"error", error: `Failed to create tiddler ${title}` };
 		}
 	},
-	launchTiddler: async ({title},notused,__pwidget) => {
+	launchTiddler: async ({title},pfixnotused,notused,__pwidget) => {
 		try {
 		console.log(`launch ${title}`)//console.log(`reading: ${title}`);
 		__pwidget.dispatchEvent({type: 'tm-navigate', navigateTo: title});
@@ -233,7 +233,20 @@ export const toolHandler = {
 		}
 	}
   ,
-  filterTiddlers: async ({ filter },pfix) => {
+  filterTiddlers: async ({ filter },pfix,aitype) => {
+	if (aitype==="claude")  {
+		try { console.log( filter)
+            const tiddlerTitles = $tw.wiki.filterTiddlers.call($tw.wiki,`${filter}`);console.log("return")
+            console.log(tiddlerTitles);
+            return {
+                type:"text",
+                text: JSON.stringify (tiddlerTitles)
+            };
+        } catch (error) {
+            console.error("Error querying tiddlers: " + error);
+            return { status: "error", error: `Failed to query tiddlers with filter "${filter_string}"` };
+        }
+	}
     //if (!prefix("filterTiddlers",pfix.read)) return{ status:"error",error: `No prefix`};
     try {
       const results = $tw.wiki.filterTiddlers(filter);
@@ -243,7 +256,7 @@ export const toolHandler = {
       return { status: "error", error: "Failed to execute filter." };
     }
   },
-  getTiddlerFields: async ({ title, fields },pfix) => {
+  getTiddlerFields: async ({ title, fields },pfix,aitype) => {
     if (!prefix(title,pfix.read)) return{ status:"error",error: `No prefix`};
     try {
       const tiddler = $tw.wiki.getTiddler(title);
@@ -256,6 +269,10 @@ export const toolHandler = {
         field = field.trim();
         result[field] = tiddler.fields[field];
       });
+      if (aitype ==="claude") return {
+		  type:"text",
+          text: JSON.stringify (result)
+	  }
       return { status: "success", fields: result };
     } catch (error) {
       console.error("Error getting tiddler fields: " + error);
@@ -271,7 +288,7 @@ export const toolHandler = {
           }
 
           // Create a new fields object with the updated values
-          const newFields = Object.assign({}, tiddler.fields, fields);
+          const newFields = object.assign({}, tiddler.fields, fields);
 
           // Update the tiddler
           $tw.wiki.addTiddler(new $tw.Tiddler(newFields));

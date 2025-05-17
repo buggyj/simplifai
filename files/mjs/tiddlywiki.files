@@ -33,6 +33,30 @@
       }
     },
     {
+      "file": "signals.mjs",
+      "fields": {
+        "type": "application/javascript",
+        "module-type": "library",
+        "title": "$:/plugins/bj/simplifai/signals.mjs"
+      }
+    },
+    {
+      "file": "anthropic.mjs",
+      "fields": {
+        "type": "application/javascript",
+        "module-type": "library",
+        "title": "$:/plugins/bj/simplifai/claude.mjs"
+      }
+    },
+    {
+      "file": "ai.mjs",
+      "fields": {
+        "type": "application/javascript",
+        "module-type": "library",
+        "title": "$:/plugins/bj/simplifai/ai.mjs"
+      }
+    },
+    {
       "file": "gpt.mjs",
       "fields": {
         "type": "application/javascript",

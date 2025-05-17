@@ -10,8 +10,7 @@ const {getTools} = await import('$:/plugins/bj/simplifai/tools.mjs')
 const {newChatName} = await import('$:/plugins/bj/simplifai/naming.mjs')
 
 const { MODEL_NAME, API_KEY, safetySettings} = await import("$:/plugins/bj/simplifai/setting.mjs");
-export const busy = signal (false)
-export const Search = signal(false)
+const {busy,Search} = await import ("$:/plugins/bj/simplifai/signals.mjs")
 
 export async function runChat(prompt,history,sysRole,toolset,params,prefixes,aModel,__pwidget,addtools,addsystool,destination) {
     let tools,toolHandler;
@@ -66,7 +65,7 @@ export async function runChat(prompt,history,sysRole,toolset,params,prefixes,aMo
             console.log(`Function called: ${name} with args:`, args);
             
             // Execute the function
-            const fResponse = await toolHandler[name](args,prefixes,__pwidget);
+            const fResponse = await toolHandler[name](args,prefixes,"gemini",__pwidget);
             responses.push({
               functionResponse: {
                 name: name,

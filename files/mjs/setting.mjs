@@ -3,12 +3,12 @@ title: $:/plugins/bj/simplifai/setting.mjs
 type: application/javascript
 module-type: library
 \*/
-const {signal} = await import ("$:/plugins/bj/unchane/preactsignal.mjs")
+const {signal,computed} = await import ("$:/plugins/bj/unchane/preactsignal.mjs")
 const {HarmCategory, HarmBlockThreshold} = await import('https://esm.run/@google/generative-ai') 
-const key = "";
+export const {aiType} = await import ("$:/plugins/bj/simplifai/signals.mjs")
 
 export const MODEL_NAME = "gemini-2.0-flash";
-export const API_KEY = signal(key);
+export const API_KEYS = {claude:signal(""),gemini:signal("")};
 export const useHistLen = 10;
 export const safetySettings = [
 	  {
@@ -24,3 +24,8 @@ export const safetySettings = [
 export const generationConfig = {
 	  temperature: 0.9
 	}
+	
+
+export const API_KEY = computed(() =>
+  API_KEYS[aiType.value]
+);

@@ -7,7 +7,7 @@ const {ibutton}=await import("$:/plugins/bj/simplifai/iconbutton.mjs")
 const {html, render, useState} = await import ("$:/plugins/bj/unchane/preactsignal.mjs");
 const {setfield,deletetiddler} = await import ("$:/plugins/bj/unchane/utils.mjs");
 
-const {API_KEY} = await import("$:/plugins/bj/simplifai/setting.mjs")
+const {API_KEYS,aiType} = await import("$:/plugins/bj/simplifai/setting.mjs")
 
 const {init} = await import ("$:/plugins/bj/unchane/towidget.mjs")
 
@@ -19,6 +19,9 @@ let forbiddenmodal="$:/plugins/bj/simplifai/forbiddenModal", forbiddenname="Down
 
 const fobiddenURL ="..."//add url, to block usage 
 
+const warnings ={gemini:"WARNING remember that data that are typed into gemini (and tiddlers that are read by gemini) are sent to google and in some cases are used by them to train the AI models and may be seen by their employees.",
+				 claude:"WARNING remember that data that are typed into cluade (and tiddlers that are read by claude) are sent to Anthropic"
+}
 export function sidebar({history,__pwidget}) {
 	const [extended, setExtended] = useState(false)
 	const [hidKeyEntry, setHidKeyEntry] = useState(true);
@@ -33,7 +36,7 @@ export function sidebar({history,__pwidget}) {
 	}
 	return html`
 	${!hidKeyEntry && html`
-	  <div class="bj_warning-overlay"><div style="padding:1em;width:70%;background:yellow">WARNING remember that data that are typed into gemini (and tiddlers that are read by gemini) are sent to google and in some cases are used by them to train the AI models and may be seen by their employees.</div></div>
+	  <div class="bj_warning-overlay"><div style="padding:1em;width:70%;background:yellow">${warnings[aiType.value]}</div></div>
 	`}
     <div class="aic_sidebar">
 		<div class="bottom-item btn">
@@ -76,7 +79,7 @@ export function sidebar({history,__pwidget}) {
 		  ${!hidKeyEntry ? html`
 			  <div class='bj_key-entry'>Enter Key:
 			  <input autofocus type="password" onchange=${(e) => {
-				API_KEY.value=e.target.value		  
+				API_KEYS[aiType.value].value=e.target.value		  
 			  }}/>
 			  <button onclick=${() => setHidKeyEntry((prev) => !prev)}>[x]</button>
 			  </div> 

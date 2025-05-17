@@ -17,10 +17,10 @@ export const tools = [
         name: "readTiddler",
         description: "Read the contents of tiddler",
         parameters: {
-          type: "OBJECT",
+          type: "object",
           properties: {
             title: {
-              type: "STRING",
+              type: "string",
               description: "name of the tiddler to read"
             }
           },
@@ -31,14 +31,14 @@ export const tools = [
         name: "writeTiddler",
         description: "Write to a existing tiddler or a new tiddler",
         parameters: {
-          type: "OBJECT",
+          type: "object",
           properties: {
             title: { 
-              type: "STRING", 
+              type: "string", 
               description: "name of the tiddler" 
             },
             text: { 
-              type: "STRING", 
+              type: "string", 
               description: "The text the tiddler to write" 
             }                
           },
@@ -49,14 +49,14 @@ export const tools = [
         name: "createTiddler",
         description: "create a tiddler using a template",
         parameters: {
-          type: "OBJECT",
+          type: "object",
           properties: {
             title: { 
-              type: "STRING", 
+              type: "string", 
               description: "The name of the tiddler" 
             },
             template: { 
-              type: "STRING", 
+              type: "string", 
               description: "The name of the template" 
             }                
           },
@@ -67,10 +67,10 @@ export const tools = [
         name: "launchTiddler",
         description: "opens a tiddler within the tiddlywiki",
         parameters: {
-          type: "OBJECT",
+          type: "object",
           properties: {
             title: { 
-              type: "STRING", 
+              type: "string", 
               description: "The name of the tiddler" 
             }              
           },
@@ -171,7 +171,7 @@ export const toolHandler = {
 		return {status:"error", error: `Failed to create tiddler ${title}` };
 		}
 	},
-	launchTiddler: async ({title},notused,__pwidget) => {
+	launchTiddler: async ({title},pfixnotused,notused,__pwidget) => {
 		try {
 		console.log(`launch ${title}`)//console.log(`reading: ${title}`);
 		__pwidget.dispatchEvent({type: 'tm-navigate', navigateTo: title});

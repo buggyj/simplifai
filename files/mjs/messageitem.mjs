@@ -9,13 +9,13 @@ const marked = await import('$:/plugins/bj/plugins/marked/markdown.js');
 const {setTextReference} = await import('$:/plugins/bj/unchane/store.js');
 const {newTiddler} = await import ("$:/plugins/bj/unchane/utils.mjs");
 
-const {busy,runChat} = await import ("$:/plugins/bj/simplifai/anthropic.mjs")
+const {ibutton} = await import("$:/plugins/bj/simplifai/iconbutton.mjs");
+const {busy,runChat,aiType} = await import ("$:/plugins/bj/simplifai/ai.mjs")
 const {API_KEY,generationConfig,MODEL_NAME} = await import("$:/plugins/bj/simplifai/setting.mjs"); 
 const {init} = await import ("$:/plugins/bj/unchane/towidget.mjs")
 
 //duplicate code
 let  nokey = {$message:"tm-modal", $param:"$:/plugins/bj/simplifai/nokeyModal", title:"", message:""}
-
 
 function markdownButton(source) {
   return marked(source).replace(/<pre(?=\s|>)([^>]*)>/g, "<my-pre><pre$1>").replace(/<\/pre>/g, "</pre></my-pre>");
@@ -40,7 +40,7 @@ const MarkdownRenderer = ({ markdown }) => {
    `;
 };
 
-export function MessageItem({ message, index, lastMessageRef, history, ibutton, __pwidget}) {
+export function MessageItem({ message, index, lastMessageRef, history, __pwidget}) {
   const {sendmessage} = init(__pwidget)
   const onNoKey = () => {sendmessage(nokey)}
   
@@ -176,6 +176,7 @@ export function MessageItem({ message, index, lastMessageRef, history, ibutton, 
 	busy.value=false;console.log (summary.title)
 	return  summary.title
   }
+
   let makeSummaryPrompt = "extact the useful infomation in this chat in 500 words, concentrate on positive technical details and examples. Do not mention failures "
   return html`
     <div key=${index} ref=${index === history.value.length - 1 ? lastMessageRef : null}>
@@ -200,7 +201,7 @@ export function MessageItem({ message, index, lastMessageRef, history, ibutton, 
       ` : html`
         ${message.parts.some(part => part.text) ? html`
           <div class="result-data" style=${{ display: !message.hidden ? 'block' : 'none' }}>
-            <${ibutton} name="gemini_icon" alt="" />
+            <${ibutton} name=${aiType.value==="gemini"?"gemini_icon":"spokes_icon"} alt="" />
             <${ibutton} name="copy_icon" alt="copy reply" style="width:12px;margin:4px;cursor: pointer;" title="copy" onClick=${() => toClipBoard(message.parts)} />
             ${message.parts.map((part, i) => {if (part.text) return html`<${MarkdownRenderer} key=${i} markdown=${part.text} />`})}
           </div>

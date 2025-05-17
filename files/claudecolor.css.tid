@@ -1,10 +1,8 @@
-title: $:/temp/bj/simplifai/gemini/color.css
-tags: $:/tags/Stylesheet
+title: $:/temp/bj/simplifai/claude/color.css
 type: text/plain
 
-
 :root    {
---bj-simplifai-sidebar: gold;
+--bj-simplifai-sidebar: Wheat;
 --bj-simplifai-nav: #e2e6eb;
 --bj-simplifai-heading: #e2e6eb;
 --bj-simplifai-cell: khaki;

@@ -7,7 +7,7 @@ module-type: library
 const {html, render,useContext,useState, useRef, useEffect, signal} = await import ("$:/plugins/bj/unchane/preactsignal.mjs");
 
 const {ibutton} = await import("$:/plugins/bj/simplifai/iconbutton.mjs");
-const { runChat,Search } = await import ('$:/plugins/bj/simplifai/gemini.mjs');
+const { runChat,Search } = await import ('$:/plugins/bj/simplifai/ai.mjs');
 const {API_KEY} = await import("$:/plugins/bj/simplifai/setting.mjs"); 
 const {init} = await import ("$:/plugins/bj/unchane/towidget.mjs");
 const {MessageItem} = await import('$:/plugins/bj/simplifai/messageitem.mjs');
@@ -57,7 +57,6 @@ export function Main({history,sysRole,params,prefixes,model,__pwidget,toolstid,a
 				  index=${index}
 				  lastMessageRef=${lastMessageRef}
 				  history=${history}
-				  ibutton=${ibutton}
 				  __pwidget=${__pwidget}
 			/>`     
           )//history.value.map
@@ -66,7 +65,7 @@ export function Main({history,sysRole,params,prefixes,model,__pwidget,toolstid,a
 		<div class="main-bottom">
 		  <${SearchBox} onSent=${onSent} API_KEY=${API_KEY} Input=${Input} Search=${Search} ibutton=${ibutton}/>
 		  <p class="bottom-info">
-			BUT: Gemini may be inaccurate so
+			BUT: AI may be inaccurate so
 			double-check its responses.
 		  </p>
 		</div>
