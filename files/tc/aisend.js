@@ -28,9 +28,13 @@ var settings
 (async () => {
 if (!settings) settings = await loadModule("$:/plugins/bj/simplifai/setting.mjs"); 
 })()
-
+var signals
+(async () => {
+if (!signals) signals = await loadModule("$:/plugins/bj/simplifai/signals.mjs"); 
+})()
 exports.run = async function(model,callback,question,...options) {
-    const {busy,runChat} = gemini
+    const {runChat} = gemini
+    const {busy} = signals
     const answer={title:""}
     const {API_KEY} = settings
     if (!API_KEY.value){return}
