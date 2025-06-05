@@ -113,12 +113,21 @@ export function MessageItem({ message, index, lastMessageRef, history, __pwidget
       return inta;
     }
     function getIntaReroot(history,startRoleIndex) {
-      var inta = [{...history[startRoleIndex],parent:null}];
-      let currentIndex = startRoleIndex + 1;
-      
+	  var prev = null, inta = [{...history[startRoleIndex],parent:null}];
+      let currentIndex = startRoleIndex + 1, newpos=0;
+     
       // Continue until we find another user or reach the end
-      while (currentIndex < history.length && history[currentIndex].role !== 'user') {
-        inta.push({...history[currentIndex],parent:null});
+      while (currentIndex < history.length) {
+		 if (history[currentIndex].hidden) {
+			 currentIndex++;
+			 continue;
+		 }  
+		  
+		if (history[currentIndex].role === 'user') {
+			prev = newpos;
+		}
+        inta.push({...history[currentIndex],parent:prev});
+		newpos++;
         currentIndex++;
       }
       
@@ -189,6 +198,7 @@ export function MessageItem({ message, index, lastMessageRef, history, __pwidget
             newtitle = newTiddler({basetitle:base,template:base,fields:{text:JSON.stringify(subTree(history, index).parentSubtree)}});
             setTextReference("$:/temp/bj/simplifai/CurrentGeminiChat",newtitle);
           }} title="clone" />
+          ${(!message.hidden) && html`
           <${ibutton} name="hat_icon" alt="top chat"  style="width:12px;margin:4px;cursor: pointer;" onclick=${() => { 
             let base = __pwidget.toTiddlers['history'],newtitle;
             //let summary = invokeSummarize(makeSummaryPrompt,subTree(history, index))
@@ -197,6 +207,7 @@ export function MessageItem({ message, index, lastMessageRef, history, __pwidget
             setTextReference("$:/temp/bj/simplifai/CurrentGeminiChat",newtitle);
           }} title="newchat with last" />
           <p>${message.parts[0].text}</p>
+          `}
         </div>
       ` : html`
         ${message.parts.some(part => part.text) ? html`
