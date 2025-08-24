@@ -13,6 +13,5 @@
 			}
 		}
 	],
-	 "directories": ["files"
-	 ]
+	 "directories": ["files"]
 }

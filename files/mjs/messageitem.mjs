@@ -44,7 +44,7 @@ export function MessageItem({ message, index, lastMessageRef, history, __pwidget
   const {sendmessage} = init(__pwidget)
   const onNoKey = () => {sendmessage(nokey)}
   
-  function onlyPathToRoot(historyold, lastRole) {
+  function onlyPathToRoot(historyold, lastRole, notCurrent) {
     // First, mark all roles as hidden
     let history = [...historyold.value]
     for (let i = 0; i < history.length; i++) {
@@ -75,6 +75,17 @@ export function MessageItem({ message, index, lastMessageRef, history, __pwidget
     // Start with the lastRole and trace back through ancestors
     let currentRole = lastRole;
     
+    if (notCurrent) { 
+	  const intaStart = findIntaStart(currentRole);
+      
+      // unhide roles in this interaction
+      //unHideIntaRoles(intaStart);
+      
+      // Move to the parent interaction
+      const parentIndex = history[intaStart].parent;
+      currentRole = parentIndex; 
+	}
+    console.log(currentRole)
     while (currentRole !== null && currentRole !== undefined) {
       // Find the start of the interaction containing currentRole
       const intaStart = findIntaStart(currentRole);
@@ -85,6 +96,7 @@ export function MessageItem({ message, index, lastMessageRef, history, __pwidget
       // Move to the parent interaction
       const parentIndex = history[intaStart].parent;
       currentRole = parentIndex;
+      console.log(currentRole)
     }
     
     return history;
@@ -199,15 +211,16 @@ export function MessageItem({ message, index, lastMessageRef, history, __pwidget
             setTextReference("$:/temp/bj/simplifai/CurrentGeminiChat",newtitle);
           }} title="clone" />
           ${(!message.hidden) && html`
-          <${ibutton} name="hat_icon" alt="top chat"  style="width:12px;margin:4px;cursor: pointer;" onclick=${() => { 
-            let base = __pwidget.toTiddlers['history'],newtitle;
-            //let summary = invokeSummarize(makeSummaryPrompt,subTree(history, index))
-            //console.log(summary)
-            newtitle = newTiddler({basetitle:base,template:base,fields:{text:JSON.stringify(headTree(history, index))}});
-            setTextReference("$:/temp/bj/simplifai/CurrentGeminiChat",newtitle);
-          }} title="newchat with last" />
-          <p>${message.parts[0].text}</p>
+			  <${ibutton} name="hat_icon" alt="top chat"  style="width:12px;margin:4px;cursor: pointer;" onclick=${() => { 
+				let base = __pwidget.toTiddlers['history'],newtitle;
+				//let summary = invokeSummarize(makeSummaryPrompt,subTree(history, index))
+				//console.log(summary)
+				newtitle = newTiddler({basetitle:base,template:base,fields:{text:JSON.stringify(headTree(history, index))}});
+				setTextReference("$:/temp/bj/simplifai/CurrentGeminiChat",newtitle);
+			  }} title="newchat with last" />
           `}
+          <p style="cursor: pointer;" onclick=${() => { history.value = onlyPathToRoot(history, index, true);}}>${message.parts[0].text}</p>
+
         </div>
       ` : html`
         ${message.parts.some(part => part.text) ? html`

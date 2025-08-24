@@ -6,7 +6,7 @@
  "type":"application/json",
  "tags":"preact-applet",
  "title":"$:/plugins/bj/simplifai",
- "version":"0.0.9",
+ "version":"0.0.10",
  "plugin-priority": "4",
  "list":"readme license"
 }

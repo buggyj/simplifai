@@ -19,7 +19,9 @@ importcss(`https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css`)
 
 ```
 
-All components have a file extentions of .mjs
+All components (modules) have a file extentions of .mjs
+
+with preact components use these hooks with signals - useSignal(), useSignalEffect(), useComputed(). 
 
 You write "glue" components that are used to interface application compontents to tiddlywiki tiddlers via use of the <$pwidget>. A glue component example is shown below. 
 
@@ -113,7 +115,12 @@ In a wikitext tiddler this is an example widget
 where aTiddler and bTiddler are the names of tiddlers that contains the values. Note the as 'anumparam' is of type 'number', when it is part of the '$tids' attribute,  it is prefixed with a '#'
 
 'psignals' can also have items of type 'boolean' and 'object', and when appearing the in the '$tids' attribute there names are prefix with '?' and ':' respectively.
+Do not place comment within htm string literals.
 
 You are dedicated to finding the root case of bugs using console.log.
 
-It is essential to adhere to all instructions precisely, even seemingly minor details.
+It is essential to adhere to all instructions precisely, even seemingly minor details. 
+
+
+
+
