@@ -72,12 +72,17 @@ function ai({__state,__pwidget,toolstid,enabletools}) {
 		chatRename(newtitle.title,__pwidget.toTiddlers['history'])
 		busy.value=false
 	}
-	
+	async function  invokeRename(){
+		var newtitle=prompt ("enter name");
+		if (newtitle == null || newtitle =="") return;
+		chatRename(newtitle,__pwidget.toTiddlers['history'])
+	}
+	//®✎
 	return html`
 	<div class="aic_nav" style="background:${ (() => {if (busy.value) return "pink"; return "var(--bj-simplifai-heading)";})() }"> 
 		<${ibutton} class='aic_nav__btn' name="exit_icon" 
 					alt="menu icon"  onclick=${() =>switchMode()}/>
-		<p>${AIName}<span style="color:red;" onclick=${()=>invokeRename()}>@</span> ${modStartString(__pwidget.toTiddlers['history'])}</p>
+		<p>${AIName}<span style="color:red;" onclick=${()=>invokeRename()}>@</span> ${modStartString(__pwidget.toTiddlers['history'])}</p><span style="color:red;" onclick=${()=>invokeRename()}>✎</span> 
 		<div><${ibutton} name="dirty_icon" alt="" class="show-on-dirty" onclick=${()=>sendmessage(save)}/>
 		<${ibutton} name="clean_icon" alt="" class="show-on-clean"/></div>
 	</div>
