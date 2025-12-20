@@ -44,7 +44,7 @@ export function Main({history,sysRole,params,prefixes,model,__pwidget,toolstid,a
 	return html`
     <div class="main">
 		<div class="maincontainer" >
-		 ${!(history.value)  ? html `
+		 ${!(history.value.length)  ? html `
             <div class="greet">
               <h1><span>Hello You,</span></h1>
               <h1>can I help You today?</h1>
