@@ -58,9 +58,10 @@ export async function runChat(prompt, history, sysRole, toolset, params, prefixe
         }).filter(entry => entry !== null);
     }
 
-    function createChat(apiKey, convertedHistory, sysRole, aParams, aModel, budget) {
+    function createChat(apiKeyVal, convertedHistory, sysRole, aParams, aModel, budget) {
+
         const anthropic = new Anthropic({
-            apiKey: apiKey,dangerouslyAllowBrowser: true
+            apiKey: apiKeyVal.value,dangerouslyAllowBrowser: true
         });
         
         // Initialize configuration
@@ -158,7 +159,7 @@ export async function runChat(prompt, history, sysRole, toolset, params, prefixe
                         responses.push({
                             functionResponse: {
                                 name: name,
-                                id,id,
+                                id:id,
                                 response: toolResponse
                             }
                         });
@@ -262,7 +263,7 @@ export async function runChat(prompt, history, sysRole, toolset, params, prefixe
                     parts.push({ text: entry.content });
                 } else
                 // Handle tool calls if present
-                if (entry.content[0].type ="tool_use") {
+                if (entry.content[0].type === "tool_use") {
                         parts.push({
                             functionCall: {
                                 name: entry.content[0].name,

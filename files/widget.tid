@@ -4,16 +4,8 @@ tags:
 stylesheet: $:/themes/bj/cssreset
 
 \widget $mkchat.app()
-<$let tid1={{{[[$:/temp/bj/simplifai/CurrentGeminiChat]get[text]else[$:/temp/bj/newChat]]}}} 
-      tid={{{[<tid1>get[title]else[$:/temp/bj/newChat]]}}}
-      systid = {{{[<tid>get[sysrole]else[$:/bj/DefaultRole]]}}}
-	  paramstid = {{{[<tid>get[sysparams]else[$:/bj/DefaultParams]]}}} 
-	  prefixtid = {{{[<tid>get[sysprefix]else[$:/bj/AllTiddlers]]}}}
-	  tools =  {{{[<tid>get[tools]else[n]]}}} 
-	  model = {{{[<tid>get[sysmodel]else[$:/bj/DefaultModel]]}}}
-	  toolstid = {{{[<tid>get[systools]else[$:/plugins/bj/simplifai/toolslight.mjs]]}}}
-      >
-<$pwidget  class="simplifai" $app="$:/plugins/bj/simplifai/simplifai.mjs"  $tids=`[[:history|$(tid)$]] [[sysRole|$(systid)$]] [[:params|$(paramstid)$]] [[:prefixes|$(prefixtid)$]] [[model|$(model)$]]` toolstid=`$(toolstid)$` enabletools=`$(tools)$` />
+<$let tid={{{[[$:/temp/bj/simplifai/CurrentGeminiChat]get[text]else[$:/temp/bj/newChat]]}}} test={{{[[test]get[text]]}}}><<runlog "goforit" >>
+<$pwidget  class="simplifai" $app="$:/plugins/bj/simplifai/simplifai.mjs"  $tids=`[[:history|$(tid)$]][[model|$(tid)$!!sysmodel]]`  />
 </$let>
 \end
 

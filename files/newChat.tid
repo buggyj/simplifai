@@ -6,6 +6,7 @@ sysparams: $:/bj/DefaultParams
 sysrole: $:/bj/DefaultRole
 tools: n
 systools: $:/plugins/bj/simplifai/toolslight.mjs
-
+sysmodel: $:/bj/DefaultModel
+sysprefix: $:/bj/AllTiddlers
 
 []

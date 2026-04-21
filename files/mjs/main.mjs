@@ -7,29 +7,80 @@ module-type: library
 const {html, render,useContext,useState, useRef, useEffect, signal} = await import ("$:/plugins/bj/unchane/preactsignal.mjs");
 
 const {ibutton} = await import("$:/plugins/bj/simplifai/iconbutton.mjs");
-const { runChat,Search } = await import ('$:/plugins/bj/simplifai/ai.mjs');
+const { goChat,Search } = await import ('$:/plugins/bj/simplifai/ai.mjs');
 const {API_KEY} = await import("$:/plugins/bj/simplifai/setting.mjs"); 
 const {init} = await import ("$:/plugins/bj/unchane/towidget.mjs");
 const {MessageItem} = await import('$:/plugins/bj/simplifai/messageitem.mjs');
+const { filterTiddlers } = await import ("$:/plugins/bj/unchane/storeutils.js");
+const {getTextReference,setTextReference} = await import('$:/plugins/bj/unchane/store.js')
 
 let modal="$:/plugins/bj/simplifai/nokeyModal", title="",  msg=""	
 let errorModal="$:/plugins/bj/simplifai/errorModal", errtitle="",  errmsg=""
 
+
+
 export const Input=signal("")
 
+function getcards(){
+   return filterTiddlers("[tag[chatterbot]]");
+}
+const cards = [
+  { id: 1, title: "Summarize text",     description: "Paste any text and get a concise summary  fsdgsdf sdfg sfsdfg Paste any text and get a concise summary" },
+  { id: 2, title: "Write an email",     description: "Draft professional emails quickly"         },
+  { id: 3, title: "Explain a concept",  description: "Get clear explanations on any topic"       },
+  { id: 4, title: "Generate ideas",     description: "Brainstorm creative ideas for any project" },
+    { id: 5, title: "Summarize text",     description: "Paste any text and get a concise summary" },
+  { id: 6,title: "Write an email",     description: "Draft professional emails quickly"         },
+  { id: 7, title: "Explain a concept",  description: "Get clear explanations on any topic"       },
+  { id: 8, title: "Generate ideas",     description: "Brainstorm creative ideas for any project" },
+];
 
-export function Main({history,sysRole,params,prefixes,model,__pwidget,toolstid,addtools}) {
+function actionCard (card) {
+  let chat = '$:/temp/bj/newChat';
+  setTextReference(`${chat}!!sysparams`,getTextReference(`${card}!!sysparams`));
+  setTextReference(`${chat}!!sysrole`,getTextReference(`${card}!!sysrole`));
+    setTextReference(`${chat}!!sysmodel`,getTextReference(`${card}!!sysmodel`));
+  setTextReference(`${chat}!!systools`,getTextReference(`${card}!!systools`));
+  setTextReference(`${chat}!!tools`,getTextReference(`${card}!!tools`));
+  setTextReference(`${chat}!!applicationtype`,getTextReference(`${card}!!applicationtype`));
+}
+
+
+export function SuggestionCards({ configured, setConfigured }) {
+  //if (configured) return null;
+
+  return html`
+  <div class="suggestion-cards">
+  ${getcards().map(tiddler => 
+	    { 
+            return html`
+            ${(() => { console.log('third ai hi'); })()}
+             <div
+                  key=${tiddler}
+                  class="suggestion-card"
+                  onClick=${() => {setConfigured(true); actionCard(tiddler);}}
+                >
+                  <h3>${getTextReference(`${tiddler}!!heading`)}</h3>
+                  <p>${getTextReference(`${tiddler}!!details`)}</p>
+                </div>`
+           }
+      )}
+    </div>
+    `
+    ;
+
+}
+export function Main({history,__pwidget}) {
 	const onSent = async (prompt) => {
      if (!API_KEY.value){onNoKey();return}	
-         const tools = (Search.value?false:addtools)
-         const error = await runChat(prompt, history,sysRole.value,toolstid,params.value,prefixes.value,model.value,__pwidget,tools,Search.value )
+         const error = await goChat(prompt, history,__pwidget,Search.value )
          if (error === false) Input.value = ''//clear prompt
          else onError()
 	}
   const onNoKey = () => {sendmessage({$message:"tm-modal", $param:modal, title:"", message:msg})}
   const onError = () => {sendmessage({$message:"tm-modal", $param:errorModal, title:errtitle, message:errmsg})}
   const lastMessageRef = useRef(null);
-  
+  console.log('ai says hi again')
   const {sendmessage} = init(__pwidget)
   // Scroll to the first line of the last message when history updates
   useEffect(() => {
@@ -40,15 +91,20 @@ export function Main({history,sysRole,params,prefixes,model,__pwidget,toolstid,a
     
     const [started, setStarted] = useState(false);
     const [result, setResult] = useState("");
+    const [configured, setConfigured] = useState(false);
     
 	return html`
     <div class="main">
 		<div class="maincontainer" >
-		 ${!(history.value.length)  ? html `
-            <div class="greet">
+        ${!(history.value.length) ? html`
+          <div class="greet">
+              ${configured ? html`
               <h1><span>Hello You,</span></h1>
               <h1>can I help You today?</h1>
-            </div>
+            ` : html`
+                <h1>Select a chatterbot or start typing?</h1>
+                <${SuggestionCards} configured=${configured} setConfigured=${setConfigured} />`}
+          </div>
 		`:history.value.map(
           (message, index) => html`
 			  <${MessageItem}

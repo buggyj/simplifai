@@ -36,7 +36,7 @@ export async function runChat(prompt,history,sysRole,toolset,params,prefixes,aMo
 	  if (addtools||addsystool)  modelparams.tools = alltools;
 	  
 	  
-	  const genAI = new GoogleGenerativeAI(apiKey);
+	  const genAI = new GoogleGenerativeAI(apiKey.value);
 	  const model = genAI.getGenerativeModel(modelparams); 
       
     const chatsetup = {

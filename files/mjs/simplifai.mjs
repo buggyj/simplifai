@@ -7,13 +7,11 @@ module-type: library
 
 
 
-
-
 const {html, render, signal} = await import ("$:/plugins/bj/unchane/preactsignal.mjs");
 const { sidebar } = await import ('$:/plugins/bj/simplifai/sidebar.mjs');
 const { Main } = await import ('$:/plugins/bj/simplifai/main.mjs');
 const {ibutton}=await import("$:/plugins/bj/simplifai/iconbutton.mjs")
-const {getTextReference,setTextReference} = await import('$:/plugins/bj/unchane/store.js')
+const {getTextReference,setTextReference,getJsonTxtRef} = await import('$:/plugins/bj/unchane/store.js')
 const {init} = await import ("$:/plugins/bj/unchane/towidget.mjs")
 const {busy,runChat,aiType} = await import ("$:/plugins/bj/simplifai/ai.mjs")
 const {chatRename} = await import('$:/plugins/bj/simplifai/naming.mjs')
@@ -43,9 +41,9 @@ function modStartString(str) {
   return str;
 }
 
-function ai({__state,__pwidget,toolstid,enabletools}) {
+function ai({__state,__pwidget}) {
 	const {sendmessage} = init(__pwidget)
-	const addtools = (enabletools ==="y")
+	
 	if (__state['model'].value.includes("claude")) {
 		aiType.value="claude"
 		AIName = "Claude"
@@ -67,9 +65,10 @@ function ai({__state,__pwidget,toolstid,enabletools}) {
 		const newtitle={title:""}
 		if ( __state["history"].value.length==0) return;//nothing to base title on.
 		if (!API_KEY.value){onNoKey();return}
-		const error = await runChat(makeTitlePrompt, __state["history"],"","",__state["params"].value,"",__state["model"].value,__pwidget,false,false,newtitle)
+		const chatTid = __pwidget.toTiddlers['history'];
+		const error = await runChat(makeTitlePrompt, __state["history"],"","",getJsonTxtRef(getTextReference(`${chatTid}!!sysparams`)),"",getTextReference(getTextReference(`${chatTid}!!sysmodel`)),__pwidget,false,false,newtitle)
 		if (error) return; 
-		chatRename(newtitle.title,__pwidget.toTiddlers['history'])
+		chatRename(newtitle.title,chatTid)
 		busy.value=false
 	}
 	async function  invokeRename(){
@@ -87,11 +86,11 @@ function ai({__state,__pwidget,toolstid,enabletools}) {
 		<${ibutton} name="clean_icon" alt="" class="show-on-clean"/></div>
 	</div>
 	<div class="aic_content_container">
-		    <${sidebar} __pwidget=${__pwidget} history=${__state["history"]}/><${Main} history=${__state["history"]} sysRole=${__state["sysRole"]} params=${__state["params"]} prefixes=${__state["prefixes"]} model=${__state["model"]} toolstid=${toolstid} addtools=${addtools} __pwidget=${__pwidget}/>
+		    <${sidebar} __pwidget=${__pwidget} history=${__state["history"]}/><${Main} history=${__state["history"]}  __pwidget=${__pwidget}/>
 	</div>
   `;
 }
 
 //check binding for
-export var psignals = [":history", "sysRole",":params",":prefixes","model"]
+export var psignals = [":history","model"]
 export  {ai as start};

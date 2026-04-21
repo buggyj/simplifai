@@ -34,7 +34,10 @@ caption: simplifai options
 
 </$list>
 
+!!chatbot <<buttonCreate "chatterbot" "$:/chatterbot/Normal" "chatterbots">>
+<$list filter='[all[shadows+tiddlers]tag[chatterbot]]'>
 
+</$list>
 !!Model <<buttonCreate "geminiModel" "$:/bj/DefaultModel" "geminiModelVersion">>
 <$list filter='[all[shadows+tiddlers]tag[geminiModel]]'>
 

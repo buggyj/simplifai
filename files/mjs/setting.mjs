@@ -27,5 +27,5 @@ export const generationConfig = {
 	
 
 export const API_KEY = computed(() =>
-  API_KEYS[aiType.value]
+  API_KEYS[aiType.value].value
 );
