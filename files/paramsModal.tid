@@ -39,7 +39,7 @@ mask-closable: true
 
 !!Model
 <$select tiddler=<<tid>> field='sysmodel' tooltip='model' default="$:/bj/DefaultModel">
-<$list filter='[all[shadows+tiddlers]tag[geminiModel]]'>
+<$list filter='[all[shadows+tiddlers]tag[gptModel]] [all[shadows+tiddlers]tag[geminiModel]] [all[shadows+tiddlers]tag[claudeModel]]'>
 <option><$view field='title'/></option>
 </$list>
 </$select>

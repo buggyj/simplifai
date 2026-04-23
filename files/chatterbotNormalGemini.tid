@@ -1,0 +1,12 @@
+title: $:/chatterbot/NormalGemini
+details: chat with gemini
+heading: Normal gemini chat
+sysmodel: $:/bj/DefaultModel
+sysparams: $:/bj/DefaultParams
+sysrole: $:/bj/DefaultRole
+systools: $:/plugins/bj/simplifai/toolslight.mjs
+tags: chatterbot
+tools: n
+type: application/json
+
+[]

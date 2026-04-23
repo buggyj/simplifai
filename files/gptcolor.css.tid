@@ -1,0 +1,9 @@
+title: $:/temp/bj/simplifai/gpt/color.css
+type: text/plain
+
+:root    {
+--bj-simplifai-sidebar: #74AA9C;
+--bj-simplifai-nav: #e2e6eb;
+--bj-simplifai-heading: #e2e6eb;
+--bj-simplifai-cell: khaki;
+}

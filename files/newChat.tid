@@ -1,7 +1,6 @@
 tags: geminiChats
 title: $:/temp/bj/newChat
 type: application/json
-applicationtype: geminiChats
 sysparams: $:/bj/DefaultParams
 sysrole: $:/bj/DefaultRole
 tools: n

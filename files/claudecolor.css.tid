@@ -2,7 +2,7 @@ title: $:/temp/bj/simplifai/claude/color.css
 type: text/plain
 
 :root    {
---bj-simplifai-sidebar: Wheat;
+--bj-simplifai-sidebar: #DE7356;
 --bj-simplifai-nav: #e2e6eb;
 --bj-simplifai-heading: #e2e6eb;
 --bj-simplifai-cell: khaki;

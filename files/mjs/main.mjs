@@ -7,7 +7,7 @@ module-type: library
 const {html, render,useContext,useState, useRef, useEffect, signal} = await import ("$:/plugins/bj/unchane/preactsignal.mjs");
 
 const {ibutton} = await import("$:/plugins/bj/simplifai/iconbutton.mjs");
-const { goChat,Search } = await import ('$:/plugins/bj/simplifai/ai.mjs');
+const { goChat,Search,aiType } = await import ('$:/plugins/bj/simplifai/ai.mjs');
 const {API_KEY} = await import("$:/plugins/bj/simplifai/setting.mjs"); 
 const {init} = await import ("$:/plugins/bj/unchane/towidget.mjs");
 const {MessageItem} = await import('$:/plugins/bj/simplifai/messageitem.mjs');
@@ -22,7 +22,7 @@ let errorModal="$:/plugins/bj/simplifai/errorModal", errtitle="",  errmsg=""
 export const Input=signal("")
 
 function getcards(){
-   return filterTiddlers("[tag[chatterbot]]");
+   return filterTiddlers("[all[shadows+tiddlers]tag[chatterbot]]");
 }
 const cards = [
   { id: 1, title: "Summarize text",     description: "Paste any text and get a concise summary  fsdgsdf sdfg sfsdfg Paste any text and get a concise summary" },
@@ -42,25 +42,30 @@ function actionCard (card) {
     setTextReference(`${chat}!!sysmodel`,getTextReference(`${card}!!sysmodel`));
   setTextReference(`${chat}!!systools`,getTextReference(`${card}!!systools`));
   setTextReference(`${chat}!!tools`,getTextReference(`${card}!!tools`));
-  setTextReference(`${chat}!!applicationtype`,getTextReference(`${card}!!applicationtype`));
 }
-
 
 export function SuggestionCards({ configured, setConfigured }) {
   //if (configured) return null;
 
+  const cards = getcards();
+
+  // skip is no chatterbot cards
+  if (!cards || cards.length === 0) {
+    setConfigured(true);
+    return null;
+  }
+
   return html`
   <div class="suggestion-cards">
-  ${getcards().map(tiddler => 
+  ${cards.map(tiddler => 
 	    { 
             return html`
-            ${(() => { console.log('third ai hi'); })()}
              <div
                   key=${tiddler}
                   class="suggestion-card"
                   onClick=${() => {setConfigured(true); actionCard(tiddler);}}
                 >
-                  <h3>${getTextReference(`${tiddler}!!heading`)}</h3>
+                  <h3 >${getTextReference(`${tiddler}!!heading`)}</h3>
                   <p>${getTextReference(`${tiddler}!!details`)}</p>
                 </div>`
            }
@@ -78,7 +83,7 @@ export function Main({history,__pwidget}) {
          else onError()
 	}
   const onNoKey = () => {sendmessage({$message:"tm-modal", $param:modal, title:"", message:msg})}
-  const onError = () => {sendmessage({$message:"tm-modal", $param:errorModal, title:errtitle, message:errmsg})}
+  const onError = () => {sendmessage({$message:"tm-modal", $param:errorModal, title:errtitle, message:aiType.value})}
   const lastMessageRef = useRef(null);
   console.log('ai says hi again')
   const {sendmessage} = init(__pwidget)

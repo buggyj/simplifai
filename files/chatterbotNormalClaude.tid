@@ -1,0 +1,12 @@
+title: $:/chatterbot/Normalclaude
+details: chat with claude
+heading: Normal claude chat
+sysmodel: $:/bj/DefaultModelclaude
+sysparams: $:/bj/DefaultParams
+sysrole: $:/bj/DefaultRole
+systools: $:/plugins/bj/simplifai/toolslight.mjs
+tags: chatterbot
+tools: n
+type: application/json
+
+[]

@@ -1,0 +1,12 @@
+title: $:/chatterbot/Normalgpt
+details: chat with gpt
+heading: Normal gpt chat
+sysmodel: $:/bj/DefaultModelgpt
+sysparams: $:/bj/DefaultParams
+sysrole: $:/bj/DefaultRole
+systools: $:/plugins/bj/simplifai/toolslight.mjs
+tags: chatterbot
+tools: n
+type: application/json
+
+[]

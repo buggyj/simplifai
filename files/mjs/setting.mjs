@@ -8,7 +8,7 @@ const {HarmCategory, HarmBlockThreshold} = await import('https://esm.run/@google
 export const {aiType} = await import ("$:/plugins/bj/simplifai/signals.mjs")
 
 export const MODEL_NAME = "gemini-2.0-flash";
-export const API_KEYS = {claude:signal(""),gemini:signal("")};
+export const API_KEYS = {claude:signal(""),gemini:signal(""),gpt:signal("")};
 export const useHistLen = 10;
 export const safetySettings = [
 	  {

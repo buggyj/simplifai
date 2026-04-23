@@ -13,7 +13,7 @@ const { Main } = await import ('$:/plugins/bj/simplifai/main.mjs');
 const {ibutton}=await import("$:/plugins/bj/simplifai/iconbutton.mjs")
 const {getTextReference,setTextReference,getJsonTxtRef} = await import('$:/plugins/bj/unchane/store.js')
 const {init} = await import ("$:/plugins/bj/unchane/towidget.mjs")
-const {busy,runChat,aiType} = await import ("$:/plugins/bj/simplifai/ai.mjs")
+const {busy,runChat,aiType,openType} = await import ("$:/plugins/bj/simplifai/ai.mjs")
 const {chatRename} = await import('$:/plugins/bj/simplifai/naming.mjs')
 const {API_KEY} = await import("$:/plugins/bj/simplifai/setting.mjs"); 
 const {setfield} = await import ("$:/plugins/bj/unchane/utils.mjs");
@@ -49,12 +49,23 @@ function ai({__state,__pwidget}) {
 		AIName = "Claude"
 		setTextReference("$:/temp/bj/simplifai/claude/color.css!!tags","$:/tags/Stylesheet")
 		setTextReference("$:/temp/bj/simplifai/gemini/color.css!!tags","")
+		setTextReference("$:/temp/bj/simplifai/gpt/color.css!!tags","")
 	}
-	else {
+	else if (__state['model'].value.includes("gpt")) {
+		aiType.value="gpt"
+		AIName = "gpt"
+		setTextReference("$:/temp/bj/simplifai/gpt/color.css!!tags","$:/tags/Stylesheet")
+		setTextReference("$:/temp/bj/simplifai/gemini/color.css!!tags","")
+		setTextReference("$:/temp/bj/simplifai/claude/color.css!!tags","")
+		if (__state['model'].value.includes("groq")) openType.value = 'groq';
+		else openType.value = 'gpt';
+	}
+	else { 
 		aiType.value="gemini"
 		AIName = "Gemini";
 		setTextReference("$:/temp/bj/simplifai/gemini/color.css!!tags","$:/tags/Stylesheet")
 		setTextReference("$:/temp/bj/simplifai/claude/color.css!!tags","")
+		setTextReference("$:/temp/bj/simplifai/gpt/color.css!!tags","")
 	}
 	function switchMode() {
 		if (getTextReference("$:/layout") == "$:/core/ui/PageTemplate") FromTid()

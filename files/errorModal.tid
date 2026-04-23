@@ -4,6 +4,6 @@ subtitle: error
 tags: ModalMessage
 mask-closable: true
 
-Gemini could not reply - check connect and key
+<<message>> could not reply - check connect and key
 
 

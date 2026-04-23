@@ -225,7 +225,7 @@ export function MessageItem({ message, index, lastMessageRef, history, __pwidget
       ` : html`
         ${message.parts.some(part => part.text) ? html`
           <div class="result-data" style=${{ display: !message.hidden ? 'block' : 'none' }}>
-            <${ibutton} name=${aiType.value==="gemini"?"gemini_icon":"spokes_icon"} alt="" />
+            <${ibutton} name=${aiType.value==="gemini"?"gemini_icon":(aiType.value==="gpt")?"gpt_icon":"spokes_icon"} alt="" />
             <${ibutton} name="copy_icon" alt="copy reply" style="width:12px;margin:4px;cursor: pointer;" title="copy" onClick=${() => toClipBoard(message.parts)} />
             ${message.parts.map((part, i) => {if (part.text) return html`<${MarkdownRenderer} key=${i} markdown=${part.text} />`})}
           </div>
