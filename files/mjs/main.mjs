@@ -24,16 +24,7 @@ export const Input=signal("")
 function getcards(){
    return filterTiddlers("[all[shadows+tiddlers]tag[chatterbot]]");
 }
-const cards = [
-  { id: 1, title: "Summarize text",     description: "Paste any text and get a concise summary  fsdgsdf sdfg sfsdfg Paste any text and get a concise summary" },
-  { id: 2, title: "Write an email",     description: "Draft professional emails quickly"         },
-  { id: 3, title: "Explain a concept",  description: "Get clear explanations on any topic"       },
-  { id: 4, title: "Generate ideas",     description: "Brainstorm creative ideas for any project" },
-    { id: 5, title: "Summarize text",     description: "Paste any text and get a concise summary" },
-  { id: 6,title: "Write an email",     description: "Draft professional emails quickly"         },
-  { id: 7, title: "Explain a concept",  description: "Get clear explanations on any topic"       },
-  { id: 8, title: "Generate ideas",     description: "Brainstorm creative ideas for any project" },
-];
+
 
 function actionCard (card) {
   let chat = '$:/temp/bj/newChat';
@@ -42,6 +33,10 @@ function actionCard (card) {
     setTextReference(`${chat}!!sysmodel`,getTextReference(`${card}!!sysmodel`));
   setTextReference(`${chat}!!systools`,getTextReference(`${card}!!systools`));
   setTextReference(`${chat}!!tools`,getTextReference(`${card}!!tools`));
+    var begining = getTextReference(`${card}!!limit-begining`,' ');
+    var ending = getTextReference(`${card}!!limit-ending`,' ');
+    if (begining !== ' ')  setTextReference(`${chat}!!limit-begining`,begining);
+    if (ending !== ' ')  setTextReference(`${chat}!!limit-ending`,ending);
 }
 
 export function SuggestionCards({ configured, setConfigured }) {
@@ -107,7 +102,7 @@ export function Main({history,__pwidget}) {
               <h1><span>Hello You,</span></h1>
               <h1>can I help You today?</h1>
             ` : html`
-                <h1>Select a chatterbot or start typing?</h1>
+                <h1>Select a chatterbot or start typing</h1>
                 <${SuggestionCards} configured=${configured} setConfigured=${setConfigured} />`}
           </div>
 		`:history.value.map(

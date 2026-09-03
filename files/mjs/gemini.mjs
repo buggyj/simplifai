@@ -3,8 +3,17 @@ title: $:/plugins/bj/simplifai/gemini.mjs
 type: application/javascript
 module-type: library
 \*/
-const {DynamicRetrievalMode, GoogleGenerativeAI} = await import('https://esm.run/@google/generative-ai') 
 
+async function loadModule(remoteUrl) {
+  try {
+    return await import(remoteUrl);
+  } catch (err) {
+      console.error('Network issue, using fallback:', err.message);
+      return await import("$:/plugins/bj/simplifai/geministub.mjs");
+  }
+}
+
+const {DynamicRetrievalMode, GoogleGenerativeAI} = await loadModule('https://esm.run/@google/generative-ai') 
 const {signal} = await import ("$:/plugins/bj/unchane/preactsignal.mjs")
 const {getTools} = await import('$:/plugins/bj/simplifai/tools.mjs')
 const {newChatName} = await import('$:/plugins/bj/simplifai/naming.mjs')

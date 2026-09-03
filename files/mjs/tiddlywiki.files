@@ -33,6 +33,14 @@
       }
     },
     {
+      "file": "geministub.mjs",
+      "fields": {
+        "type": "application/javascript",
+        "module-type": "library",
+        "title": "$:/plugins/bj/simplifai/geministub.mjs"
+      }
+    },
+    {
       "file": "signals.mjs",
       "fields": {
         "type": "application/javascript",
@@ -62,6 +70,14 @@
         "type": "application/javascript",
         "module-type": "library",
         "title": "$:/plugins/bj/simplifai/gpt.mjs"
+      }
+    },
+    {
+      "file": "chatapi.mjs",
+      "fields": {
+        "type": "application/javascript",
+        "module-type": "library",
+        "title": "$:/plugins/bj/simplifai/chatapi.mjs"
       }
     },
     {

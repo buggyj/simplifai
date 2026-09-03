@@ -3,7 +3,10 @@ title: $:/plugins/bj/simplifai/gpt.mjs
 type: application/javascript
 module-type: library
 \*/
-import OpenAI from 'https://esm.run/openai';
+//import OpenAI from 'https://esm.run/openai';
+const {OpenAI} = await import("$:/plugins/bj/simplifai/chatapi.mjs")
+//const {OpenAI} = await import("https://cdn.jsdelivr.net/npm/groq-sdk/+esm")
+console.log('OpenAI',OpenAI)
 
 const {signal} = await import("$:/plugins/bj/unchane/preactsignal.mjs")
 const {getTools} = await import('$:/plugins/bj/simplifai/tools.mjs')
@@ -81,12 +84,16 @@ export async function runChat(prompt, history, sysRole, toolset, params, prefixe
             dangerouslyAllowBrowser: true
         }
         console.log ('openType.value',openType.value);
-		if (openType.value === 'groq') openvals.baseURL = "https://api.groq.com/openai/v1";
-		
+		if (openType.value === 'groq') {
+			openvals.baseURL = "https://api.groq.com/openai/v1";
+			//openvals["reasoning_format"] =  "hidden";
+			 openvals.stream = false;
+		}
 		const openai = new OpenAI(openvals);
         // Build request params
         const modelparams = {
             model: aModel,
+           "reasoning_format":"parsed"
         };
 
         // System message prepended to messages array (OpenAI style)

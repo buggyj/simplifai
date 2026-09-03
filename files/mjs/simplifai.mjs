@@ -7,7 +7,7 @@ module-type: library
 
 
 
-const {html, render, signal} = await import ("$:/plugins/bj/unchane/preactsignal.mjs");
+const {html, render, signal, computed} = await import ("$:/plugins/bj/unchane/preactsignal.mjs");
 const { sidebar } = await import ('$:/plugins/bj/simplifai/sidebar.mjs');
 const { Main } = await import ('$:/plugins/bj/simplifai/main.mjs');
 const {ibutton}=await import("$:/plugins/bj/simplifai/iconbutton.mjs")
@@ -41,32 +41,49 @@ function modStartString(str) {
   return str;
 }
 
-function ai({__state,__pwidget}) {
-	const {sendmessage} = init(__pwidget)
-	
-	if (__state['model'].value.includes("claude")) {
-		aiType.value="claude"
-		AIName = "Claude"
-		setTextReference("$:/temp/bj/simplifai/claude/color.css!!tags","$:/tags/Stylesheet")
-		setTextReference("$:/temp/bj/simplifai/gemini/color.css!!tags","")
-		setTextReference("$:/temp/bj/simplifai/gpt/color.css!!tags","")
-	}
-	else if (__state['model'].value.includes("gpt")) {
-		aiType.value="gpt"
-		AIName = "gpt"
-		setTextReference("$:/temp/bj/simplifai/gpt/color.css!!tags","$:/tags/Stylesheet")
-		setTextReference("$:/temp/bj/simplifai/gemini/color.css!!tags","")
-		setTextReference("$:/temp/bj/simplifai/claude/color.css!!tags","")
-		if (__state['model'].value.includes("groq")) openType.value = 'groq';
-		else openType.value = 'gpt';
-	}
-	else { 
-		aiType.value="gemini"
-		AIName = "Gemini";
-		setTextReference("$:/temp/bj/simplifai/gemini/color.css!!tags","$:/tags/Stylesheet")
-		setTextReference("$:/temp/bj/simplifai/claude/color.css!!tags","")
-		setTextReference("$:/temp/bj/simplifai/gpt/color.css!!tags","")
-	}
+function ai({__state, __pwidget}) {
+    const {sendmessage} = init(__pwidget)
+    
+    // Computed signal: if model is 'default', read the 'default' tiddler value instead
+    const effectiveModel = computed(() => {
+        const raw = __state['model'].value;
+        if (raw === '$:/bj/DefaultModel') {
+            return getTextReference('$:/bj/DefaultModel', '');
+        }
+        return raw;
+    });
+
+    if (effectiveModel.value.includes("gemini")) {
+        aiType.value = "gemini"
+        AIName = "Gemini";
+        setTextReference("$:/temp/bj/simplifai/gemini/color.css!!tags", "$:/tags/Stylesheet")
+        setTextReference("$:/temp/bj/simplifai/claude/color.css!!tags", "")
+        setTextReference("$:/temp/bj/simplifai/gpt/color.css!!tags", "")
+    }
+    else if (effectiveModel.value.includes("claude")) {
+        aiType.value = "claude"
+        AIName = "Claude"
+        setTextReference("$:/temp/bj/simplifai/claude/color.css!!tags", "$:/tags/Stylesheet")
+        setTextReference("$:/temp/bj/simplifai/gemini/color.css!!tags", "")
+        setTextReference("$:/temp/bj/simplifai/gpt/color.css!!tags", "")
+    }
+    else if (effectiveModel.value.includes("gpt")) {
+        aiType.value = "gpt"
+        AIName = "gpt"
+        setTextReference("$:/temp/bj/simplifai/gpt/color.css!!tags", "$:/tags/Stylesheet")
+        setTextReference("$:/temp/bj/simplifai/gemini/color.css!!tags", "")
+        setTextReference("$:/temp/bj/simplifai/claude/color.css!!tags", "")
+        if (effectiveModel.value.includes("groq")) openType.value = 'groq';
+        else openType.value = 'gpt';
+    }
+    else {
+        aiType.value = "gpt";
+        AIName = effectiveModel.value.split('_')[0];
+        setTextReference("$:/temp/bj/simplifai/gpt/color.css!!tags", "$:/tags/Stylesheet")
+        setTextReference("$:/temp/bj/simplifai/gemini/color.css!!tags", "")
+        setTextReference("$:/temp/bj/simplifai/claude/color.css!!tags", "")
+        openType.value = 'groq'
+    }
 	function switchMode() {
 		if (getTextReference("$:/layout") == "$:/core/ui/PageTemplate") FromTid()
 		else ToTid()
